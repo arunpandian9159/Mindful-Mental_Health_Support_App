@@ -1,0 +1,105 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { StatusBar } from "@/components/StatusBar";
+
+export default function NewGoal() {
+  const router = useRouter();
+
+  const inspirations = [
+    {
+      title: "Hydrate",
+      icon: "water_drop",
+      color: "text-blue-500",
+      bg: "bg-blue-50",
+    },
+    {
+      title: "Walk",
+      icon: "directions_walk",
+      color: "text-green-500",
+      bg: "bg-green-50",
+    },
+    {
+      title: "Meditate",
+      icon: "self_improvement",
+      color: "text-purple-500",
+      bg: "bg-purple-50",
+    },
+  ];
+
+  return (
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
+      <StatusBar />
+      <div className="w-full px-6 pt-16 py-2 flex items-center z-10">
+        <button
+          onClick={() => router.back()}
+          className="flex items-center justify-center w-10 h-10 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        >
+          <span className="material-symbols-outlined text-[24px]">
+            arrow_back
+          </span>
+        </button>
+      </div>
+
+      <div className="flex-1 flex flex-col w-full px-6 pt-2 pb-6 overflow-y-auto no-scrollbar">
+        <h1 className="font-serif tracking-tight text-[32px] font-bold leading-tight mb-8 text-gray-900 dark:text-white">
+          Set a New
+          <br />
+          Wellness Goal
+        </h1>
+
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-semibold ml-1 text-gray-700 dark:text-gray-300">
+              What is your goal?
+            </label>
+            <div className="relative group">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-400">
+                edit
+              </span>
+              <input
+                className="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 rounded-2xl py-4 pl-12 pr-4 shadow-sm text-base outline-none focus:border-primary transition-colors"
+                placeholder="e.g. Walk outside"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <div className="flex items-center justify-between mb-4 px-1">
+            <h2 className="text-base font-bold text-gray-900 dark:text-white">
+              SMART Inspirations
+            </h2>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
+            {inspirations.map((item) => (
+              <button
+                key={item.title}
+                className="min-w-37.5 p-4 bg-white dark:bg-surface-dark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-all text-left group"
+              >
+                <div
+                  className={`w-10 h-10 rounded-full ${item.bg} dark:bg-opacity-10 ${item.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}
+                >
+                  <span className="material-symbols-outlined">{item.icon}</span>
+                </div>
+                <h3 className="font-semibold text-sm text-gray-900 dark:text-white">
+                  {item.title}
+                </h3>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full px-6 pb-8 pt-4 flex flex-col gap-3 z-10">
+        <button
+          onClick={() => router.push("/home")}
+          className="flex w-full items-center justify-center rounded-full h-14 px-5 bg-goal-green hover:bg-opacity-90 text-white text-[17px] font-bold shadow-lg transition-all active:scale-95"
+        >
+          Save Goal
+        </button>
+      </div>
+    </div>
+  );
+}

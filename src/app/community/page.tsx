@@ -1,11 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { StatusBar } from "@/components/StatusBar";
 
 export default function Community() {
-  const router = useRouter();
 
   const posts = [
     {

@@ -9,8 +9,8 @@ export default function CrisisSupport() {
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
       {/* Background blobs for calming effect */}
-      <div className="absolute -top-[20%] -right-[10%] h-[500px] w-[500px] rounded-full bg-primary/10 blur-[100px] pointer-events-none"></div>
-      <div className="absolute top-[40%] -left-[10%] h-[300px] w-[300px] rounded-full bg-coral/10 blur-[80px] pointer-events-none"></div>
+      <div className="absolute -top-[20%] -right-[10%] h-125 w-125 rounded-full bg-primary/10 blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-[40%] -left-[10%] h-75 w-75 rounded-full bg-coral/10 blur-[80px] pointer-events-none"></div>
 
       <StatusBar />
 
@@ -33,7 +33,7 @@ export default function CrisisSupport() {
             </span>
           </div>
           <h1 className="text-3xl font-bold mb-3">You are not alone.</h1>
-          <p className="text-gray-500 max-w-[280px]">
+          <p className="text-gray-500 max-w-70">
             Help is available right now. Connect with someone who understands.
           </p>
         </div>

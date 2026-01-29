@@ -5,6 +5,18 @@ import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { GlobalHelpFAB } from "@/components/GlobalHelpFAB";
 import { StatusBar } from "@/components/StatusBar";
+import Image from "next/image";
+import {
+  Leaf,
+  Bell,
+  SmileySad,
+  SmileyMeh,
+  SmileyBlank,
+  Smiley,
+  SmileyWink,
+  PencilLine,
+  PlayCircle,
+} from "@phosphor-icons/react";
 
 export default function Home() {
   const router = useRouter();
@@ -16,19 +28,21 @@ export default function Home() {
       <header className="flex items-center justify-between px-6 py-6 pt-10 sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
-            <span className="material-symbols-outlined text-lg">spa</span>
+            <Leaf size={18} weight="fill" />
           </div>
         </div>
         <div className="flex items-center gap-4">
           <button className="relative text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
-            <span className="material-symbols-outlined">notifications</span>
+            <Bell size={24} />
             <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-400 border-2 border-background-light dark:border-background-dark"></span>
           </button>
           <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border-2 border-white dark:border-gray-600 shadow-sm">
-            <img
+            <Image
               alt="Profile"
               className="h-full w-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU-_SYT0qaSxH6lDtb_P0g6umnFWWZLjDxu-MjtxkNm1ea2zs9jQUjN-uT7L3qtzXwb-YAAZVz0s5DA-LX2_Myo1czEUJKE_HR-RteTFCs7801_LLdbzlm8IjvLVKaXBkb6ZG0Uiuel_n7C7jEi35Q9B7jwTknxV6fQoi9i2lvJV2WrAkURNBXdcbrMvhOF9Trhqfrifp5q1bFUnhOtITQ9uR1MO6rLwTxABjD9hUiCQrEzTic6IND0puSTUpAnKjChb51a0Br0fx8"
+              width={40}
+              height={40}
             />
           </div>
         </div>
@@ -52,27 +66,27 @@ export default function Home() {
             <div className="flex justify-between items-center px-2">
               {[
                 {
-                  icon: "sentiment_very_dissatisfied",
+                  icon: SmileySad,
                   color: "text-red-400",
                   bg: "bg-red-50",
                 },
                 {
-                  icon: "sentiment_dissatisfied",
+                  icon: SmileyMeh,
                   color: "text-red-400",
                   bg: "bg-red-50",
                 },
                 {
-                  icon: "sentiment_neutral",
+                  icon: SmileyBlank,
                   color: "text-gray-400",
                   bg: "bg-gray-50",
                 },
                 {
-                  icon: "sentiment_satisfied",
+                  icon: Smiley,
                   color: "text-green-400",
                   bg: "bg-green-50",
                 },
                 {
-                  icon: "sentiment_very_satisfied",
+                  icon: SmileyWink,
                   color: "text-green-400",
                   bg: "bg-green-50",
                 },
@@ -85,9 +99,7 @@ export default function Home() {
                   <div
                     className={`p-3 rounded-full ${item.bg} dark:bg-opacity-10 transition-colors group-hover:bg-primary/10 group-hover:text-primary ${item.color}`}
                   >
-                    <span className="material-symbols-outlined text-3xl">
-                      {item.icon}
-                    </span>
+                    <item.icon size={32} weight="duotone" />
                   </div>
                 </button>
               ))}
@@ -139,9 +151,7 @@ export default function Home() {
           >
             <div>
               <div className="flex items-center gap-1.5 mb-2 text-primary font-medium text-xs uppercase tracking-wide">
-                <span className="material-symbols-outlined text-sm">
-                  edit_note
-                </span>
+                <PencilLine size={14} />
                 <span>Prompt</span>
               </div>
               <p className="text-sm text-gray-800 dark:text-gray-200 font-medium leading-snug">
@@ -183,10 +193,7 @@ export default function Home() {
                 </div>
                 <div className="mt-5 flex items-center gap-3">
                   <span className="flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-lg group-hover:bg-primary-dark transition-colors">
-                    <span className="material-symbols-outlined text-[20px]">
-                      play_circle
-                    </span>{" "}
-                    Play
+                    <PlayCircle size={20} weight="fill" /> Play
                   </span>
                   <span className="text-xs text-gray-400 font-medium">
                     5 min
@@ -194,10 +201,11 @@ export default function Home() {
                 </div>
               </div>
               <div className="relative h-48 md:h-auto md:w-2/5 order-1 md:order-2 overflow-hidden">
-                <img
+                <Image
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMnu5DlzaJbe8b4Gx6hkgBNcoYGgp7dGcv86DDzLv41Mn4w33_JKrY4dnYYeHbllcaFVMQ-4qYL7lJhlrr52dnPDo7D7y0D-cxOycNG1M-lz5WNDzu9M0S9IVOr47F9LUcF9aCQQFoWzkSKwZUj_jkAoGlLQqVcgSdhqaxJcK806xRj5zTyjLJcqTdyjTtDF4-qBKQP-oMUms9Cmd1M2x9QtwwKL2B4YWwXZox0o_tEZQzTaqCjPvthx4rcGPLS0p-oCJopPCYm63P"
                   alt="Breathing exercise"
                   className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
                 />
               </div>
             </div>

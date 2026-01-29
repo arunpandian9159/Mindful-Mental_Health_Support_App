@@ -25,7 +25,7 @@ export default function WelcomePage() {
                 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrNm3fYNRLCGv0taFopq60tAJjBffkiz0ZJozmo_PIwjgEbM87zzs3kNRZh0sjrAngAjeGHsUpNq4Pua85QwcCSkXCi_tuxtw5cnaJHHQQBGKovNpTngeQGGPibvNefCm6Y1I_nvdOOUQulsIyHgpwnRTNJmVg_e8JPzdRH8ECgJ8l2QvdqdGWmjtmlyiW2jX1lDvQUYnZuJyYPWGqCA_mGYbtPogyNmZqvADWDQjJCT8Zh63e1zCCw-3QfR-9ulXquIdzxMH1PH-y")',
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 mix-blend-overlay"></div>
+            <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20 mix-blend-overlay"></div>
           </div>
         </motion.div>
 
@@ -42,7 +42,7 @@ export default function WelcomePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-[#566370] dark:text-gray-400 text-base font-normal leading-relaxed max-w-[280px]"
+            className="text-[#566370] dark:text-gray-400 text-base font-normal leading-relaxed max-w-70"
           >
             We&apos;re here, one step at a time.
           </motion.p>
@@ -64,7 +64,7 @@ export default function WelcomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.5 }}
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/home")}
           className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-5 bg-transparent border-2 border-primary/30 hover:bg-primary/5 transition-all text-primary text-[17px] font-bold leading-normal tracking-wide active:scale-95"
         >
           <span className="truncate">Explore as Guest</span>

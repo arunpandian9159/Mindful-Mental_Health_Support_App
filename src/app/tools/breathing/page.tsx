@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { StatusBar } from "@/components/StatusBar";
 
 export default function BreathingDetail() {
   const router = useRouter();
@@ -56,9 +55,9 @@ export default function BreathingDetail() {
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-white dark:bg-background-dark">
       <div
-        className={`relative h-[45vh] min-h-[360px] w-full flex flex-col items-center justify-start overflow-hidden transition-colors duration-1000 ${isActive ? "bg-secondary" : "bg-primary"}`}
+        className={`relative h-[45vh] min-h-[360] w-full flex flex-col items-center justify-start overflow-hidden transition-colors duration-1000 ${isActive ? "bg-secondary" : "bg-primary"}`}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent mix-blend-multiply opacity-50"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/10 to-transparent mix-blend-multiply opacity-50"></div>
         <div className="w-full flex justify-between items-center px-6 pt-14 pb-2 z-20">
           <button
             onClick={() => router.back()}
@@ -102,7 +101,7 @@ export default function BreathingDetail() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="text-white/90 text-lg mt-8 font-medium tracking-wide bg-black/10 px-6 py-2 rounded-full backdrop-blur-sm min-w-[120px] text-center"
+              className="text-white/90 text-lg mt-8 font-medium tracking-wide bg-black/10 px-6 py-2 rounded-full backdrop-blur-sm min-w-30 text-center"
             >
               {isActive ? getPhaseText() : "Ready?"}
             </motion.p>
@@ -129,7 +128,7 @@ export default function BreathingDetail() {
             ].map((step, i) => (
               <div key={i} className="flex gap-4 group">
                 <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${isActive && i === ["inhale", "hold", "exhale", "rest"].indexOf(phase) ? "bg-primary text-white" : "bg-gray-100 text-gray-400 group-hover:bg-primary/10"}`}
+                  className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${isActive && i === ["inhale", "hold", "exhale", "rest"].indexOf(phase) ? "bg-primary text-white" : "bg-gray-100 text-gray-400 group-hover:bg-primary/10"}`}
                 >
                   {i + 1}
                 </div>

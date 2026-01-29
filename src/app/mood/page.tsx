@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { StatusBar } from "@/components/StatusBar";
+import { ArrowLeft, TrendUp, CaretRight, Plus } from "@phosphor-icons/react";
 
 export default function MoodHistory() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function MoodHistory() {
           onClick={() => router.push("/")}
           className="flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
         >
-          <span className="material-symbols-outlined">arrow_back</span>
+          <ArrowLeft size={24} />
         </button>
         <h2 className="text-lg font-bold flex-1 text-center pr-12">
           Mood Trends
@@ -45,9 +45,7 @@ export default function MoodHistory() {
             <div className="flex items-end gap-2">
               <p className="text-3xl font-bold leading-none">4.2</p>
               <span className="text-green-500 text-sm font-medium mb-1.5 flex items-center">
-                <span className="material-symbols-outlined text-sm mr-0.5">
-                  trending_up
-                </span>
+                <TrendUp size={14} className="mr-0.5" />
                 +12%
               </span>
             </div>
@@ -87,9 +85,7 @@ export default function MoodHistory() {
                 <span className="text-xs text-gray-500">Today, 9:00 AM</span>
               </div>
             </div>
-            <span className="material-symbols-outlined text-gray-400">
-              chevron_right
-            </span>
+            <CaretRight size={20} className="text-gray-400" />
           </div>
 
           <div className="flex items-center justify-between bg-white dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-primary/20 transition-all cursor-pointer">
@@ -104,9 +100,7 @@ export default function MoodHistory() {
                 </span>
               </div>
             </div>
-            <span className="material-symbols-outlined text-gray-400">
-              chevron_right
-            </span>
+            <CaretRight size={20} className="text-gray-400" />
           </div>
         </div>
       </main>
@@ -117,7 +111,7 @@ export default function MoodHistory() {
           onClick={() => router.push("/mood/log")}
           className="size-16 bg-primary rounded-full flex items-center justify-center shadow-fab text-white hover:scale-105 active:scale-95 transition-transform"
         >
-          <span className="material-symbols-outlined text-[32px]">add</span>
+          <Plus size={32} weight="bold" />
         </button>
       </div>
 
