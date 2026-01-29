@@ -3,6 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowLeftIcon,
+  ArrowsOutIcon,
+  ArrowsInIcon,
+  LeafIcon,
+} from "@phosphor-icons/react";
 
 export default function BreathingDetail() {
   const router = useRouter();
@@ -63,7 +69,7 @@ export default function BreathingDetail() {
             onClick={() => router.back()}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
           >
-            <span className="material-symbols-outlined">arrow_back</span>
+            <ArrowLeftIcon size={24} />
           </button>
         </div>
 
@@ -86,13 +92,15 @@ export default function BreathingDetail() {
             transition={{ duration: 4, ease: "easeInOut" }}
             className="w-28 h-28 rounded-full bg-white/90 flex items-center justify-center shadow-lg"
           >
-            <span className="material-symbols-outlined text-secondary text-4xl">
-              {phase === "inhale"
-                ? "expand"
-                : phase === "exhale"
-                  ? "compress"
-                  : "spa"}
-            </span>
+            <div className="text-secondary">
+              {phase === "inhale" ? (
+                <ArrowsOutIcon size={48} />
+              ) : phase === "exhale" ? (
+                <ArrowsInIcon size={48} />
+              ) : (
+                <LeafIcon size={48} weight="fill" />
+              )}
+            </div>
           </motion.div>
 
           <AnimatePresence mode="wait">

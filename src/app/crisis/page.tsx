@@ -2,6 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
+import {
+  XIcon,
+  SirenIcon,
+  PhoneCallIcon,
+  ChatIcon,
+  ShieldPlusIcon,
+  LeafIcon,
+} from "@phosphor-icons/react";
 
 export default function CrisisSupport() {
   const router = useRouter();
@@ -21,16 +29,14 @@ export default function CrisisSupport() {
           onClick={() => router.back()}
           className="flex size-10 items-center justify-center rounded-full bg-black/5 dark:bg-white/10 text-lg hover:bg-black/10 transition-colors"
         >
-          <span className="material-symbols-outlined">close</span>
+          <XIcon size={20} />
         </button>
       </header>
 
       <main className="relative z-10 flex flex-1 flex-col overflow-y-auto no-scrollbar px-6 pt-4 pb-6">
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="size-20 bg-danger/10 rounded-full flex items-center justify-center mb-6 animate-pulse">
-            <span className="material-symbols-outlined text-danger text-4xl">
-              emergency
-            </span>
+            <SirenIcon size={40} className="text-danger" weight="fill" />
           </div>
           <h1 className="text-3xl font-bold mb-3">You are not alone.</h1>
           <p className="text-gray-500 max-w-70">
@@ -44,9 +50,7 @@ export default function CrisisSupport() {
             className="flex w-full items-center gap-4 rounded-xl bg-coral p-5 shadow-lg active:scale-95 transition-transform"
           >
             <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-black/10 text-black">
-              <span className="material-symbols-outlined text-3xl">
-                phone_in_talk
-              </span>
+              <PhoneCallIcon size={32} weight="fill" />
             </div>
             <div className="flex flex-1 flex-col text-black">
               <span className="text-lg font-bold">Call National Hotline</span>
@@ -61,7 +65,7 @@ export default function CrisisSupport() {
             className="flex w-full items-center gap-4 rounded-xl bg-primary p-5 shadow-lg active:scale-95 transition-transform"
           >
             <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
-              <span className="material-symbols-outlined text-3xl">chat</span>
+              <ChatIcon size={32} weight="fill" />
             </div>
             <div className="flex flex-1 flex-col text-white">
               <span className="text-lg font-bold">Text Support Line</span>
@@ -75,9 +79,7 @@ export default function CrisisSupport() {
         <div className="grid grid-cols-2 gap-4">
           <button className="flex flex-col items-center justify-center gap-3 rounded-xl bg-white dark:bg-surface-dark p-6 text-center shadow-soft border border-gray-100 dark:border-gray-800 hover:border-primary/30 transition-all">
             <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <span className="material-symbols-outlined text-3xl">
-                shield_person
-              </span>
+              <ShieldPlusIcon size={32} weight="fill" />
             </div>
             <span className="font-bold text-sm">
               View My
@@ -91,7 +93,7 @@ export default function CrisisSupport() {
             className="flex flex-col items-center justify-center gap-3 rounded-xl bg-white dark:bg-surface-dark p-6 text-center shadow-soft border border-gray-100 dark:border-gray-800 hover:border-primary/30 transition-all"
           >
             <div className="flex size-12 items-center justify-center rounded-full bg-secondary/10 text-secondary">
-              <span className="material-symbols-outlined text-3xl">spa</span>
+              <LeafIcon size={32} weight="fill" />
             </div>
             <span className="font-bold text-sm">
               Start Grounding

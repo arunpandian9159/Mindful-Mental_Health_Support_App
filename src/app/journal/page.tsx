@@ -3,12 +3,12 @@
 import { BottomNav } from "@/components/BottomNav";
 import { StatusBar } from "@/components/StatusBar";
 import {
-  Gear,
-  MagnifyingGlass,
-  SmileyBlank,
-  Smiley,
-  Notebook,
-  Pencil,
+  GearIcon,
+  MagnifyingGlassIcon,
+  SmileyBlankIcon,
+  SmileyIcon,
+  NotebookIcon,
+  PencilIcon,
 } from "@phosphor-icons/react";
 
 export default function Journal() {
@@ -40,12 +40,12 @@ export default function Journal() {
             My Journal
           </h1>
           <button className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 transition-colors">
-            <Gear size={24} />
+            <GearIcon size={24} />
           </button>
         </div>
         <div className="relative w-full">
           <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-            <MagnifyingGlass size={20} />
+            <MagnifyingGlassIcon size={20} />
           </span>
           <input
             className="block w-full pl-10 pr-3 py-3 border border-gray-100 dark:border-gray-800 rounded-xl bg-white dark:bg-surface-dark shadow-sm text-sm outline-none focus:border-primary transition-colors"
@@ -72,9 +72,9 @@ export default function Journal() {
               </div>
               <div className="size-8 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center">
                 {entry.mood === "neutral" ? (
-                  <SmileyBlank size={20} className="text-gray-400" />
+                  <SmileyBlankIcon size={20} className="text-gray-400" />
                 ) : (
-                  <Smiley size={20} className="text-gray-400" />
+                  <SmileyIcon size={20} className="text-gray-400" />
                 )}
               </div>
             </div>
@@ -85,7 +85,7 @@ export default function Journal() {
         ))}
 
         <div className="mt-4 flex flex-col items-center justify-center p-8 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-3xl opacity-50">
-          <Notebook size={48} className="mb-2 text-gray-400" />
+          <NotebookIcon size={48} className="mb-2 text-gray-400" />
           <p className="text-sm font-medium text-gray-400">
             Write your thoughts away...
           </p>
@@ -94,7 +94,7 @@ export default function Journal() {
 
       <div className="fixed bottom-24 right-6 z-30">
         <button className="h-16 w-16 bg-primary rounded-full shadow-fab flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-transform">
-          <Pencil size={32} weight="bold" />
+          <PencilIcon size={32} weight="bold" />
         </button>
       </div>
 

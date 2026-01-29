@@ -2,6 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
+import {
+  ArrowLeftIcon,
+  PencilSimpleIcon,
+  DropIcon,
+  FootprintsIcon,
+  BrainIcon,
+} from "@phosphor-icons/react";
 
 export default function NewGoal() {
   const router = useRouter();
@@ -9,19 +16,19 @@ export default function NewGoal() {
   const inspirations = [
     {
       title: "Hydrate",
-      icon: "water_drop",
+      icon: DropIcon,
       color: "text-blue-500",
       bg: "bg-blue-50",
     },
     {
       title: "Walk",
-      icon: "directions_walk",
+      icon: FootprintsIcon,
       color: "text-green-500",
       bg: "bg-green-50",
     },
     {
       title: "Meditate",
-      icon: "self_improvement",
+      icon: BrainIcon,
       color: "text-purple-500",
       bg: "bg-purple-50",
     },
@@ -35,9 +42,7 @@ export default function NewGoal() {
           onClick={() => router.back()}
           className="flex items-center justify-center w-10 h-10 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         >
-          <span className="material-symbols-outlined text-[24px]">
-            arrow_back
-          </span>
+          <ArrowLeftIcon size={24} />
         </button>
       </div>
 
@@ -54,8 +59,8 @@ export default function NewGoal() {
               What is your goal?
             </label>
             <div className="relative group">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-400">
-                edit
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                <PencilSimpleIcon size={20} />
               </span>
               <input
                 className="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 rounded-2xl py-4 pl-12 pr-4 shadow-sm text-base outline-none focus:border-primary transition-colors"
@@ -81,7 +86,7 @@ export default function NewGoal() {
                 <div
                   className={`w-10 h-10 rounded-full ${item.bg} dark:bg-opacity-10 ${item.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}
                 >
-                  <span className="material-symbols-outlined">{item.icon}</span>
+                  <item.icon size={24} />
                 </div>
                 <h3 className="font-semibold text-sm text-gray-900 dark:text-white">
                   {item.title}

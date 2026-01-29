@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
+import { SmileyIcon, LeafIcon, UsersIcon } from "@phosphor-icons/react";
 
 export default function OnboardingFeatures() {
   const router = useRouter();
@@ -32,9 +33,7 @@ export default function OnboardingFeatures() {
           <div className="w-full flex flex-col gap-7 pl-2">
             <div className="flex items-center gap-5">
               <div className="shrink-0 w-12 h-12 rounded-2xl bg-[#EAF4FC] dark:bg-primary/20 flex items-center justify-center text-primary">
-                <span className="material-symbols-outlined text-[24px]">
-                  sentiment_satisfied
-                </span>
+                <SmileyIcon size={24} />
               </div>
               <span className="text-[17px] font-medium text-gray-800 dark:text-gray-100 leading-snug">
                 Track your mood gently
@@ -42,9 +41,7 @@ export default function OnboardingFeatures() {
             </div>
             <div className="flex items-center gap-5">
               <div className="shrink-0 w-12 h-12 rounded-2xl bg-[#EAF4FC] dark:bg-primary/20 flex items-center justify-center text-primary">
-                <span className="material-symbols-outlined text-[24px]">
-                  spa
-                </span>
+                <LeafIcon size={24} />
               </div>
               <span className="text-[17px] font-medium text-gray-800 dark:text-gray-100 leading-snug">
                 Use calming tools anytime
@@ -52,9 +49,7 @@ export default function OnboardingFeatures() {
             </div>
             <div className="flex items-center gap-5">
               <div className="shrink-0 w-12 h-12 rounded-2xl bg-[#EAF4FC] dark:bg-primary/20 flex items-center justify-center text-primary">
-                <span className="material-symbols-outlined text-[24px]">
-                  diversity_1
-                </span>
+                <UsersIcon size={24} />
               </div>
               <span className="text-[17px] font-medium text-gray-800 dark:text-gray-100 leading-snug">
                 Connect with a safe community

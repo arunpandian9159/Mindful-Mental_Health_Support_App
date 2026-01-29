@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, Smiley, Leaf, ChatCircle, User } from "@phosphor-icons/react";
+import {
+  HouseIcon,
+  SmileyIcon,
+  LeafIcon,
+  ChatCircleIcon,
+  UserIcon,
+} from "@phosphor-icons/react";
 
 export const BottomNav = () => {
   const pathname = usePathname();
@@ -13,11 +19,11 @@ export const BottomNav = () => {
       : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-200";
 
   const navItems = [
-    { href: "/home", label: "Home", icon: House },
-    { href: "/mood", label: "Mood", icon: Smiley },
-    { href: "/tools", label: "Tools", icon: Leaf },
-    { href: "/community", label: "Comm.", icon: ChatCircle },
-    { href: "/profile", label: "Profile", icon: User },
+    { href: "/home", label: "Home", icon: HouseIcon },
+    { href: "/mood", label: "Mood", icon: SmileyIcon },
+    { href: "/tools", label: "Tools", icon: LeafIcon },
+    { href: "/community", label: "Comm.", icon: ChatCircleIcon },
+    { href: "/profile", label: "Profile", icon: UserIcon },
   ];
 
   return (

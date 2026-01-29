@@ -1,6 +1,10 @@
 "use client";
 
-import { CellSignalHigh, WifiHigh, BatteryFull } from "@phosphor-icons/react";
+import {
+  CellSignalHighIcon,
+  WifiHighIcon,
+  BatteryFullIcon,
+} from "@phosphor-icons/react";
 
 export const StatusBar = ({ lightText = false }: { lightText?: boolean }) => (
   <div
@@ -8,9 +12,9 @@ export const StatusBar = ({ lightText = false }: { lightText?: boolean }) => (
   >
     <span className="text-sm font-semibold">9:41</span>
     <div className="flex items-center gap-1.5">
-      <CellSignalHigh size={18} weight="bold" />
-      <WifiHigh size={18} weight="bold" />
-      <BatteryFull size={18} weight="bold" />
+      <CellSignalHighIcon size={18} weight="bold" />
+      <WifiHighIcon size={18} weight="bold" />
+      <BatteryFullIcon size={18} weight="bold" />
     </div>
   </div>
 );

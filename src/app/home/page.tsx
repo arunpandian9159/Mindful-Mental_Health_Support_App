@@ -7,15 +7,15 @@ import { GlobalHelpFAB } from "@/components/GlobalHelpFAB";
 import { StatusBar } from "@/components/StatusBar";
 import Image from "next/image";
 import {
-  Leaf,
-  Bell,
-  SmileySad,
-  SmileyMeh,
-  SmileyBlank,
-  Smiley,
-  SmileyWink,
-  PencilLine,
-  PlayCircle,
+  LeafIcon,
+  BellIcon,
+  SmileySadIcon,
+  SmileyMehIcon,
+  SmileyBlankIcon,
+  SmileyIcon,
+  SmileyWinkIcon,
+  PencilLineIcon,
+  PlayCircleIcon,
 } from "@phosphor-icons/react";
 
 export default function Home() {
@@ -28,12 +28,12 @@ export default function Home() {
       <header className="flex items-center justify-between px-6 py-6 pt-10 sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
-            <Leaf size={18} weight="fill" />
+            <LeafIcon size={18} weight="fill" />
           </div>
         </div>
         <div className="flex items-center gap-4">
           <button className="relative text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
-            <Bell size={24} />
+            <BellIcon size={24} />
             <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-400 border-2 border-background-light dark:border-background-dark"></span>
           </button>
           <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border-2 border-white dark:border-gray-600 shadow-sm">
@@ -66,27 +66,27 @@ export default function Home() {
             <div className="flex justify-between items-center px-2">
               {[
                 {
-                  icon: SmileySad,
+                  icon: SmileySadIcon,
                   color: "text-red-400",
                   bg: "bg-red-50",
                 },
                 {
-                  icon: SmileyMeh,
+                  icon: SmileyMehIcon,
                   color: "text-red-400",
                   bg: "bg-red-50",
                 },
                 {
-                  icon: SmileyBlank,
+                  icon: SmileyBlankIcon,
                   color: "text-gray-400",
                   bg: "bg-gray-50",
                 },
                 {
-                  icon: Smiley,
+                  icon: SmileyIcon,
                   color: "text-green-400",
                   bg: "bg-green-50",
                 },
                 {
-                  icon: SmileyWink,
+                  icon: SmileyWinkIcon,
                   color: "text-green-400",
                   bg: "bg-green-50",
                 },
@@ -151,7 +151,7 @@ export default function Home() {
           >
             <div>
               <div className="flex items-center gap-1.5 mb-2 text-primary font-medium text-xs uppercase tracking-wide">
-                <PencilLine size={14} />
+                <PencilLineIcon size={14} />
                 <span>Prompt</span>
               </div>
               <p className="text-sm text-gray-800 dark:text-gray-200 font-medium leading-snug">
@@ -193,7 +193,7 @@ export default function Home() {
                 </div>
                 <div className="mt-5 flex items-center gap-3">
                   <span className="flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-lg group-hover:bg-primary-dark transition-colors">
-                    <PlayCircle size={20} weight="fill" /> Play
+                    <PlayCircleIcon size={20} weight="fill" /> Play
                   </span>
                   <span className="text-xs text-gray-400 font-medium">
                     5 min

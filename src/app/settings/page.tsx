@@ -3,14 +3,14 @@
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
 import {
-  CircleHalf,
-  TextT,
-  Ear,
-  Bell,
-  Shield,
-  ArrowLeft,
-  CaretRight,
-  Heart,
+  CircleHalfIcon,
+  TextTIcon,
+  EarIcon,
+  BellIcon,
+  ShieldIcon,
+  ArrowLeftIcon,
+  CaretRightIcon,
+  HeartIcon,
 } from "@phosphor-icons/react";
 
 export default function Settings() {
@@ -19,31 +19,31 @@ export default function Settings() {
   const settingsItems = [
     {
       title: "High Contrast",
-      icon: CircleHalf,
+      icon: CircleHalfIcon,
       description: "Enhance visibility with higher contrast colors",
       type: "toggle",
     },
     {
       title: "Text Size",
-      icon: TextT,
+      icon: TextTIcon,
       description: "Adjust the size of the text",
       type: "nav",
     },
     {
       title: "Screen Reader",
-      icon: Ear,
+      icon: EarIcon,
       description: "Optimize for screen reader support",
       type: "toggle",
     },
     {
       title: "Notifications",
-      icon: Bell,
+      icon: BellIcon,
       description: "Manage your daily check-in alerts",
       type: "nav",
     },
     {
       title: "Data Privacy",
-      icon: Shield,
+      icon: ShieldIcon,
       description: "Manage your personal data and privacy",
       type: "nav",
     },
@@ -57,7 +57,7 @@ export default function Settings() {
           onClick={() => router.back()}
           className="flex items-center justify-center w-8 h-8 rounded-full -ml-2 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         >
-          <ArrowLeft size={24} />
+          <ArrowLeftIcon size={24} />
         </button>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
           Accessibility
@@ -95,14 +95,14 @@ export default function Settings() {
                   <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow-sm transition-transform"></div>
                 </div>
               ) : (
-                <CaretRight size={20} className="text-gray-400" />
+                <CaretRightIcon size={20} className="text-gray-400" />
               )}
             </div>
           ))}
         </div>
 
         <div className="mt-10 p-5 rounded-2xl bg-primary/5 dark:bg-primary/10 border border-primary/10 flex flex-col items-center text-center">
-          <Heart size={32} weight="fill" className="text-primary mb-2" />
+          <HeartIcon size={32} weight="fill" className="text-primary mb-2" />
           <h3 className="font-bold text-sm text-primary mb-1">
             Empowering Accessibility
           </h3>

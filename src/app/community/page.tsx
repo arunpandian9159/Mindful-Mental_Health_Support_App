@@ -2,9 +2,9 @@
 
 import { BottomNav } from "@/components/BottomNav";
 import { StatusBar } from "@/components/StatusBar";
+import { HeartIcon, ChatCircleIcon, PlusIcon } from "@phosphor-icons/react";
 
 export default function Community() {
-
   const posts = [
     {
       id: "#492",
@@ -83,15 +83,11 @@ export default function Community() {
 
             <div className="flex gap-4 mt-6 pt-4 border-t border-gray-50 dark:border-white/5">
               <button className="flex items-center gap-1.5 text-gray-400 hover:text-primary transition-colors">
-                <span className="material-symbols-outlined text-xl">
-                  favorite
-                </span>
+                <HeartIcon size={20} weight="bold" />
                 <span className="text-xs font-bold">12</span>
               </button>
               <button className="flex items-center gap-1.5 text-gray-400 hover:text-primary transition-colors">
-                <span className="material-symbols-outlined text-xl">
-                  chat_bubble
-                </span>
+                <ChatCircleIcon size={20} weight="bold" />
                 <span className="text-xs font-bold">4</span>
               </button>
             </div>
@@ -100,7 +96,7 @@ export default function Community() {
       </main>
 
       <div className="fixed bottom-24 right-6 h-14 w-14 rounded-full bg-primary text-white shadow-fab flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-transform">
-        <span className="material-symbols-outlined text-[28px]">add</span>
+        <PlusIcon size={28} weight="bold" />
       </div>
 
       <BottomNav />

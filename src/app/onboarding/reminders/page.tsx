@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
+import { BellRingingIcon } from "@phosphor-icons/react";
 
 export default function OnboardingReminders() {
   const router = useRouter();
@@ -13,9 +14,7 @@ export default function OnboardingReminders() {
       <StatusBar />
       <div className="flex-1 flex flex-col items-center justify-center pt-16 pb-6 w-full px-8 text-center relative z-0">
         <div className="w-32 h-32 rounded-[2.5rem] bg-secondary/10 flex items-center justify-center mb-10 shadow-sm">
-          <span className="material-symbols-outlined text-secondary text-[64px]">
-            notifications_active
-          </span>
+          <BellRingingIcon size={64} weight="fill" className="text-secondary" />
         </div>
         <h1 className="font-serif text-[#101519] dark:text-white tracking-tight text-[28px] font-bold leading-tight mb-4">
           Set Daily Check-ins
