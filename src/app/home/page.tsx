@@ -60,8 +60,8 @@ export default function Home() {
         </section>
 
         <section className="px-6">
-          <div className="glass rounded-3xl shadow-xl p-6 transition-all hover:scale-[1.01]">
-            <h3 className="text-lg font-serif font-semibold text-text-primary dark:text-white mb-6">
+          <div className="glass rounded-3xl shadow-xl p-5 transition-all hover:scale-[1.01]">
+            <h3 className="text-lg font-serif font-semibold text-text-primary dark:text-white mb-3">
               How are you feeling?
             </h3>
             <div className="flex justify-between items-center px-2">
@@ -72,9 +72,9 @@ export default function Home() {
                   className="group flex flex-col items-center gap-2 transition-all active:scale-90 focus:outline-none"
                 >
                   <div
-                    className={`p-4 rounded-full ${item.bg} dark:bg-opacity-20 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg ${item.color}`}
+                    className={`p-2 rounded-full ${item.bg} dark:bg-opacity-20 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg ${item.color}`}
                   >
-                    <item.icon size={36} weight="duotone" />
+                    <item.icon size={24} weight="duotone" />
                   </div>
                 </button>
               ))}

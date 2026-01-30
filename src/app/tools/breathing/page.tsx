@@ -60,7 +60,7 @@ export default function BreathingDetail() {
         className={`relative h-[45vh] min-h-90 w-full flex flex-col items-center justify-start overflow-hidden transition-colors duration-1000 ${isActive ? "bg-secondary" : "bg-primary"}`}
       >
         <div className="absolute inset-0 bg-linear-to-b from-black/10 to-transparent mix-blend-multiply opacity-50"></div>
-        <div className="w-full max-w-5xl flex justify-between items-center px-6 pt-14 pb-2 z-20">
+        <div className="w-full max-w-5xl flex justify-between items-center px-6 pt-6 pb-2 z-20">
           <button
             onClick={() => router.back()}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
@@ -114,7 +114,7 @@ export default function BreathingDetail() {
       </div>
 
       <div className="flex-1 bg-white dark:bg-background-dark rounded-t-[2.5rem] -mt-10 relative z-20 flex flex-col overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] w-full max-w-5xl">
-        <div className="flex-1 overflow-y-auto px-6 pt-10 pb-24 no-scrollbar max-w-2xl mx-auto w-full">
+        <div className="flex-1 overflow-y-auto px-6 pt-10 pb-32 no-scrollbar max-w-2xl mx-auto w-full">
           <h1 className="font-serif text-[26px] md:text-4xl font-bold leading-tight mb-4 transition-all text-center md:text-left">
             Square Breathing
           </h1>

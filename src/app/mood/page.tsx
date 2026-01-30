@@ -111,7 +111,7 @@ export default function MoodHistory() {
 
           {/* Line Chart View */}
           {activeView === "chart" && (
-            <div className="w-full max-w-3xl mx-auto bg-white dark:bg-surface-dark rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-gray-800 relative overflow-hidden">
+            <div className="w-full max-w-3xl mx-auto bg-white dark:bg-surface-dark rounded-2xl p-2 shadow-soft border border-gray-100 dark:border-gray-800 relative overflow-hidden">
               <MoodChart
                 data={moodChartData}
                 labels={dayLabels}
@@ -322,7 +322,7 @@ function MoodChart({
                 y={y}
                 textAnchor="end"
                 dominantBaseline="middle"
-                className="fill-gray-400 text-[12px] font-medium"
+                className="fill-gray-400 text-[16px] font-medium"
               >
                 {level}
               </text>
@@ -349,7 +349,7 @@ function MoodChart({
               x={x}
               y={height - 10}
               textAnchor="middle"
-              className="fill-gray-400 text-[12px] font-medium"
+              className="fill-gray-400 text-[16px] font-medium"
             >
               {label}
             </text>
