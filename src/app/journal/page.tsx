@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
-import { StatusBar } from "@/components/StatusBar";
+
 import {
   GearIcon,
   MagnifyingGlassIcon,
@@ -11,28 +11,12 @@ import {
   NotebookIcon,
   PencilIcon,
 } from "@phosphor-icons/react";
+import { journalEntries } from "@/data/data";
 
 export default function Journal() {
   const router = useRouter();
 
-  const entries = [
-    {
-      id: 1,
-      date: "Today, 9:30 AM",
-      title: "Morning Reflection",
-      excerpt:
-        "Woke up feeling a bit anxious about the presentation today, but the breathing exercise helped...",
-      mood: "neutral",
-    },
-    {
-      id: 2,
-      date: "Yesterday, 8:45 PM",
-      title: "Grateful Heart",
-      excerpt:
-        "Spent time with family and enjoyed a quiet dinner. Feeling much better than this morning.",
-      mood: "satisfied",
-    },
-  ];
+  const entries = journalEntries;
 
   const handleEntryClick = (entryId: number) => {
     router.push(`/journal/${entryId}`);
@@ -47,7 +31,6 @@ export default function Journal() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
-      <StatusBar />
       <div className="w-full px-6 pt-16 pb-4 flex flex-col gap-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10 sticky top-0">
         <div className="flex justify-between items-center">
           <h1 className="font-serif text-2xl font-bold text-gray-900 dark:text-white">

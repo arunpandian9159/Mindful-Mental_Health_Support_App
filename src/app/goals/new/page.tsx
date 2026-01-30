@@ -2,14 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { StatusBar } from "@/components/StatusBar";
-import {
-  ArrowLeftIcon,
-  PencilSimpleIcon,
-  DropIcon,
-  FootprintsIcon,
-  BrainIcon,
-} from "@phosphor-icons/react";
+
+import { ArrowLeftIcon, PencilSimpleIcon } from "@phosphor-icons/react";
+import { goalInspirations } from "@/data/data";
 
 export default function NewGoal() {
   const router = useRouter();
@@ -17,26 +12,7 @@ export default function NewGoal() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const inspirations = [
-    {
-      title: "Hydrate",
-      icon: DropIcon,
-      color: "text-blue-500",
-      bg: "bg-blue-50",
-    },
-    {
-      title: "Walk",
-      icon: FootprintsIcon,
-      color: "text-green-500",
-      bg: "bg-green-50",
-    },
-    {
-      title: "Meditate",
-      icon: BrainIcon,
-      color: "text-purple-500",
-      bg: "bg-purple-50",
-    },
-  ];
+  const inspirations = goalInspirations;
 
   const handleSaveGoal = async () => {
     // Validate input
@@ -91,7 +67,6 @@ export default function NewGoal() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
-      <StatusBar />
       <div className="w-full px-6 pt-16 py-2 flex items-center z-10">
         <button
           onClick={() => router.back()}

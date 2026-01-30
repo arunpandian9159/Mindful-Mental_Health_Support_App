@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { StatusBar } from "@/components/StatusBar";
+
 import {
   XIcon,
   SirenIcon,
@@ -10,6 +10,7 @@ import {
   ShieldPlusIcon,
   LeafIcon,
 } from "@phosphor-icons/react";
+import { emergencyContact, crisisHotlines } from "@/data/data";
 
 export default function CrisisSupport() {
   const router = useRouter();
@@ -19,8 +20,6 @@ export default function CrisisSupport() {
       {/* Background blobs for calming effect */}
       <div className="absolute -top-[20%] -right-[10%] h-125 w-125 rounded-full bg-primary/10 blur-[100px] pointer-events-none"></div>
       <div className="absolute top-[40%] -left-[10%] h-75 w-75 rounded-full bg-coral/10 blur-[80px] pointer-events-none"></div>
-
-      <StatusBar />
 
       <header className="relative z-10 flex items-center justify-between px-6 pt-12 pb-2">
         <div className="w-10"></div>
@@ -46,7 +45,7 @@ export default function CrisisSupport() {
 
         <div className="flex flex-col gap-4 mb-8">
           <a
-            href="tel:988"
+            href={`tel:${crisisHotlines.nationalHotline.number}`}
             className="flex w-full items-center gap-4 rounded-xl bg-coral p-5 shadow-lg active:scale-95 transition-transform"
           >
             <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-black/10 text-black">
@@ -55,13 +54,14 @@ export default function CrisisSupport() {
             <div className="flex flex-1 flex-col text-black">
               <span className="text-lg font-bold">Call National Hotline</span>
               <span className="text-sm font-medium opacity-80">
-                988 - Available 24/7, Confidential
+                {crisisHotlines.nationalHotline.number} -{" "}
+                {crisisHotlines.nationalHotline.description}
               </span>
             </div>
           </a>
 
           <a
-            href="sms:741741"
+            href={`sms:${crisisHotlines.textSupport.number}`}
             className="flex w-full items-center gap-4 rounded-xl bg-primary p-5 shadow-lg active:scale-95 transition-transform"
           >
             <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
@@ -70,7 +70,8 @@ export default function CrisisSupport() {
             <div className="flex flex-1 flex-col text-white">
               <span className="text-lg font-bold">Text Support Line</span>
               <span className="text-sm font-medium opacity-80">
-                Text HOME to 741741
+                Text {crisisHotlines.textSupport.keyword} to{" "}
+                {crisisHotlines.textSupport.number}
               </span>
             </div>
           </a>
@@ -108,8 +109,13 @@ export default function CrisisSupport() {
             Emergency Contact
           </h4>
           <div className="flex justify-between items-center">
-            <span className="font-medium">Dr. Emily Chen (Therapist)</span>
-            <a href="tel:5550123" className="text-primary font-bold">
+            <span className="font-medium">
+              {emergencyContact.name} ({emergencyContact.role})
+            </span>
+            <a
+              href={`tel:${emergencyContact.phone}`}
+              className="text-primary font-bold"
+            >
               Call
             </a>
           </div>

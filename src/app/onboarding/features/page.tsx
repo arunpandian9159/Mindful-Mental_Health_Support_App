@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { StatusBar } from "@/components/StatusBar";
+
 import { SmileyIcon, LeafIcon, UsersIcon } from "@phosphor-icons/react";
 
 export default function OnboardingFeatures() {
@@ -12,7 +12,6 @@ export default function OnboardingFeatures() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
-      <StatusBar />
       <div className="flex-1 flex flex-col w-full relative pt-16 pb-6">
         <div className="w-full px-8 flex justify-center mb-8">
           <div className="w-full max-w-70 aspect-square relative overflow-hidden rounded-4xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white dark:bg-gray-800 p-3">

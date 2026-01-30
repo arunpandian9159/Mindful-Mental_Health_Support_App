@@ -2,26 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { StatusBar } from "@/components/StatusBar";
+
 import {
-  CircleHalfIcon,
-  TextTIcon,
-  EarIcon,
-  BellIcon,
-  ShieldIcon,
   ArrowLeftIcon,
   CaretRightIcon,
   HeartIcon,
 } from "@phosphor-icons/react";
-
-interface SettingsItem {
-  title: string;
-  icon: React.ComponentType<{ size?: number }>;
-  description: string;
-  type: "toggle" | "nav";
-  key: string;
-  href?: string;
-}
+import { settingsItems } from "@/data/data";
 
 export default function Settings() {
   const router = useRouter();
@@ -29,47 +16,6 @@ export default function Settings() {
     "high-contrast": false,
     "screen-reader": false,
   });
-
-  const settingsItems: SettingsItem[] = [
-    {
-      title: "High Contrast",
-      icon: CircleHalfIcon,
-      description: "Enhance visibility with higher contrast colors",
-      type: "toggle",
-      key: "high-contrast",
-    },
-    {
-      title: "Text Size",
-      icon: TextTIcon,
-      description: "Adjust the size of the text",
-      type: "nav",
-      key: "text-size",
-      href: "/settings/text-size",
-    },
-    {
-      title: "Screen Reader",
-      icon: EarIcon,
-      description: "Optimize for screen reader support",
-      type: "toggle",
-      key: "screen-reader",
-    },
-    {
-      title: "Notifications",
-      icon: BellIcon,
-      description: "Manage your daily check-in alerts",
-      type: "nav",
-      key: "notifications",
-      href: "/settings/notifications",
-    },
-    {
-      title: "Data Privacy",
-      icon: ShieldIcon,
-      description: "Manage your personal data and privacy",
-      type: "nav",
-      key: "data-privacy",
-      href: "/settings/privacy",
-    },
-  ];
 
   const handleToggle = (itemKey: string) => {
     setToggleStates((prev) => ({
@@ -100,7 +46,6 @@ export default function Settings() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
-      <StatusBar />
       <div className="px-6 py-4 pt-16 flex items-center gap-4 z-10 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
         <button
           onClick={() => router.back()}

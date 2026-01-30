@@ -4,27 +4,21 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { GlobalHelpFAB } from "@/components/GlobalHelpFAB";
-import { StatusBar } from "@/components/StatusBar";
+
 import Image from "next/image";
 import {
   LeafIcon,
   BellIcon,
-  SmileySadIcon,
-  SmileyMehIcon,
-  SmileyBlankIcon,
-  SmileyIcon,
-  SmileyWinkIcon,
   PencilLineIcon,
   PlayCircleIcon,
 } from "@phosphor-icons/react";
+import { currentUser, moodOptions } from "@/data/data";
 
 export default function Home() {
   const router = useRouter();
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-24 bg-background-light dark:bg-background-dark">
-      <StatusBar />
-
       <header className="flex items-center justify-between px-6 py-6 pt-10 sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
@@ -40,7 +34,7 @@ export default function Home() {
             <Image
               alt="Profile"
               className="h-full w-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU-_SYT0qaSxH6lDtb_P0g6umnFWWZLjDxu-MjtxkNm1ea2zs9jQUjN-uT7L3qtzXwb-YAAZVz0s5DA-LX2_Myo1czEUJKE_HR-RteTFCs7801_LLdbzlm8IjvLVKaXBkb6ZG0Uiuel_n7C7jEi35Q9B7jwTknxV6fQoi9i2lvJV2WrAkURNBXdcbrMvhOF9Trhqfrifp5q1bFUnhOtITQ9uR1MO6rLwTxABjD9hUiCQrEzTic6IND0puSTUpAnKjChb51a0Br0fx8"
+              src={currentUser.avatar}
               width={40}
               height={40}
             />
@@ -51,7 +45,8 @@ export default function Home() {
       <main className="flex-1">
         <section className="px-6 pb-2">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Good morning, <span className="text-primary">Sarah</span>
+            Good morning,{" "}
+            <span className="text-primary">{currentUser.name}</span>
           </h1>
           <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
             Ready to start your day mindfully?
@@ -64,33 +59,7 @@ export default function Home() {
               How are you feeling?
             </h3>
             <div className="flex justify-between items-center px-2">
-              {[
-                {
-                  icon: SmileySadIcon,
-                  color: "text-red-400",
-                  bg: "bg-red-50",
-                },
-                {
-                  icon: SmileyMehIcon,
-                  color: "text-red-400",
-                  bg: "bg-red-50",
-                },
-                {
-                  icon: SmileyBlankIcon,
-                  color: "text-gray-400",
-                  bg: "bg-gray-50",
-                },
-                {
-                  icon: SmileyIcon,
-                  color: "text-green-400",
-                  bg: "bg-green-50",
-                },
-                {
-                  icon: SmileyWinkIcon,
-                  color: "text-green-400",
-                  bg: "bg-green-50",
-                },
-              ].map((item, i) => (
+              {moodOptions.map((item, i) => (
                 <button
                   key={i}
                   onClick={() => router.push("/mood/log")}

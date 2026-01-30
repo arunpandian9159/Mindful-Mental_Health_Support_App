@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
-import { StatusBar } from "@/components/StatusBar";
+
 import {
   MagnifyingGlassIcon,
   HandHeartIcon,
@@ -12,21 +12,15 @@ import {
   ArrowLeft,
 } from "@phosphor-icons/react";
 import Image from "next/image";
+import { toolCategories } from "@/data/data";
 
 export default function WellnessLibrary() {
   const router = useRouter();
 
-  const categories = [
-    "All",
-    "Mindfulness",
-    "Relaxation",
-    "Cognitive",
-    "Physical",
-  ];
+  const categories = toolCategories;
 
   return (
     <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
-      <StatusBar />
       <header className="flex items-center justify-between px-4 pt-12 pb-2 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10 sticky top-0">
         <button
           onClick={() => router.push("/")}

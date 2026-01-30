@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { StatusBar } from "@/components/StatusBar";
+
 import { LockKeyIcon } from "@phosphor-icons/react";
 
 export default function OnboardingPrivacy() {
@@ -10,7 +10,6 @@ export default function OnboardingPrivacy() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
-      <StatusBar />
       <div className="flex-1 flex flex-col items-center justify-center pt-16 pb-6 w-full px-8 text-center relative z-0">
         <div className="w-32 h-32 rounded-[2.5rem] bg-primary/10 flex items-center justify-center mb-10 shadow-sm transition-transform hover:scale-105 duration-300">
           <LockKeyIcon size={64} weight="fill" className="text-primary" />

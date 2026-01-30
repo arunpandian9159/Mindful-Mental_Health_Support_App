@@ -1,39 +1,12 @@
 "use client";
 
 import { BottomNav } from "@/components/BottomNav";
-import { StatusBar } from "@/components/StatusBar";
+
 import { HeartIcon, ChatCircleIcon, PlusIcon } from "@phosphor-icons/react";
+import { communityPosts } from "@/data/data";
 
 export default function Community() {
-  const posts = [
-    {
-      id: "#492",
-      author: "Member #492",
-      time: "2h ago",
-      title: "Finally managed to go grocery shopping today.",
-      content:
-        "It was overwhelming at first, but I focused on my list and got through it.",
-      bg: "bg-blue-50",
-    },
-    {
-      id: "#128",
-      author: "Anonymous",
-      time: "5h ago",
-      title: "The breathing exercise really helped with my panic attack.",
-      content:
-        "Just wanted to share a small win. Box breathing is a game changer.",
-      bg: "bg-green-50",
-    },
-    {
-      id: "#773",
-      author: "Member #773",
-      time: "1d ago",
-      title: "Feeling a bit low today, looking for some encouragement.",
-      content:
-        "Woke up with heavy thoughts. Any kind words would be appreciated.",
-      bg: "bg-purple-50",
-    },
-  ];
+  const posts = communityPosts;
 
   const handleCreatePost = () => {
     // TODO: Implement post composer modal or navigation
@@ -42,7 +15,6 @@ export default function Community() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-24 bg-background-light dark:bg-background-dark">
-      <StatusBar />
       <header className="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 pt-10">
         <div className="flex items-center justify-between px-4 py-3">
           <h1 className="text-lg font-bold flex-1 text-center">Community</h1>

@@ -2,15 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { StatusBar } from "@/components/StatusBar";
 
 export default function WelcomePage() {
   const router = useRouter();
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
-      <StatusBar />
-
       <div className="flex-1 flex flex-col items-center justify-start pt-0 pb-6 w-full relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -20,10 +17,7 @@ export default function WelcomePage() {
         >
           <div
             className="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-10000 ease-linear transform hover:scale-110"
-            style={{
-              backgroundImage:
-                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrNm3fYNRLCGv0taFopq60tAJjBffkiz0ZJozmo_PIwjgEbM87zzs3kNRZh0sjrAngAjeGHsUpNq4Pua85QwcCSkXCi_tuxtw5cnaJHHQQBGKovNpTngeQGGPibvNefCm6Y1I_nvdOOUQulsIyHgpwnRTNJmVg_e8JPzdRH8ECgJ8l2QvdqdGWmjtmlyiW2jX1lDvQUYnZuJyYPWGqCA_mGYbtPogyNmZqvADWDQjJCT8Zh63e1zCCw-3QfR-9ulXquIdzxMH1PH-y")',
-            }}
+            style={{ backgroundImage: "/welcomepage.png" }}
           >
             <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20 mix-blend-overlay"></div>
           </div>

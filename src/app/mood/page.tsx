@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
-import { StatusBar } from "@/components/StatusBar";
+
 import {
   ArrowLeftIcon,
   TrendUpIcon,
@@ -15,7 +15,6 @@ export default function MoodHistory() {
 
   return (
     <div className="relative flex h-full min-h-screen w-full flex-col pb-20 bg-background-light dark:bg-background-dark">
-      <StatusBar />
       <header className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 pt-12 justify-between sticky top-0 z-10">
         <button
           onClick={() => router.push("/")}
