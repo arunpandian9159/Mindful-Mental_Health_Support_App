@@ -61,7 +61,7 @@ export default function BreathingDetail() {
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-white dark:bg-background-dark">
       <div
-        className={`relative h-[45vh] min-h-[360] w-full flex flex-col items-center justify-start overflow-hidden transition-colors duration-1000 ${isActive ? "bg-secondary" : "bg-primary"}`}
+        className={`relative h-[45vh] min-h-90 w-full flex flex-col items-center justify-start overflow-hidden transition-colors duration-1000 ${isActive ? "bg-secondary" : "bg-primary"}`}
       >
         <div className="absolute inset-0 bg-linear-to-b from-black/10 to-transparent mix-blend-multiply opacity-50"></div>
         <div className="w-full flex justify-between items-center px-6 pt-14 pb-2 z-20">

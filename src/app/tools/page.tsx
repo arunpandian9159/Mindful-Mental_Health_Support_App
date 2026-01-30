@@ -9,7 +9,7 @@ import {
   HeadphonesIcon,
   PlayIcon,
   VideoCameraIcon,
-  ArrowLeftIcon,
+  ArrowLeft,
 } from "@phosphor-icons/react";
 import Image from "next/image";
 
@@ -32,7 +32,7 @@ export default function WellnessLibrary() {
           onClick={() => router.push("/")}
           className="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         >
-          <ArrowLeftIcon size={24} />
+          <ArrowLeft size={24} />
         </button>
         <h1 className="text-lg font-bold flex-1 text-center">
           Wellness Library

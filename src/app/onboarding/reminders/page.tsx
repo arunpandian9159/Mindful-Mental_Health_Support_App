@@ -9,6 +9,34 @@ export default function OnboardingReminders() {
   const router = useRouter();
   const [selected, setSelected] = useState("Once daily");
 
+  const handleFinish = async () => {
+    // Persist reminder preference before navigating
+    try {
+      // Try to save via API first
+      try {
+        await fetch("/api/settings/reminders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ frequency: selected }),
+        });
+      } catch {
+        // Fallback to localStorage if API is not available
+        localStorage.setItem(
+          "mindful_reminder_frequency",
+          JSON.stringify({
+            frequency: selected,
+            updatedAt: new Date().toISOString(),
+          }),
+        );
+      }
+    } catch (error) {
+      console.error("Failed to save reminder preference:", error);
+    }
+
+    // Navigate to home after persisting
+    router.push("/home");
+  };
+
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
       <StatusBar />
@@ -39,7 +67,7 @@ export default function OnboardingReminders() {
           <div className="h-1.5 w-8 rounded-full bg-primary transition-all duration-300"></div>
         </div>
         <button
-          onClick={() => router.push("/home")}
+          onClick={handleFinish}
           className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-5 bg-primary hover:bg-primary/90 transition-colors text-white text-[17px] font-bold leading-normal tracking-wide shadow-lg"
         >
           <span className="truncate">Finish</span>

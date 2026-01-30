@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
 import {
@@ -13,41 +14,89 @@ import {
   HeartIcon,
 } from "@phosphor-icons/react";
 
+interface SettingsItem {
+  title: string;
+  icon: React.ComponentType<{ size?: number }>;
+  description: string;
+  type: "toggle" | "nav";
+  key: string;
+  href?: string;
+}
+
 export default function Settings() {
   const router = useRouter();
+  const [toggleStates, setToggleStates] = useState<Record<string, boolean>>({
+    "high-contrast": false,
+    "screen-reader": false,
+  });
 
-  const settingsItems = [
+  const settingsItems: SettingsItem[] = [
     {
       title: "High Contrast",
       icon: CircleHalfIcon,
       description: "Enhance visibility with higher contrast colors",
       type: "toggle",
+      key: "high-contrast",
     },
     {
       title: "Text Size",
       icon: TextTIcon,
       description: "Adjust the size of the text",
       type: "nav",
+      key: "text-size",
+      href: "/settings/text-size",
     },
     {
       title: "Screen Reader",
       icon: EarIcon,
       description: "Optimize for screen reader support",
       type: "toggle",
+      key: "screen-reader",
     },
     {
       title: "Notifications",
       icon: BellIcon,
       description: "Manage your daily check-in alerts",
       type: "nav",
+      key: "notifications",
+      href: "/settings/notifications",
     },
     {
       title: "Data Privacy",
       icon: ShieldIcon,
       description: "Manage your personal data and privacy",
       type: "nav",
+      key: "data-privacy",
+      href: "/settings/privacy",
     },
   ];
+
+  const handleToggle = (itemKey: string) => {
+    setToggleStates((prev) => ({
+      ...prev,
+      [itemKey]: !prev[itemKey],
+    }));
+  };
+
+  const handleToggleKeyDown = (event: React.KeyboardEvent, itemKey: string) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleToggle(itemKey);
+    }
+  };
+
+  const handleNavClick = (href?: string) => {
+    if (href) {
+      router.push(href);
+    }
+  };
+
+  const handleNavKeyDown = (event: React.KeyboardEvent, href?: string) => {
+    if ((event.key === "Enter" || event.key === " ") && href) {
+      event.preventDefault();
+      handleNavClick(href);
+    }
+  };
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
@@ -55,6 +104,7 @@ export default function Settings() {
       <div className="px-6 py-4 pt-16 flex items-center gap-4 z-10 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
         <button
           onClick={() => router.back()}
+          aria-label="Go back"
           className="flex items-center justify-center w-8 h-8 rounded-full -ml-2 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         >
           <ArrowLeftIcon size={24} />
@@ -73,8 +123,23 @@ export default function Settings() {
         <div className="flex flex-col gap-4">
           {settingsItems.map((item) => (
             <div
-              key={item.title}
-              className="bg-white dark:bg-surface-dark p-4 rounded-2xl shadow-soft border border-gray-100 dark:border-gray-800 flex items-center justify-between group transition-all hover:border-primary/20"
+              key={item.key}
+              role={item.type === "nav" ? "button" : undefined}
+              tabIndex={item.type === "nav" ? 0 : undefined}
+              onClick={
+                item.type === "nav"
+                  ? () => handleNavClick(item.href)
+                  : undefined
+              }
+              onKeyDown={
+                item.type === "nav"
+                  ? (e) => handleNavKeyDown(e, item.href)
+                  : undefined
+              }
+              aria-label={
+                item.type === "nav" ? `Navigate to ${item.title}` : undefined
+              }
+              className={`bg-white dark:bg-surface-dark p-4 rounded-2xl shadow-soft border border-gray-100 dark:border-gray-800 flex items-center justify-between group transition-all hover:border-primary/20 ${item.type === "nav" ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" : ""}`}
             >
               <div className="flex items-center gap-4 pr-2">
                 <div className="size-10 rounded-xl bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-600 dark:text-gray-300">
@@ -91,8 +156,18 @@ export default function Settings() {
               </div>
 
               {item.type === "toggle" ? (
-                <div className="w-12 h-6 bg-gray-200 dark:bg-gray-700 rounded-full relative cursor-pointer hover:bg-gray-300 transition-colors">
-                  <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow-sm transition-transform"></div>
+                <div
+                  role="switch"
+                  tabIndex={0}
+                  aria-checked={toggleStates[item.key] || false}
+                  aria-label={`Toggle ${item.title}`}
+                  onClick={() => handleToggle(item.key)}
+                  onKeyDown={(e) => handleToggleKeyDown(e, item.key)}
+                  className={`w-12 h-6 rounded-full relative cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${toggleStates[item.key] ? "bg-primary" : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300"}`}
+                >
+                  <div
+                    className={`w-5 h-5 bg-white rounded-full absolute top-0.5 shadow-sm transition-transform ${toggleStates[item.key] ? "translate-x-6" : "left-0.5"}`}
+                  ></div>
                 </div>
               ) : (
                 <CaretRightIcon size={20} className="text-gray-400" />

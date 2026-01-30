@@ -1,11 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { StatusBar } from "@/components/StatusBar";
 import { SmileyIcon, LeafIcon, UsersIcon } from "@phosphor-icons/react";
 
 export default function OnboardingFeatures() {
   const router = useRouter();
+  const currentStep = 2;
+  const totalSteps = 4;
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
@@ -14,15 +17,14 @@ export default function OnboardingFeatures() {
         <div className="w-full px-8 flex justify-center mb-8">
           <div className="w-full max-w-70 aspect-square relative overflow-hidden rounded-4xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white dark:bg-gray-800 p-3">
             <div className="w-full h-full rounded-3xl overflow-hidden relative">
-              <div
-                className="absolute inset-0 bg-center bg-cover bg-no-repeat transform scale-110"
-                style={{
-                  backgroundImage:
-                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrNm3fYNRLCGv0taFopq60tAJjBffkiz0ZJozmo_PIwjgEbM87zzs3kNRZh0sjrAngAjeGHsUpNq4Pua85QwcCSkXCi_tuxtw5cnaJHHQQBGKovNpTngeQGGPibvNefCm6Y1I_nvdOOUQulsIyHgpwnRTNJmVg_e8JPzdRH8ECgJ8l2QvdqdGWmjtmlyiW2jX1lDvQUYnZuJyYPWGqCA_mGYbtPogyNmZqvADWDQjJCT8Zh63e1zCCw-3QfR-9ulXquIdzxMH1PH-y")',
-                }}
-              >
-                <div className="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
-              </div>
+              <Image
+                src="/images/onboarding-features-hero.webp"
+                alt=""
+                aria-hidden="true"
+                fill
+                className="object-cover object-center scale-110"
+              />
+              <div className="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
             </div>
           </div>
         </div>
@@ -59,11 +61,32 @@ export default function OnboardingFeatures() {
         </div>
       </div>
       <div className="w-full px-6 pb-10 pt-2 flex flex-col items-center gap-6 z-10">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-primary/20 dark:bg-white/20"></div>
-          <div className="w-8 h-2 rounded-full bg-primary"></div>
-          <div className="w-2 h-2 rounded-full bg-primary/20 dark:bg-white/20"></div>
-          <div className="w-2 h-2 rounded-full bg-primary/20 dark:bg-white/20"></div>
+        <div
+          role="list"
+          aria-label="Onboarding progress"
+          className="flex items-center gap-2"
+        >
+          <div
+            role="listitem"
+            className="w-2 h-2 rounded-full bg-primary/20 dark:bg-white/20"
+          ></div>
+          <div
+            role="listitem"
+            aria-current="step"
+            className="w-8 h-2 rounded-full bg-primary"
+          >
+            <span className="sr-only">
+              Step {currentStep} of {totalSteps}
+            </span>
+          </div>
+          <div
+            role="listitem"
+            className="w-2 h-2 rounded-full bg-primary/20 dark:bg-white/20"
+          ></div>
+          <div
+            role="listitem"
+            className="w-2 h-2 rounded-full bg-primary/20 dark:bg-white/20"
+          ></div>
         </div>
         <button
           onClick={() => router.push("/onboarding/privacy")}

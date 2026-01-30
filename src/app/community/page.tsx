@@ -35,6 +35,11 @@ export default function Community() {
     },
   ];
 
+  const handleCreatePost = () => {
+    // TODO: Implement post composer modal or navigation
+    console.log("Open post composer");
+  };
+
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-24 bg-background-light dark:bg-background-dark">
       <StatusBar />
@@ -95,9 +100,14 @@ export default function Community() {
         ))}
       </main>
 
-      <div className="fixed bottom-24 right-6 h-14 w-14 rounded-full bg-primary text-white shadow-fab flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-transform">
+      <button
+        type="button"
+        onClick={handleCreatePost}
+        aria-label="Create post"
+        className="fixed bottom-24 right-6 h-14 w-14 rounded-full bg-primary text-white shadow-fab flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-transform"
+      >
         <PlusIcon size={28} weight="bold" />
-      </div>
+      </button>
 
       <BottomNav />
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
 import {
@@ -12,6 +13,9 @@ import {
 
 export default function NewGoal() {
   const router = useRouter();
+  const [goal, setGoal] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const inspirations = [
     {
@@ -34,6 +38,57 @@ export default function NewGoal() {
     },
   ];
 
+  const handleSaveGoal = async () => {
+    // Validate input
+    if (!goal.trim()) {
+      setError("Please enter a goal");
+      return;
+    }
+
+    setError("");
+    setIsLoading(true);
+
+    try {
+      // Attempt to save via API, fallback to localStorage
+      try {
+        const response = await fetch("/api/goals", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title: goal.trim() }),
+        });
+
+        if (!response.ok) {
+          throw new Error("API request failed");
+        }
+      } catch {
+        // Fallback to localStorage if API is not available
+        const existingGoals = JSON.parse(
+          localStorage.getItem("mindful_goals") || "[]",
+        );
+        const newGoal = {
+          id: Date.now(),
+          title: goal.trim(),
+          createdAt: new Date().toISOString(),
+        };
+        localStorage.setItem(
+          "mindful_goals",
+          JSON.stringify([...existingGoals, newGoal]),
+        );
+      }
+
+      router.push("/home");
+    } catch {
+      setError("Failed to save goal. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleInspirationClick = (title: string) => {
+    setGoal(title);
+    setError("");
+  };
+
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
       <StatusBar />
@@ -55,7 +110,10 @@ export default function NewGoal() {
 
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold ml-1 text-gray-700 dark:text-gray-300">
+            <label
+              htmlFor="goalInput"
+              className="text-sm font-semibold ml-1 text-gray-700 dark:text-gray-300"
+            >
               What is your goal?
             </label>
             <div className="relative group">
@@ -63,11 +121,18 @@ export default function NewGoal() {
                 <PencilSimpleIcon size={20} />
               </span>
               <input
-                className="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 rounded-2xl py-4 pl-12 pr-4 shadow-sm text-base outline-none focus:border-primary transition-colors"
+                id="goalInput"
+                className={`w-full bg-white dark:bg-surface-dark border ${error ? "border-red-500" : "border-gray-200 dark:border-gray-700"} rounded-2xl py-4 pl-12 pr-4 shadow-sm text-base outline-none focus:border-primary transition-colors`}
                 placeholder="e.g. Walk outside"
                 type="text"
+                value={goal}
+                onChange={(e) => {
+                  setGoal(e.target.value);
+                  if (error) setError("");
+                }}
               />
             </div>
+            {error && <p className="text-red-500 text-sm ml-1 mt-1">{error}</p>}
           </div>
         </div>
 
@@ -81,6 +146,7 @@ export default function NewGoal() {
             {inspirations.map((item) => (
               <button
                 key={item.title}
+                onClick={() => handleInspirationClick(item.title)}
                 className="min-w-37.5 p-4 bg-white dark:bg-surface-dark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-all text-left group"
               >
                 <div
@@ -99,10 +165,11 @@ export default function NewGoal() {
 
       <div className="w-full px-6 pb-8 pt-4 flex flex-col gap-3 z-10">
         <button
-          onClick={() => router.push("/home")}
-          className="flex w-full items-center justify-center rounded-full h-14 px-5 bg-goal-green hover:bg-opacity-90 text-white text-[17px] font-bold shadow-lg transition-all active:scale-95"
+          onClick={handleSaveGoal}
+          disabled={isLoading}
+          className="flex w-full items-center justify-center rounded-full h-14 px-5 bg-goal-green hover:bg-opacity-90 text-white text-[17px] font-bold shadow-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Save Goal
+          {isLoading ? "Saving..." : "Save Goal"}
         </button>
       </div>
     </div>

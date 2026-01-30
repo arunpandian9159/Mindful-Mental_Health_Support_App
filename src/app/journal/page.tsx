@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
 import { StatusBar } from "@/components/StatusBar";
 import {
@@ -12,6 +13,8 @@ import {
 } from "@phosphor-icons/react";
 
 export default function Journal() {
+  const router = useRouter();
+
   const entries = [
     {
       id: 1,
@@ -30,6 +33,17 @@ export default function Journal() {
       mood: "satisfied",
     },
   ];
+
+  const handleEntryClick = (entryId: number) => {
+    router.push(`/journal/${entryId}`);
+  };
+
+  const handleEntryKeyDown = (event: React.KeyboardEvent, entryId: number) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleEntryClick(entryId);
+    }
+  };
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
@@ -59,7 +73,12 @@ export default function Journal() {
         {entries.map((entry) => (
           <div
             key={entry.id}
-            className="bg-white dark:bg-surface-dark p-5 rounded-2xl shadow-soft border border-gray-100 dark:border-gray-800 flex flex-col gap-3 group cursor-pointer hover:border-primary/20 transition-all"
+            role="button"
+            tabIndex={0}
+            onClick={() => handleEntryClick(entry.id)}
+            onKeyDown={(e) => handleEntryKeyDown(e, entry.id)}
+            className="bg-white dark:bg-surface-dark p-5 rounded-2xl shadow-soft border border-gray-100 dark:border-gray-800 flex flex-col gap-3 group cursor-pointer hover:border-primary/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            aria-label={`Journal entry: ${entry.title}, ${entry.date}`}
           >
             <div className="flex justify-between items-start">
               <div className="flex flex-col">

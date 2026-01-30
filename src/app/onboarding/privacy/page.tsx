@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { StatusBar } from "@/components/StatusBar";
 import { LockKeyIcon } from "@phosphor-icons/react";
@@ -20,9 +21,14 @@ export default function OnboardingPrivacy() {
         <p className="text-[#566370] dark:text-gray-400 text-base font-normal leading-relaxed max-w-xs mx-auto mb-8">
           Your data is encrypted, secure, and never shared without permission.
         </p>
-        <button className="text-primary font-semibold text-sm hover:text-primary/80 transition-colors border-b border-primary/20 pb-0.5">
+        <Link
+          href="/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary font-semibold text-sm hover:text-primary/80 transition-colors border-b border-primary/20 pb-0.5"
+        >
           View privacy policy
-        </button>
+        </Link>
       </div>
       <div className="w-full px-6 pb-10 pt-4 flex flex-col gap-6 z-10">
         <div className="flex justify-center items-center gap-2">
