@@ -1,4 +1,5 @@
 import {
+  Icon,
   CircleHalfIcon,
   TextTIcon,
   EarIcon,
@@ -22,6 +23,13 @@ import {
   EyeSlashIcon,
   LockKeyIcon,
   UserIcon,
+  BriefcaseIcon,
+  UsersIcon,
+  ForkKnifeIcon,
+  LeafIcon,
+  FlowerLotusIcon,
+  MusicNotesIcon,
+  BicycleIcon,
 } from "@phosphor-icons/react";
 
 // ============================================================
@@ -211,18 +219,29 @@ export const moodHistory: MoodHistoryEntry[] = [
 export interface ActivityTag {
   id: string;
   label: string;
-  emoji: string;
+  icon: Icon; // Changed icon type to Icon
+  color: string;
 }
 
 export const activityTags: ActivityTag[] = [
-  { id: "work", label: "Work", emoji: "💼" },
-  { id: "exercise", label: "Exercise", emoji: "🏃" },
-  { id: "social", label: "Social", emoji: "👥" },
-  { id: "sleep", label: "Sleep", emoji: "😴" },
-  { id: "food", label: "Food", emoji: "🍽️" },
-  { id: "nature", label: "Nature", emoji: "🌿" },
-  { id: "meditation", label: "Meditation", emoji: "🧘" },
-  { id: "music", label: "Music", emoji: "🎵" },
+  { id: "work", label: "Work", icon: BriefcaseIcon, color: "text-amber-500" },
+  {
+    id: "exercise",
+    label: "Exercise",
+    icon: BicycleIcon,
+    color: "text-blue-500",
+  },
+  { id: "social", label: "Social", icon: UsersIcon, color: "text-purple-500" },
+  { id: "sleep", label: "Sleep", icon: MoonIcon, color: "text-indigo-500" },
+  { id: "food", label: "Food", icon: ForkKnifeIcon, color: "text-orange-500" },
+  { id: "nature", label: "Nature", icon: LeafIcon, color: "text-emerald-500" },
+  {
+    id: "meditation",
+    label: "Meditation",
+    icon: FlowerLotusIcon,
+    color: "text-teal-500",
+  },
+  { id: "music", label: "Music", icon: MusicNotesIcon, color: "text-pink-500" },
 ];
 
 // ============================================================

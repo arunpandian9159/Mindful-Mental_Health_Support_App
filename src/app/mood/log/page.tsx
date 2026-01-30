@@ -70,7 +70,7 @@ export default function MoodLog() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
-      <header className="w-full px-4 pt-12 pb-4 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10 sticky top-0">
+      <header className="w-full px-4 pt-5 pb-4 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10 sticky top-0">
         <button
           onClick={() => router.back()}
           aria-label="Cancel"
@@ -115,7 +115,7 @@ export default function MoodLog() {
           >
             How are you feeling?
           </h3>
-          <div className="flex justify-between items-center gap-2">
+          <div className="flex justify-between items-center gap-1">
             {moodOptions.map((mood, index) => {
               const Icon = mood.icon;
               const isSelected = selectedMood === index;
@@ -126,24 +126,26 @@ export default function MoodLog() {
                   tabIndex={0}
                   onClick={() => setSelectedMood(index)}
                   onKeyDown={(e) => handleMoodKeyDown(e, index)}
-                  className={`flex flex-col items-center gap-2 p-3 rounded-2xl cursor-pointer transition-all flex-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                  className={`flex flex-col items-center gap-2 p-2 rounded-2xl cursor-pointer transition-all flex-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                     isSelected
-                      ? `${mood.bg} ring-2 ring-primary scale-105`
-                      : "hover:bg-gray-50 dark:hover:bg-gray-800"
+                      ? "bg-white dark:bg-white/10 shadow-md scale-105 ring-1 ring-primary/20"
+                      : "hover:bg-gray-50 dark:hover:bg-white/5"
                   }`}
                   aria-pressed={isSelected}
                   aria-label={mood.label}
                 >
-                  <Icon
-                    size={36}
-                    weight={isSelected ? "fill" : "regular"}
-                    className={isSelected ? mood.color : "text-gray-400"}
-                  />
+                  <div
+                    className={`p-1 rounded-full ${mood.bg} dark:bg-opacity-20 transition-all duration-300 ${
+                      isSelected ? "scale-110 shadow-inner" : "opacity-70"
+                    } ${mood.color}`}
+                  >
+                    <Icon size={28} weight={isSelected ? "fill" : "duotone"} />
+                  </div>
                   <span
-                    className={`text-xs font-medium ${
+                    className={`text-[10px] font-bold uppercase tracking-tight text-center leading-tight ${
                       isSelected
                         ? "text-gray-900 dark:text-white"
-                        : "text-gray-500"
+                        : "text-gray-400"
                     }`}
                   >
                     {mood.label}
@@ -169,6 +171,9 @@ export default function MoodLog() {
           <div className="flex flex-wrap gap-2">
             {activityTags.map((activity) => {
               const isSelected = selectedActivities.includes(activity.id);
+              const Icon = activity.icon;
+              const colorBase = activity.color.replace("text-", "");
+
               return (
                 <div
                   key={activity.id}
@@ -176,15 +181,27 @@ export default function MoodLog() {
                   tabIndex={0}
                   onClick={() => toggleActivity(activity.id)}
                   onKeyDown={(e) => handleActivityKeyDown(e, activity.id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                  className={`flex items-center gap-2 px-3 py-2 rounded-xl cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 border-2 ${
                     isSelected
-                      ? "bg-primary text-white"
-                      : "bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 hover:border-primary/20"
+                      ? `bg-${colorBase}/20 ${activity.color} border-${colorBase} shadow-sm`
+                      : `bg-${colorBase}/5 ${activity.color} border-transparent hover:bg-${colorBase}/10`
                   }`}
                   aria-pressed={isSelected}
                 >
-                  <span className="text-base">{activity.emoji}</span>
-                  <span className="text-sm font-medium">{activity.label}</span>
+                  <Icon
+                    size={18}
+                    weight={isSelected ? "fill" : "duotone"}
+                    className={
+                      isSelected
+                        ? activity.color
+                        : `${activity.color} opacity-80`
+                    }
+                  />
+                  <span
+                    className={`text-sm font-bold ${isSelected ? "text-gray-900 dark:text-white" : "text-gray-700 dark:text-gray-300"}`}
+                  >
+                    {activity.label}
+                  </span>
                 </div>
               );
             })}
