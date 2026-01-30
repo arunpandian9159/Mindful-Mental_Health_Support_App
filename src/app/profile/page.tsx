@@ -18,10 +18,10 @@ export default function Profile() {
 
   const menuItems = [
     {
-      title: "Accessibility",
+      title: "General",
       description: "Display and interaction settings",
       icon: HandPointingIcon,
-      href: "/settings",
+      href: "/settings/general",
       color: "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
     },
     {

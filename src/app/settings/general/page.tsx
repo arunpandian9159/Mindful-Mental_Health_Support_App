@@ -46,7 +46,7 @@ export default function Settings() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
-      <div className="w-full px-6 py-4 pt-16 flex items-center gap-4 z-10 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md justify-center">
+      <div className="w-full px-6 py-4 pt-6 flex items-center gap-4 z-10 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md justify-center">
         <div className="w-full max-w-5xl flex items-center gap-4">
           <button
             onClick={() => router.back()}
@@ -56,7 +56,7 @@ export default function Settings() {
             <ArrowLeftIcon size={24} />
           </button>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white transition-all">
-            Accessibility Settings
+            General Settings
           </h1>
         </div>
       </div>

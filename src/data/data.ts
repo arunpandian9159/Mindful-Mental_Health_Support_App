@@ -3,8 +3,6 @@ import {
   CircleHalfIcon,
   TextTIcon,
   EarIcon,
-  BellIcon,
-  ShieldIcon,
   DropIcon,
   BrainIcon,
   SmileySadIcon,
@@ -331,6 +329,14 @@ export interface SettingsItem {
 
 export const settingsItems: SettingsItem[] = [
   {
+    title: "Account",
+    icon: UserIcon,
+    description: "Manage your personal information",
+    type: "nav",
+    key: "account",
+    href: "/settings/account",
+  },
+  {
     title: "High Contrast",
     icon: CircleHalfIcon,
     description: "Enhance visibility with higher contrast colors",
@@ -351,22 +357,6 @@ export const settingsItems: SettingsItem[] = [
     description: "Optimize for screen reader support",
     type: "toggle",
     key: "screen-reader",
-  },
-  {
-    title: "Notifications",
-    icon: BellIcon,
-    description: "Manage your daily check-in alerts",
-    type: "nav",
-    key: "notifications",
-    href: "/settings/notifications",
-  },
-  {
-    title: "Data Privacy",
-    icon: ShieldIcon,
-    description: "Manage your personal data and privacy",
-    type: "nav",
-    key: "data-privacy",
-    href: "/settings/privacy",
   },
 ];
 
