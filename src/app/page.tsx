@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function WelcomePage() {
   const router = useRouter();
@@ -15,12 +16,14 @@ export default function WelcomePage() {
           transition={{ duration: 0.8 }}
           className="w-full h-[55vh] relative overflow-hidden rounded-b-[3rem] shadow-[0_10px_40px_-10px_rgba(93,155,213,0.2)]"
         >
-          <div
-            className="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-10000 ease-linear transform hover:scale-110"
-            style={{ backgroundImage: "/welcomepage.png" }}
-          >
-            <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20 mix-blend-overlay"></div>
-          </div>
+          <Image
+            src="/welcomepage.png"
+            alt="Welcome"
+            fill
+            priority
+            className="object-cover object-center transition-transform duration-10000 ease-linear transform hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20 mix-blend-overlay"></div>
         </motion.div>
 
         <div className="w-full px-8 mt-10 flex flex-col items-center text-center">

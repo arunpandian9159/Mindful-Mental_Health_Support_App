@@ -17,7 +17,7 @@ export default function OnboardingFeatures() {
           <div className="w-full max-w-70 aspect-square relative overflow-hidden rounded-4xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white dark:bg-gray-800 p-3">
             <div className="w-full h-full rounded-3xl overflow-hidden relative">
               <Image
-                src="/images/onboarding-features-hero.webp"
+                src="/welcomepage.png"
                 alt=""
                 aria-hidden="true"
                 fill
