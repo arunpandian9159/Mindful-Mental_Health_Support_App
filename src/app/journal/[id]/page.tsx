@@ -13,14 +13,17 @@ import {
 } from "@phosphor-icons/react";
 import { journalEntries } from "@/data/data";
 
-const moodIcons = {
+// Define mood type for type safety
+type Mood = "neutral" | "satisfied" | "sad" | "happy";
+
+const moodIcons: Record<Mood, typeof SmileyBlankIcon> = {
   neutral: SmileyBlankIcon,
   satisfied: SmileyIcon,
   sad: SmileySadIcon,
   happy: SmileyWinkIcon,
 };
 
-const moodColors = {
+const moodColors: Record<Mood, string> = {
   neutral: "text-gray-400 bg-gray-50",
   satisfied: "text-green-400 bg-green-50",
   sad: "text-red-400 bg-red-50",
@@ -53,8 +56,9 @@ export default function JournalEntryDetail() {
     );
   }
 
-  const MoodIcon = moodIcons[entry.mood];
-  const moodColor = moodColors[entry.mood];
+  // Safe lookup with fallbacks for unknown mood values
+  const MoodIcon = moodIcons[entry.mood as Mood] ?? SmileyBlankIcon;
+  const moodColor = moodColors[entry.mood as Mood] ?? moodColors.neutral;
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">

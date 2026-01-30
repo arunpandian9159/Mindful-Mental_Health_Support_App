@@ -3,18 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { XIcon, CheckIcon } from "@phosphor-icons/react";
-import { moodOptions } from "@/data/data";
-
-const activityTags = [
-  { id: "work", label: "Work", emoji: "💼" },
-  { id: "exercise", label: "Exercise", emoji: "🏃" },
-  { id: "social", label: "Social", emoji: "👥" },
-  { id: "sleep", label: "Sleep", emoji: "😴" },
-  { id: "food", label: "Food", emoji: "🍽️" },
-  { id: "nature", label: "Nature", emoji: "🌿" },
-  { id: "meditation", label: "Meditation", emoji: "🧘" },
-  { id: "music", label: "Music", emoji: "🎵" },
-];
+import { moodOptions, activityTags } from "@/data/data";
 
 export default function MoodLog() {
   const router = useRouter();
@@ -22,6 +11,7 @@ export default function MoodLog() {
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const [note, setNote] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const toggleActivity = (id: string) => {
     setSelectedActivities((prev) =>
@@ -33,10 +23,35 @@ export default function MoodLog() {
     if (selectedMood === null) return;
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    setIsSubmitting(false);
-    router.push("/mood");
+    setSubmitError(null);
+
+    try {
+      // Build payload with all selected data
+      const payload = {
+        mood: selectedMood,
+        activities: selectedActivities,
+        note: note.trim(),
+        timestamp: new Date().toISOString(),
+      };
+
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // TODO: Replace with actual API call
+      console.log("Mood log payload:", payload);
+
+      // Success - navigate to mood page
+      router.push("/mood");
+    } catch (error) {
+      // Show error to user and don't navigate
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Failed to save mood entry. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleMoodKeyDown = (event: React.KeyboardEvent, index: number) => {
@@ -79,9 +94,25 @@ export default function MoodLog() {
       </header>
 
       <main className="flex-1 w-full px-6 pb-10 flex flex-col gap-8 overflow-y-auto no-scrollbar">
+        {/* Error Message */}
+        {submitError && (
+          <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+            <p className="text-sm text-red-600 dark:text-red-400 text-center">
+              {submitError}
+            </p>
+          </div>
+        )}
+
         {/* Mood Selection */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+        <div
+          className="flex flex-col gap-4"
+          role="group"
+          aria-labelledby="mood-selection-label"
+        >
+          <h3
+            id="mood-selection-label"
+            className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+          >
             How are you feeling?
           </h3>
           <div className="flex justify-between items-center gap-2">
@@ -124,8 +155,15 @@ export default function MoodLog() {
         </div>
 
         {/* Activity Tags */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+        <div
+          className="flex flex-col gap-4"
+          role="group"
+          aria-labelledby="activity-selection-label"
+        >
+          <h3
+            id="activity-selection-label"
+            className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+          >
             What have you been doing?
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -155,7 +193,10 @@ export default function MoodLog() {
 
         {/* Note */}
         <div className="flex flex-col gap-4">
-          <h3 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+          <h3
+            id="note-label"
+            className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+          >
             Add a note (optional)
           </h3>
           <textarea
@@ -163,6 +204,7 @@ export default function MoodLog() {
             onChange={(e) => setNote(e.target.value)}
             placeholder="What's on your mind?"
             rows={4}
+            aria-labelledby="note-label"
             className="w-full p-4 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
           />
         </div>

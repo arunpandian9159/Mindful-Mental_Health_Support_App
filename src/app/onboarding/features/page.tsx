@@ -16,11 +16,14 @@ export default function OnboardingFeatures() {
         <div className="w-full px-8 flex justify-center mb-8">
           <div className="w-full max-w-70 aspect-square relative overflow-hidden rounded-4xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white dark:bg-gray-800 p-3">
             <div className="w-full h-full rounded-3xl overflow-hidden relative">
+              {/* Using Next.js Image component for automatic format optimization */}
               <Image
                 src="/welcomepage.png"
                 alt=""
                 aria-hidden="true"
                 fill
+                sizes="(max-width: 768px) 100vw, 280px"
+                priority
                 className="object-cover object-center scale-110"
               />
               <div className="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>

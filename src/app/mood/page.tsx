@@ -3,6 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
+import {
+  heatmapData,
+  getMoodColor,
+  dayLabels,
+  moodChartData,
+  moodHistory,
+} from "@/data/data";
 
 import {
   ArrowLeftIcon,
@@ -11,34 +18,28 @@ import {
   PlusIcon,
 } from "@phosphor-icons/react";
 
-// Mock heatmap data - 7 weeks of mood data (0-5 scale, 0 = no data)
-const heatmapData = [
-  [3, 4, 5, 4, 3, 4, 5], // Week 1
-  [4, 3, 4, 5, 4, 5, 4], // Week 2
-  [5, 4, 3, 4, 5, 4, 3], // Week 3
-  [3, 4, 5, 4, 3, 2, 4], // Week 4
-  [4, 5, 4, 3, 4, 5, 4], // Week 5
-  [2, 3, 4, 5, 4, 3, 4], // Week 6
-  [4, 5, 4, 4, 5, 4, 5], // Week 7
-];
-
-const getMoodColor = (value: number) => {
-  const colors: Record<number, string> = {
-    0: "bg-gray-100 dark:bg-gray-800",
-    1: "bg-red-200 dark:bg-red-900/40",
-    2: "bg-orange-200 dark:bg-orange-900/40",
-    3: "bg-yellow-200 dark:bg-yellow-900/40",
-    4: "bg-green-200 dark:bg-green-900/40",
-    5: "bg-emerald-300 dark:bg-emerald-800/50",
-  };
-  return colors[value] || colors[0];
-};
-
-const dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
 export default function MoodHistory() {
   const router = useRouter();
   const [activeView, setActiveView] = useState<"chart" | "heatmap">("chart");
+  const [selectedCell, setSelectedCell] = useState<{
+    weekIndex: number;
+    dayIndex: number;
+    value: number;
+  } | null>(null);
+
+  const handleCellClick = (
+    weekIndex: number,
+    dayIndex: number,
+    value: number,
+  ) => {
+    setSelectedCell({ weekIndex, dayIndex, value });
+    // You can also navigate to a detail page or show a modal
+    // router.push(`/mood/detail?week=${weekIndex}&day=${dayIndex}`);
+  };
+
+  const closeSelectedCell = () => {
+    setSelectedCell(null);
+  };
 
   return (
     <div className="relative flex h-full min-h-screen w-full flex-col pb-20 bg-background-light dark:bg-background-dark">
@@ -112,15 +113,19 @@ export default function MoodHistory() {
               <div className="text-gray-400 text-xs font-medium uppercase tracking-widest">
                 Mood Chart Visualization
               </div>
-              {/* Simple CSS-based Sparkline or Placeholder */}
+              {/* Simple CSS-based Sparkline - values clamped to 0-5 scale */}
               <div className="absolute bottom-10 left-0 right-0 h-24 flex items-end justify-between px-8">
-                {[3, 5, 4, 6, 5, 7, 6].map((h, i) => (
-                  <div
-                    key={i}
-                    className="w-4 bg-primary/20 rounded-t-sm animate-pulse"
-                    style={{ height: `${h * 15}%` }}
-                  ></div>
-                ))}
+                {moodChartData.map((h, i) => {
+                  // Clamp values to 0-5 range to match mood scale
+                  const clampedValue = Math.min(Math.max(h, 0), 5);
+                  return (
+                    <div
+                      key={i}
+                      className="w-4 bg-primary/20 rounded-t-sm animate-pulse"
+                      style={{ height: `${clampedValue * 20}%` }}
+                    ></div>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -149,15 +154,42 @@ export default function MoodHistory() {
                         W{weekIndex + 1}
                       </div>
                       {week.map((value, dayIndex) => (
-                        <div
+                        <button
                           key={dayIndex}
-                          className={`flex-1 aspect-square rounded-md ${getMoodColor(value)} transition-colors hover:ring-2 hover:ring-primary/30 cursor-pointer`}
+                          onClick={() =>
+                            handleCellClick(weekIndex, dayIndex, value)
+                          }
+                          className={`flex-1 aspect-square rounded-md ${getMoodColor(value)} transition-colors hover:ring-2 hover:ring-primary/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary`}
                           title={`${dayLabels[dayIndex]}, Week ${weekIndex + 1}: Mood ${value}/5`}
-                        ></div>
+                          aria-label={`${dayLabels[dayIndex]}, Week ${weekIndex + 1}: Mood ${value} out of 5`}
+                        ></button>
                       ))}
                     </div>
                   ))}
                 </div>
+
+                {/* Selected Cell Detail */}
+                {selectedCell && (
+                  <div className="mt-3 p-3 rounded-xl bg-primary/10 border border-primary/20">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-bold text-gray-900 dark:text-white">
+                          {dayLabels[selectedCell.dayIndex]}, Week{" "}
+                          {selectedCell.weekIndex + 1}
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          Mood Score: {selectedCell.value}/5
+                        </p>
+                      </div>
+                      <button
+                        onClick={closeSelectedCell}
+                        className="text-xs text-primary font-medium hover:underline"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 {/* Legend */}
                 <div className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-gray-100 dark:border-gray-800">
@@ -183,33 +215,25 @@ export default function MoodHistory() {
         </div>
 
         <div className="flex flex-col gap-3 px-4 pb-6">
-          <div className="flex items-center justify-between bg-white dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-primary/20 transition-all cursor-pointer">
-            <div className="flex items-center gap-4">
-              <div className="size-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-2xl">
-                😊
+          {moodHistory.map((entry) => (
+            <div
+              key={entry.id}
+              className="flex items-center justify-between bg-white dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-primary/20 transition-all cursor-pointer"
+            >
+              <div className="flex items-center gap-4">
+                <div
+                  className={`size-10 rounded-full ${entry.bgColor} flex items-center justify-center text-2xl`}
+                >
+                  {entry.emoji}
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-bold text-sm">{entry.label}</span>
+                  <span className="text-xs text-gray-500">{entry.time}</span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-sm">Feeling Great</span>
-                <span className="text-xs text-gray-500">Today, 9:00 AM</span>
-              </div>
+              <CaretRightIcon size={20} className="text-gray-400" />
             </div>
-            <CaretRightIcon size={20} className="text-gray-400" />
-          </div>
-
-          <div className="flex items-center justify-between bg-white dark:bg-surface-dark p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-primary/20 transition-all cursor-pointer">
-            <div className="flex items-center gap-4">
-              <div className="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-2xl">
-                🙂
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-sm">Feeling Okay</span>
-                <span className="text-xs text-gray-500">
-                  Yesterday, 8:45 PM
-                </span>
-              </div>
-            </div>
-            <CaretRightIcon size={20} className="text-gray-400" />
-          </div>
+          ))}
         </div>
       </main>
 

@@ -1,23 +1,60 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeftIcon, ShieldCheckIcon } from "@phosphor-icons/react";
+import Link from "next/link";
+import {
+  ArrowLeftIcon,
+  ShieldCheckIcon,
+  CheckCircleIcon,
+} from "@phosphor-icons/react";
 import { privacyItems } from "@/data/data";
+
+const STORAGE_KEY = "privacy_settings";
+const defaultToggleStates: Record<string, boolean> = {
+  "anonymous-profile": true,
+  "data-encryption": true,
+  "activity-visible": false,
+};
+
+// Helper to get initial state from localStorage
+const getInitialToggleStates = (): Record<string, boolean> => {
+  if (typeof window === "undefined") return defaultToggleStates;
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      return { ...defaultToggleStates, ...JSON.parse(saved) };
+    }
+  } catch {
+    /* ignore */
+  }
+  return defaultToggleStates;
+};
 
 export default function PrivacySettings() {
   const router = useRouter();
-  const [toggleStates, setToggleStates] = useState<Record<string, boolean>>({
-    "anonymous-profile": true,
-    "data-encryption": true,
-    "activity-visible": false,
-  });
+  // Use lazy initialization to avoid calling setState in useEffect
+  const [toggleStates, setToggleStates] = useState<Record<string, boolean>>(
+    getInitialToggleStates,
+  );
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    // Skip first render to avoid writing initial state back to localStorage
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(toggleStates));
+    } catch {
+      /* ignore */
+    }
+  }, [toggleStates]);
 
   const handleToggle = (itemId: string) => {
-    setToggleStates((prev) => ({
-      ...prev,
-      [itemId]: !prev[itemId],
-    }));
+    if (itemId === "data-encryption") return;
+    setToggleStates((prev) => ({ ...prev, [itemId]: !prev[itemId] }));
   };
 
   const handleToggleKeyDown = (event: React.KeyboardEvent, itemId: string) => {
@@ -28,17 +65,13 @@ export default function PrivacySettings() {
   };
 
   const handleActionClick = (itemId: string) => {
-    if (itemId === "download-data") {
+    if (itemId === "download-data")
       alert("Your data download will begin shortly.");
-    } else if (itemId === "delete-account") {
-      if (
-        confirm(
-          "Are you sure you want to delete your account? This action cannot be undone.",
-        )
-      ) {
-        alert("Account deletion initiated.");
-      }
-    }
+    else if (
+      itemId === "delete-account" &&
+      confirm("Are you sure? This cannot be undone.")
+    )
+      alert("Account deletion initiated.");
   };
 
   return (
@@ -57,7 +90,6 @@ export default function PrivacySettings() {
       </header>
 
       <main className="flex-1 overflow-y-auto px-6 pb-10 pt-2 no-scrollbar">
-        {/* Privacy Shield Banner */}
         <div className="flex items-center gap-4 p-4 rounded-2xl bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800 mb-6">
           <div className="size-12 rounded-xl bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
             <ShieldCheckIcon
@@ -83,20 +115,12 @@ export default function PrivacySettings() {
           {privacyItems.map((item) => (
             <div
               key={item.id}
-              className={`bg-white dark:bg-surface-dark p-4 rounded-2xl shadow-soft border transition-all ${
-                item.danger
-                  ? "border-red-100 dark:border-red-900/30 hover:border-red-200"
-                  : "border-gray-100 dark:border-gray-800 hover:border-primary/20"
-              }`}
+              className={`bg-white dark:bg-surface-dark p-4 rounded-2xl shadow-soft border transition-all ${item.danger ? "border-red-100 dark:border-red-900/30" : "border-gray-100 dark:border-gray-800 hover:border-primary/20"}`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4 pr-2">
                   <div
-                    className={`size-10 rounded-xl flex items-center justify-center ${
-                      item.danger
-                        ? "bg-red-50 dark:bg-red-900/20"
-                        : "bg-gray-50 dark:bg-white/5"
-                    }`}
+                    className={`size-10 rounded-xl flex items-center justify-center ${item.danger ? "bg-red-50 dark:bg-red-900/20" : "bg-gray-50 dark:bg-white/5"}`}
                   >
                     <item.icon
                       size={24}
@@ -109,48 +133,48 @@ export default function PrivacySettings() {
                   </div>
                   <div className="flex flex-col">
                     <h3
-                      className={`font-bold text-base leading-tight mb-0.5 ${
-                        item.danger
-                          ? "text-red-600 dark:text-red-400"
-                          : "text-gray-900 dark:text-white"
-                      }`}
+                      className={`font-bold text-base leading-tight mb-0.5 ${item.danger ? "text-red-600 dark:text-red-400" : "text-gray-900 dark:text-white"}`}
                     >
                       {item.title}
                     </h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400 leading-tight">
-                      {item.description}
+                      {item.id === "data-encryption"
+                        ? "Always encrypted (cannot be disabled)"
+                        : item.description}
                     </p>
                   </div>
                 </div>
-
                 {item.type === "toggle" ? (
-                  <div
-                    role="switch"
-                    tabIndex={0}
-                    aria-checked={toggleStates[item.id] || false}
-                    aria-label={`Toggle ${item.title}`}
-                    onClick={() => handleToggle(item.id)}
-                    onKeyDown={(e) => handleToggleKeyDown(e, item.id)}
-                    className={`w-12 h-6 rounded-full relative cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
-                      toggleStates[item.id]
-                        ? "bg-primary"
-                        : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300"
-                    }`}
-                  >
+                  item.id === "data-encryption" ? (
+                    <div className="flex items-center gap-2">
+                      <CheckCircleIcon
+                        size={20}
+                        className="text-green-500"
+                        weight="fill"
+                      />
+                      <span className="text-xs text-green-600 font-medium">
+                        Active
+                      </span>
+                    </div>
+                  ) : (
                     <div
-                      className={`w-5 h-5 bg-white rounded-full absolute top-0.5 shadow-sm transition-transform ${
-                        toggleStates[item.id] ? "translate-x-6" : "left-0.5"
-                      }`}
-                    />
-                  </div>
+                      role="switch"
+                      tabIndex={0}
+                      aria-checked={toggleStates[item.id] || false}
+                      aria-label={`Toggle ${item.title}`}
+                      onClick={() => handleToggle(item.id)}
+                      onKeyDown={(e) => handleToggleKeyDown(e, item.id)}
+                      className={`w-12 h-6 rounded-full relative cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${toggleStates[item.id] ? "bg-primary" : "bg-gray-200 dark:bg-gray-700"}`}
+                    >
+                      <div
+                        className={`w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow-sm transition-transform ${toggleStates[item.id] ? "translate-x-6" : "translate-x-0"}`}
+                      />
+                    </div>
+                  )
                 ) : (
                   <button
                     onClick={() => handleActionClick(item.id)}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                      item.danger
-                        ? "bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100"
-                        : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200"
-                    }`}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${item.danger ? "bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100" : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200"}`}
                   >
                     {item.id === "download-data" ? "Download" : "Delete"}
                   </button>
@@ -162,12 +186,11 @@ export default function PrivacySettings() {
 
         <div className="mt-8 p-4 rounded-2xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800">
           <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed text-center">
-            Your privacy matters to us. We never sell your data to third
-            parties. Read our{" "}
-            <a href="#" className="text-primary underline">
+            Your privacy matters. We never sell your data. Read our{" "}
+            <Link href="/privacy-policy" className="text-primary underline">
               Privacy Policy
-            </a>{" "}
-            for more details.
+            </Link>
+            .
           </p>
         </div>
       </main>

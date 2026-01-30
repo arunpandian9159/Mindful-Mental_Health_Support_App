@@ -143,7 +143,36 @@ export const communityPosts: CommunityPost[] = [
 // MOOD PAGE DATA
 // ============================================================
 
-export const moodChartData = [3, 5, 4, 6, 5, 7, 6];
+// Heatmap data - 7 weeks of mood data (0-5 scale, 0 = no data)
+export const heatmapData = [
+  [3, 4, 5, 4, 3, 4, 5], // Week 1
+  [4, 3, 4, 5, 4, 5, 4], // Week 2
+  [5, 4, 3, 4, 5, 4, 3], // Week 3
+  [3, 4, 5, 4, 3, 2, 4], // Week 4
+  [4, 5, 4, 3, 4, 5, 4], // Week 5
+  [2, 3, 4, 5, 4, 3, 4], // Week 6
+  [4, 5, 4, 4, 5, 4, 5], // Week 7
+];
+
+// Mood color mapping for heatmap cells
+export const moodColorMap: Record<number, string> = {
+  0: "bg-gray-100 dark:bg-gray-800",
+  1: "bg-red-200 dark:bg-red-900/40",
+  2: "bg-orange-200 dark:bg-orange-900/40",
+  3: "bg-yellow-200 dark:bg-yellow-900/40",
+  4: "bg-green-200 dark:bg-green-900/40",
+  5: "bg-emerald-300 dark:bg-emerald-800/50",
+};
+
+export const getMoodColor = (value: number): string => {
+  return moodColorMap[value] || moodColorMap[0];
+};
+
+// Day labels for heatmap
+export const dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+// Chart data (0-5 scale)
+export const moodChartData = [3, 5, 4, 5, 5, 5, 5];
 
 export const moodStats = {
   averageScore: 4.2,
@@ -173,6 +202,24 @@ export const moodHistory: MoodHistoryEntry[] = [
     time: "Yesterday, 8:45 PM",
     bgColor: "bg-blue-100 dark:bg-blue-900/30",
   },
+];
+
+// Activity tags for mood logging
+export interface ActivityTag {
+  id: string;
+  label: string;
+  emoji: string;
+}
+
+export const activityTags: ActivityTag[] = [
+  { id: "work", label: "Work", emoji: "💼" },
+  { id: "exercise", label: "Exercise", emoji: "🏃" },
+  { id: "social", label: "Social", emoji: "👥" },
+  { id: "sleep", label: "Sleep", emoji: "😴" },
+  { id: "food", label: "Food", emoji: "🍽️" },
+  { id: "nature", label: "Nature", emoji: "🌿" },
+  { id: "meditation", label: "Meditation", emoji: "🧘" },
+  { id: "music", label: "Music", emoji: "🎵" },
 ];
 
 // ============================================================

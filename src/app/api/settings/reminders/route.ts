@@ -1,4 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+
+// Zod schema for validation
+const ReminderSettingsSchema = z.object({
+  dailyCheckIn: z.boolean().optional(),
+  checkInTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Invalid time format (HH:MM)")
+    .optional(),
+  journalReminder: z.boolean().optional(),
+  journalTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Invalid time format (HH:MM)")
+    .optional(),
+  moodTracking: z.boolean().optional(),
+  moodTrackingFrequency: z.enum(["daily", "twice", "thrice"]).optional(),
+  weeklyReport: z.boolean().optional(),
+  reportDay: z.string().optional(),
+});
 
 interface ReminderSettings {
   dailyCheckIn: boolean;
@@ -34,10 +53,24 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Validate and update settings
+    // Validate the request body against schema
+    const validationResult = ReminderSettingsSchema.safeParse(body);
+
+    if (!validationResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid request body",
+          details: validationResult.error.flatten().fieldErrors,
+        },
+        { status: 400 },
+      );
+    }
+
+    // Safely merge validated data into settings
     reminderSettings = {
       ...reminderSettings,
-      ...body,
+      ...validationResult.data,
     };
 
     return NextResponse.json({

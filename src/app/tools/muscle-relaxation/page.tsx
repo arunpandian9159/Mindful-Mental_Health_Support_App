@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
@@ -15,9 +17,9 @@ export default function MuscleRelaxation() {
   const [currentStep, setCurrentStep] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [timerStarted, setTimerStarted] = useState(false);
   const currentStepRef = useRef(currentStep);
 
-  // Keep ref in sync with state
   useEffect(() => {
     currentStepRef.current = currentStep;
   }, [currentStep]);
@@ -28,8 +30,7 @@ export default function MuscleRelaxation() {
       interval = setInterval(() => {
         setTimeRemaining((prev) => prev - 1);
       }, 1000);
-    } else if (isPlaying && timeRemaining === 0) {
-      // Timer finished - advance to next step
+    } else if (isPlaying && timeRemaining === 0 && timerStarted) {
       const step = currentStepRef.current;
       setCompletedSteps((prev) => [...prev, muscleGroups[step].id]);
       if (step < muscleGroups.length - 1) {
@@ -37,18 +38,24 @@ export default function MuscleRelaxation() {
         setTimeRemaining(muscleGroups[step + 1].duration);
       } else {
         setIsPlaying(false);
+        setTimerStarted(false);
       }
     }
     return () => clearInterval(interval);
-  }, [isPlaying, timeRemaining]);
+  }, [isPlaying, timeRemaining, timerStarted]);
 
   const handleStart = () => {
     if (completedSteps.length === muscleGroups.length) {
-      // Reset if all completed
       setCompletedSteps([]);
       setCurrentStep(0);
+      setTimeRemaining(muscleGroups[0].duration);
+      setTimerStarted(true);
+    } else {
+      // Use the correct step index for timeRemaining
+      const startIndex = currentStep;
+      setTimeRemaining(muscleGroups[startIndex].duration);
+      setTimerStarted(true);
     }
-    setTimeRemaining(muscleGroups[currentStep].duration);
     setIsPlaying(true);
   };
 
@@ -60,6 +67,7 @@ export default function MuscleRelaxation() {
     if (!isPlaying) {
       setCurrentStep(index);
       setTimeRemaining(muscleGroups[index].duration);
+      setTimerStarted(false);
     }
   };
 
@@ -69,12 +77,29 @@ export default function MuscleRelaxation() {
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
+  // Fixed progress calculation: return 0% when not started
   const progress =
-    ((muscleGroups[currentStep].duration - timeRemaining) /
-      muscleGroups[currentStep].duration) *
-    100;
+    !timerStarted || timeRemaining === muscleGroups[currentStep].duration
+      ? 0
+      : Math.min(
+          100,
+          Math.max(
+            0,
+            ((muscleGroups[currentStep].duration - timeRemaining) /
+              muscleGroups[currentStep].duration) *
+              100,
+          ),
+        );
+
   const isComplete =
     completedSteps.length === muscleGroups.length && !isPlaying;
+
+  // Button text logic: show Resume only if timer was started and is paused
+  const getButtonText = () => {
+    if (isComplete) return "Start Again";
+    if (timerStarted && !isPlaying && timeRemaining > 0) return "Resume";
+    return "Start";
+  };
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
@@ -91,7 +116,6 @@ export default function MuscleRelaxation() {
       </header>
 
       <main className="flex-1 w-full px-6 pb-24 flex flex-col gap-6 overflow-y-auto no-scrollbar">
-        {/* Main Display */}
         <div className="bg-white dark:bg-surface-dark rounded-3xl p-8 shadow-soft border border-gray-100 dark:border-gray-800 flex flex-col items-center">
           {isComplete ? (
             <>
@@ -150,7 +174,6 @@ export default function MuscleRelaxation() {
           )}
         </div>
 
-        {/* Control Button */}
         <button
           onClick={isPlaying ? handlePause : handleStart}
           className="w-full py-4 rounded-2xl bg-primary text-white font-bold text-base flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-[0.98] transition-all"
@@ -160,22 +183,14 @@ export default function MuscleRelaxation() {
               <PauseIcon size={24} weight="fill" />
               Pause
             </>
-          ) : isComplete ? (
-            <>
-              <PlayIcon size={24} weight="fill" />
-              Start Again
-            </>
           ) : (
             <>
               <PlayIcon size={24} weight="fill" />
-              {timeRemaining > 0 && !isPlaying && currentStep > 0
-                ? "Resume"
-                : "Start"}
+              {getButtonText()}
             </>
           )}
         </button>
 
-        {/* Step List */}
         <div className="flex flex-col gap-2">
           <h4 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
             Muscle Groups
@@ -189,23 +204,11 @@ export default function MuscleRelaxation() {
                   key={group.id}
                   onClick={() => handleStepClick(index)}
                   disabled={isPlaying}
-                  className={`flex items-center justify-between p-4 rounded-xl transition-all ${
-                    isCurrent
-                      ? "bg-primary/10 border-2 border-primary"
-                      : isCompleted
-                        ? "bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800"
-                        : "bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 hover:border-primary/20"
-                  } ${isPlaying ? "cursor-not-allowed" : "cursor-pointer"}`}
+                  className={`flex items-center justify-between p-4 rounded-xl transition-all ${isCurrent ? "bg-primary/10 border-2 border-primary" : isCompleted ? "bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800" : "bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 hover:border-primary/20"} ${isPlaying ? "cursor-not-allowed" : "cursor-pointer"}`}
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`size-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                        isCompleted
-                          ? "bg-green-500 text-white"
-                          : isCurrent
-                            ? "bg-primary text-white"
-                            : "bg-gray-100 dark:bg-gray-800 text-gray-500"
-                      }`}
+                      className={`size-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? "bg-green-500 text-white" : isCurrent ? "bg-primary text-white" : "bg-gray-100 dark:bg-gray-800 text-gray-500"}`}
                     >
                       {isCompleted ? (
                         <CheckCircleIcon size={18} weight="fill" />
@@ -214,13 +217,7 @@ export default function MuscleRelaxation() {
                       )}
                     </div>
                     <span
-                      className={`font-medium ${
-                        isCurrent
-                          ? "text-primary"
-                          : isCompleted
-                            ? "text-green-600 dark:text-green-400"
-                            : "text-gray-700 dark:text-gray-300"
-                      }`}
+                      className={`font-medium ${isCurrent ? "text-primary" : isCompleted ? "text-green-600 dark:text-green-400" : "text-gray-700 dark:text-gray-300"}`}
                     >
                       {group.name}
                     </span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, BellIcon } from "@phosphor-icons/react";
 import { notificationSettings, type NotificationSetting } from "@/data/data";
@@ -10,6 +10,9 @@ export default function NotificationSettings() {
   const [notifications, setNotifications] =
     useState<NotificationSetting[]>(notificationSettings);
   const [masterToggle, setMasterToggle] = useState(true);
+
+  // Store previous enabled states when master toggle is turned off
+  const previousStatesRef = useRef<Record<string, boolean>>({});
 
   const handleToggle = (id: string) => {
     setNotifications((prev) =>
@@ -24,11 +27,30 @@ export default function NotificationSettings() {
     }
   };
 
-  const handleMasterToggle = () => {
+  const handleMasterToggle = useCallback(() => {
     const newState = !masterToggle;
     setMasterToggle(newState);
-    setNotifications((prev) => prev.map((n) => ({ ...n, enabled: newState })));
-  };
+
+    if (!newState) {
+      // Turning off: save current states before disabling
+      const currentStates: Record<string, boolean> = {};
+      notifications.forEach((n) => {
+        currentStates[n.id] = n.enabled;
+      });
+      previousStatesRef.current = currentStates;
+    } else {
+      // Turning on: restore previous individual states
+      const savedStates = previousStatesRef.current;
+      if (Object.keys(savedStates).length > 0) {
+        setNotifications((prev) =>
+          prev.map((n) => ({
+            ...n,
+            enabled: savedStates[n.id] ?? n.enabled,
+          })),
+        );
+      }
+    }
+  }, [masterToggle, notifications]);
 
   const handleMasterKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -81,8 +103,8 @@ export default function NotificationSettings() {
               }`}
             >
               <div
-                className={`w-6 h-6 bg-white rounded-full absolute top-0.5 shadow-sm transition-transform ${
-                  masterToggle ? "translate-x-7" : "left-0.5"
+                className={`w-6 h-6 bg-white rounded-full absolute top-0.5 left-0.5 shadow-sm transition-transform ${
+                  masterToggle ? "translate-x-7" : "translate-x-0"
                 }`}
               />
             </div>
@@ -146,10 +168,10 @@ export default function NotificationSettings() {
                   }`}
                 >
                   <div
-                    className={`w-5 h-5 bg-white rounded-full absolute top-0.5 shadow-sm transition-transform ${
+                    className={`w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow-sm transition-transform ${
                       notification.enabled && masterToggle
                         ? "translate-x-6"
-                        : "left-0.5"
+                        : "translate-x-0"
                     }`}
                   />
                 </div>
