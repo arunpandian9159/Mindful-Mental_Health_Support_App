@@ -35,7 +35,10 @@ export default function Home() {
               <BellIcon size={24} />
               <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-400 border-2 border-background-light dark:border-background-dark"></span>
             </button>
-            <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border-2 border-white dark:border-gray-600 shadow-sm">
+            <Link
+              href="/profile"
+              className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border-2 border-white dark:border-gray-600 shadow-sm active:scale-90 transition-transform cursor-pointer"
+            >
               <Image
                 alt="Profile"
                 className="h-full w-full object-cover"
@@ -43,7 +46,7 @@ export default function Home() {
                 width={40}
                 height={40}
               />
-            </div>
+            </Link>
           </div>
         </div>
       </header>

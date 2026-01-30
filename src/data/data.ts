@@ -100,6 +100,13 @@ export const journalPrompt = {
 // COMMUNITY PAGE DATA
 // ============================================================
 
+export const communityCategories = [
+  "Recovery",
+  "Coping",
+  "Support",
+  "Mindfulness",
+];
+
 export interface CommunityPost {
   id: string;
   author: string;

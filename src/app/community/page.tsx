@@ -3,14 +3,15 @@
 import { BottomNav } from "@/components/BottomNav";
 
 import { HeartIcon, ChatCircleIcon, PlusIcon } from "@phosphor-icons/react";
-import { communityPosts } from "@/data/data";
+import { communityPosts, communityCategories } from "@/data/data";
+import { useRouter } from "next/navigation";
 
 export default function Community() {
   const posts = communityPosts;
+  const router = useRouter();
 
   const handleCreatePost = () => {
-    // TODO: Implement post composer modal or navigation
-    console.log("Open post composer");
+    router.push("/community/log");
   };
 
   return (
@@ -24,12 +25,14 @@ export default function Community() {
             <button className="shrink-0 h-9 px-5 rounded-full bg-primary text-white text-sm font-medium shadow-md">
               All
             </button>
-            <button className="shrink-0 h-9 px-5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-primary/5 transition-colors">
-              Recovery
-            </button>
-            <button className="shrink-0 h-9 px-5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-primary/5 transition-colors">
-              Coping
-            </button>
+            {communityCategories.map((cat) => (
+              <button
+                key={cat}
+                className="shrink-0 h-9 px-5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-primary/5 transition-colors"
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
       </header>

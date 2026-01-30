@@ -6,7 +6,7 @@ import {
   HouseIcon,
   SmileyIcon,
   LeafIcon,
-  UserIcon,
+  UsersIcon,
   SirenIcon,
 } from "@phosphor-icons/react";
 
@@ -18,7 +18,7 @@ export const BottomNav = () => {
     { href: "/home", label: "Home", icon: HouseIcon },
     { href: "/mood", label: "Mood", icon: SmileyIcon },
     { href: "/tools", label: "Tools", icon: LeafIcon },
-    { href: "/profile", label: "Profile", icon: UserIcon },
+    { href: "/community", label: "Community", icon: UsersIcon },
   ];
 
   return (
