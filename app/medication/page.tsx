@@ -13,6 +13,7 @@ import {
 } from "@phosphor-icons/react";
 import { userMedications, doseHistory, refillAlerts } from "@/data/data";
 import { BottomNav } from "@/components/BottomNav";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 export default function MedicationDashboard() {
   const router = useRouter();
@@ -34,26 +35,12 @@ export default function MedicationDashboard() {
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark pb-32">
-      <div className="max-w-md mx-auto px-6 pt-12">
-        <header className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-serif font-bold text-text-primary dark:text-white mb-1">
-              Medication
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400">
-              Stay on track with your wellness
-            </p>
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/medication/add")}
-            className="size-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20"
-          >
-            <PlusIcon size={24} weight="bold" />
-          </motion.button>
-        </header>
-
+      <SubPageHeader
+        title="Medication"
+        rightIcon={<PlusIcon size={20} weight="bold" />}
+        rightAction={() => router.push("/medication/add")}
+      />
+      <div className="max-w-md mx-auto px-6 pt-24">
         {/* Refill Alerts */}
         {refillAlerts.length > 0 && (
           <motion.section

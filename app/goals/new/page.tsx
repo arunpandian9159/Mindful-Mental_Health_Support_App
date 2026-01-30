@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  ArrowLeftIcon,
   PencilSimpleIcon,
   CalendarIcon,
   CaretDownIcon,
 } from "@phosphor-icons/react";
 import { goalInspirations } from "@/data/data";
 import { motion, AnimatePresence } from "framer-motion";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 export default function NewGoal() {
   const router = useRouter();
@@ -57,17 +57,10 @@ export default function NewGoal() {
   const frequencies = ["Daily", "Weekly", "Bi-weekly", "Monthly"];
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col bg-[#F8F9FA] dark:bg-background-dark items-center">
+    <div className="relative flex min-h-screen w-full flex-col bg-[#F8F9FA] dark:bg-background-dark items-center pt-16">
+      <SubPageHeader title="New Goal" />
       {/* Scrollable Content Area */}
-      <main className="flex-1 w-full max-w-md px-6 pt-5 pb-40 overflow-y-auto no-scrollbar">
-        {/* Header */}
-        <button
-          onClick={() => router.back()}
-          className="p-2 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-        >
-          <ArrowLeftIcon size={24} weight="bold" />
-        </button>
-
+      <main className="flex-1 w-full max-w-md px-6 pt-10 pb-40 overflow-y-auto no-scrollbar">
         <h1 className="font-serif text-[40px] leading-tight font-bold text-gray-900 dark:text-white mb-10">
           Set a New
           <br />

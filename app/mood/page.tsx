@@ -14,7 +14,6 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 import {
-  ArrowLeftIcon,
   TrendUpIcon,
   CaretRightIcon,
   PlusIcon,
@@ -22,6 +21,7 @@ import {
   SmileyIcon,
 } from "@phosphor-icons/react";
 import { moodStats } from "@/data/data";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 export default function MoodHistory() {
   const router = useRouter();
@@ -49,17 +49,11 @@ export default function MoodHistory() {
 
   return (
     <div className="relative flex h-full min-h-screen w-full flex-col pb-20 bg-background-light dark:bg-background-dark items-center">
-      <header className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 pt-5 justify-between sticky top-0 z-10 w-full max-w-5xl">
-        <button
-          onClick={() => router.push("/")}
-          className="flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-        >
-          <ArrowLeftIcon size={24} />
-        </button>
-        <h2 className="text-xl md:text-2xl font-bold flex-1 text-center pr-12">
-          Mood Trends
-        </h2>
-      </header>
+      <SubPageHeader
+        title="Mood Trends"
+        rightIcon={<PlusIcon size={20} weight="bold" />}
+        rightAction={() => router.push("/mood/log")}
+      />
 
       <main className="flex-1 overflow-y-auto no-scrollbar w-full max-w-5xl">
         <div className="flex px-4 py-3 max-w-md mx-auto">
@@ -291,17 +285,6 @@ export default function MoodHistory() {
           ))}
         </div>
       </main>
-
-      {/* Center FAB for Logging */}
-      <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40 w-full max-w-5xl pointer-events-none px-6">
-        <button
-          onClick={() => router.push("/mood/log")}
-          className="float-right size-16 bg-primary rounded-full flex items-center justify-center shadow-fab text-white hover:scale-105 active:scale-95 transition-transform pointer-events-auto"
-        >
-          <PlusIcon size={32} weight="bold" />
-        </button>
-      </div>
-
       <BottomNav />
     </div>
   );

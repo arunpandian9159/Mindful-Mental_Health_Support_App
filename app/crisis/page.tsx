@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import {
-  X,
   HeartIcon,
   CaretRightIcon,
   ChatCircleDotsIcon,
@@ -11,6 +10,7 @@ import {
   PhoneCallIcon,
 } from "@phosphor-icons/react";
 import { emergencyContact, crisisHotlines } from "@/data/data";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 export default function CrisisSupport() {
   const router = useRouter();
@@ -22,18 +22,7 @@ export default function CrisisSupport() {
       <div className="absolute top-[30%] -left-[15%] h-100 w-100 rounded-full bg-primary/15 blur-[90px] pointer-events-none"></div>
       <div className="absolute -bottom-[10%] right-[5%] h-75 w-75 rounded-full bg-red/10 blur-[80px] pointer-events-none"></div>
 
-      <header className="relative z-10 flex items-center justify-between px-6 pt-6 pb-2 w-full max-w-md">
-        <div className="w-10"></div>
-        <h2 className="text-[#2D3142] dark:text-white text-lg font-semibold leading-tight tracking-tight">
-          Support & Crisis
-        </h2>
-        <button
-          onClick={() => router.back()}
-          className="flex size-10 items-center justify-center rounded-full bg-black/5 dark:bg-white/10 text-[#2D3142] dark:text-white transition-colors hover:bg-black/10 dark:hover:bg-white/20 active:scale-95"
-        >
-          <X size={24} />
-        </button>
-      </header>
+      <SubPageHeader title="Support & Crisis" />
 
       <main className="relative z-10 flex flex-1 flex-col overflow-y-auto no-scrollbar px-6 pt-4 pb-8 w-full max-w-md">
         <div className="mb-8 flex flex-col items-center text-center">
@@ -72,7 +61,7 @@ export default function CrisisSupport() {
             href={`tel:${crisisHotlines.nationalHotline.number}`}
           >
             <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <PhoneCallIcon size={30} weight="fill"/>
+              <PhoneCallIcon size={30} weight="fill" />
             </div>
             <div className="flex flex-1 flex-col">
               <span className="text-[#101519] dark:text-white text-lg font-bold leading-tight">

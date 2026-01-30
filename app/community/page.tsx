@@ -1,6 +1,7 @@
 "use client";
 
 import { BottomNav } from "@/components/BottomNav";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 import { HeartIcon, ChatCircleIcon, PlusIcon } from "@phosphor-icons/react";
 import { communityPosts, communityCategories } from "@/data/data";
@@ -10,18 +11,14 @@ export default function Community() {
   const posts = communityPosts;
   const router = useRouter();
 
-  const handleCreatePost = () => {
-    router.push("/community/log");
-  };
-
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-24 bg-background-light dark:bg-background-dark items-center">
-      <header className="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 pt-2 w-full flex flex-col items-center">
-        <div className="w-full max-w-5xl">
-          <div className="flex items-center justify-between px-4 py-3">
-            <h1 className="text-lg font-bold flex-1 text-center">Community</h1>
-          </div>
-          <div className="flex gap-2 px-4 pb-3 overflow-x-auto no-scrollbar w-full justify-start md:justify-center">
+      <SubPageHeader title="Community" 
+        rightIcon={<PlusIcon size={20} weight="bold" />}
+        rightAction={() => router.push("/community/log")}/>
+      <header className="sticky top-16 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 pt-2 w-full flex flex-col items-center">
+        <div className="w-full max-w-2xl">
+          <div className="flex gap-2 px-4 py-3 overflow-x-auto no-scrollbar w-full justify-start md:justify-center">
             <button className="shrink-0 h-9 px-5 rounded-full bg-primary text-white text-sm font-medium shadow-md">
               All
             </button>
@@ -81,19 +78,7 @@ export default function Community() {
           </article>
         ))}
       </main>
-
-      <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-5xl pointer-events-none px-6">
-        <button
-          type="button"
-          onClick={handleCreatePost}
-          aria-label="Create post"
-          className="float-right h-14 w-14 rounded-full bg-primary text-white shadow-fab flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-transform pointer-events-auto"
-        >
-          <PlusIcon size={28} weight="bold" />
-        </button>
-      </div>
-
-      <BottomNav />
+     <BottomNav />
     </div>
   );
 }

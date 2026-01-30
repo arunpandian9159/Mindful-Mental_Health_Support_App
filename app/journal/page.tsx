@@ -3,14 +3,14 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { BottomNav } from "@/components/BottomNav";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 import {
-  GearIcon,
+  PlusIcon,
   MagnifyingGlassIcon,
   SmileyBlankIcon,
   SmileyIcon,
   NotebookIcon,
-  PencilIcon,
   SunIcon,
   BrainIcon,
   CloudIcon,
@@ -86,18 +86,14 @@ export default function Journal() {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-[#F8F9FA] dark:bg-background-dark items-center">
-      <header className="w-full px-6 pt-5 pb-4 flex flex-col gap-4 bg-white/40 dark:bg-background-dark/40 backdrop-blur-md z-10 sticky top-0 items-center border-b border-gray-100 dark:border-gray-800">
-        <div className="w-full max-w-5xl">
-          <div className="flex justify-between items-center">
-            <h1 className="font-serif text-2xl md:text-4xl font-bold text-[#2D3436] dark:text-white transition-all">
-              My Journal
-            </h1>
-            <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 transition-colors">
-              <GearIcon size={24} />
-            </button>
-          </div>
-
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-[#F8F9FA] dark:bg-background-dark items-center pt-16">
+      <SubPageHeader
+        title="Journal"
+        rightIcon={<PlusIcon size={20} weight="bold" />}
+        rightAction={() => router.push("/journal/new")}
+      />
+      <header className="w-full px-6 py-6 flex flex-col gap-4 bg-white/40 dark:bg-background-dark/40 backdrop-blur-md z-10 sticky top-16 items-center border-b border-gray-100 dark:border-gray-800">
+        <div className="w-full max-w-2xl">
           <div className="relative w-full mt-6 max-w-2xl mx-auto">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
               <MagnifyingGlassIcon size={20} />
@@ -192,20 +188,6 @@ export default function Journal() {
           </div>
         )}
       </main>
-
-      <div className="fixed bottom-28 right-8 z-30">
-        <button
-          onClick={() => router.push("/journal/new")}
-          className="h-16 w-16 bg-primary rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-all group"
-        >
-          <PencilIcon
-            size={32}
-            weight="bold"
-            className="group-hover:rotate-12 transition-transform"
-          />
-        </button>
-      </div>
-
       <BottomNav />
     </div>
   );

@@ -12,6 +12,7 @@ import {
 import { currentUser } from "@/data/data";
 import { BottomNav } from "@/components/BottomNav";
 import { motion } from "framer-motion";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 export default function Profile() {
   const router = useRouter();
@@ -44,6 +45,7 @@ export default function Profile() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark items-center pb-32">
+      <SubPageHeader title="Profile" />
       {/* Hero Section */}
       <div className="w-full max-w-5xl px-6 pt-20 pb-10 flex flex-col items-center text-center">
         <motion.div

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
-  CaretLeftIcon,
   PlusIcon,
   CheckCircleIcon,
   FlameIcon,
@@ -14,6 +13,7 @@ import {
 } from "@phosphor-icons/react";
 import { userGoals, currentUser } from "@/data/data";
 import { BottomNav } from "@/components/BottomNav";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 export default function GoalsDashboard() {
   const router = useRouter();
@@ -33,25 +33,11 @@ export default function GoalsDashboard() {
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark pb-32">
-      <header className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-30 border-b border-gray-100 dark:border-gray-800">
-        <div className="max-w-md mx-auto px-6 h-16 flex items-center justify-between">
-          <button
-            onClick={() => router.push("/")}
-            className="size-10 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all active:scale-95"
-          >
-            <CaretLeftIcon size={20} weight="bold" />
-          </button>
-          <h1 className="text-sm font-bold text-text-primary dark:text-white uppercase tracking-widest">
-            Goals
-          </h1>
-          <button
-            onClick={() => router.push("/goals/new")}
-            className="size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-md active:scale-95 transition-all"
-          >
-            <PlusIcon size={20} weight="bold" />
-          </button>
-        </div>
-      </header>
+      <SubPageHeader
+        title="Goals"
+        rightIcon={<PlusIcon size={20} weight="bold" />}
+        rightAction={() => router.push("/goals/new")}
+      />
 
       <main className="max-w-md mx-auto px-6 pt-24 space-y-8">
         {/* Welcome & Daily Progress */}
