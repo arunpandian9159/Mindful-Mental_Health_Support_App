@@ -43,18 +43,23 @@ export default function Community() {
             key={post.id}
             className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-soft border border-gray-100 dark:border-gray-700 hover:border-primary/20 transition-all cursor-pointer group h-fit"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className={`rounded-full h-10 w-10 flex items-center justify-center text-primary font-bold text-xs ${post.bg} dark:bg-opacity-10`}
-              >
-                {post.id}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div
+                  className={`rounded-full h-10 w-10 flex items-center justify-center text-primary font-bold text-xs ${post.bg} dark:bg-opacity-10`}
+                >
+                  {post.id}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold group-hover:text-primary transition-colors">
+                    {post.author}
+                  </span>
+                  <span className="text-xs text-gray-500">{post.time}</span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-bold group-hover:text-primary transition-colors">
-                  {post.author}
-                </span>
-                <span className="text-xs text-gray-500">{post.time}</span>
-              </div>
+              <span className="text-[10px] px-2 py-1 rounded-full bg-primary/10 text-primary font-bold tracking-wide uppercase">
+                {post.category}
+              </span>
             </div>
             <h3 className="text-base font-bold mb-2 leading-tight">
               {post.title}

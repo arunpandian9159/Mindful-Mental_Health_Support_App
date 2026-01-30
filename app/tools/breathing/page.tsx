@@ -3,7 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeftIcon, LeafIcon, WindIcon } from "@phosphor-icons/react";
+import {
+  ArrowLeftIcon,
+  LeafIcon,
+  WindIcon,
+  ClockIcon,
+} from "@phosphor-icons/react";
 import { breathingSteps } from "@/data/data";
 
 export default function BreathingDetail() {
@@ -115,6 +120,17 @@ export default function BreathingDetail() {
 
       <div className="flex-1 bg-white dark:bg-background-dark rounded-t-[2.5rem] -mt-10 relative z-20 flex flex-col overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] w-full max-w-5xl">
         <div className="flex-1 overflow-y-auto px-6 pt-10 pb-32 no-scrollbar max-w-2xl mx-auto w-full">
+          <div className="flex items-center justify-between mb-4 w-full">
+            <div className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary">
+              Relaxation
+            </div>
+            <div className="flex items-center gap-1.5 text-gray-500/60 dark:text-gray-400">
+              <ClockIcon size={16} weight="bold" />
+              <span className="text-[11px] font-bold uppercase tracking-wider">
+                5 mins
+              </span>
+            </div>
+          </div>
           <h1 className="font-serif text-[26px] md:text-4xl font-bold leading-tight mb-4 transition-all text-center md:text-left">
             Square Breathing
           </h1>

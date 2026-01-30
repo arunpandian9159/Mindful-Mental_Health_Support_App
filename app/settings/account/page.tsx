@@ -27,7 +27,7 @@ export default function AccountSettings() {
     name: currentUser.name,
     email: "sarah@gmail.com", // Dummy data
     phone: "+91 91595 65585", // Dummy data
-    password: "••••••••••••", // Dummy data
+    password: "mindful@secret123", // Dummy data
   });
 
   const handleInputChange = (field: string, value: string) => {

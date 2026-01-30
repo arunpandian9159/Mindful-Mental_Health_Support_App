@@ -23,7 +23,7 @@ export const BottomNav = () => {
 
   return (
     <div className="fixed bottom-6 left-6 right-6 z-50 flex justify-center pointer-events-none">
-      <nav className="glass rounded-full px-4 py-2 flex items-center gap-2 shadow-2xl max-w-sm w-full justify-between pointer-events-auto">
+      <nav className="bg-white rounded-full px-2 py-2 flex items-center shadow-2xl border border-gray-100 max-w-sm w-full justify-between pointer-events-auto">
         {/* Left items */}
         <div className="flex items-center gap-1 flex-1 justify-around">
           {navItems.slice(0, 2).map((item) => {
@@ -33,13 +33,16 @@ export const BottomNav = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center p-2 rounded-full transition-all duration-300 ${
+                className={`flex flex-col items-center justify-center min-w-12 py-1 rounded-2xl transition-all duration-300 ${
                   isActive
                     ? "text-primary bg-primary/10"
                     : "text-gray-400 hover:text-gray-600"
                 }`}
               >
                 <Icon size={22} weight={isActive ? "fill" : "regular"} />
+                <span className="text-[10px] font-medium mt-0.5">
+                  {item.label}
+                </span>
               </Link>
             );
           })}
@@ -66,13 +69,16 @@ export const BottomNav = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center p-2 rounded-full transition-all duration-300 ${
+                className={`flex flex-col items-center justify-center min-w-14 py-1 rounded-2xl transition-all duration-300 ${
                   isActive
                     ? "text-primary bg-primary/10"
                     : "text-gray-400 hover:text-gray-600"
                 }`}
               >
                 <Icon size={22} weight={isActive ? "fill" : "regular"} />
+                <span className="text-[10px] font-medium mt-0.5">
+                  {item.label}
+                </span>
               </Link>
             );
           })}
