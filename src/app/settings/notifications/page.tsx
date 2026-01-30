@@ -2,69 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ArrowLeftIcon,
-  BellIcon,
-  SunIcon,
-  MoonIcon,
-  CalendarIcon,
-  HeartIcon,
-  NotebookIcon,
-} from "@phosphor-icons/react";
-
-interface NotificationSetting {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  enabled: boolean;
-  time?: string;
-}
-
-const initialNotifications: NotificationSetting[] = [
-  {
-    id: "morning-checkin",
-    title: "Morning Check-in",
-    description: "Daily reminder to log your mood",
-    icon: SunIcon,
-    enabled: true,
-    time: "09:00",
-  },
-  {
-    id: "evening-reflection",
-    title: "Evening Reflection",
-    description: "Wind down with a journal prompt",
-    icon: MoonIcon,
-    enabled: true,
-    time: "20:00",
-  },
-  {
-    id: "weekly-summary",
-    title: "Weekly Summary",
-    description: "Get insights on your weekly progress",
-    icon: CalendarIcon,
-    enabled: true,
-  },
-  {
-    id: "wellness-tips",
-    title: "Wellness Tips",
-    description: "Receive helpful mental health tips",
-    icon: HeartIcon,
-    enabled: false,
-  },
-  {
-    id: "journal-reminder",
-    title: "Journal Reminder",
-    description: "Remember to write in your journal",
-    icon: NotebookIcon,
-    enabled: true,
-    time: "21:00",
-  },
-];
+import { ArrowLeftIcon, BellIcon } from "@phosphor-icons/react";
+import { notificationSettings, type NotificationSetting } from "@/data/data";
 
 export default function NotificationSettings() {
   const router = useRouter();
-  const [notifications, setNotifications] = useState(initialNotifications);
+  const [notifications, setNotifications] =
+    useState<NotificationSetting[]>(notificationSettings);
   const [masterToggle, setMasterToggle] = useState(true);
 
   const handleToggle = (id: string) => {

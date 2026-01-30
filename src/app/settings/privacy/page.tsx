@@ -2,63 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ArrowLeftIcon,
-  ShieldCheckIcon,
-  TrashIcon,
-  DownloadIcon,
-  EyeSlashIcon,
-  LockKeyIcon,
-  UserIcon,
-} from "@phosphor-icons/react";
-
-interface PrivacyItem {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  type: "toggle" | "action";
-  danger?: boolean;
-}
-
-const privacyItems: PrivacyItem[] = [
-  {
-    id: "anonymous-profile",
-    title: "Anonymous Profile",
-    description: "Hide your identity in the community",
-    icon: EyeSlashIcon,
-    type: "toggle",
-  },
-  {
-    id: "data-encryption",
-    title: "Data Encryption",
-    description: "Your data is encrypted at rest",
-    icon: LockKeyIcon,
-    type: "toggle",
-  },
-  {
-    id: "activity-visible",
-    title: "Activity Visible",
-    description: "Allow others to see your activity status",
-    icon: UserIcon,
-    type: "toggle",
-  },
-  {
-    id: "download-data",
-    title: "Download My Data",
-    description: "Export all your personal data",
-    icon: DownloadIcon,
-    type: "action",
-  },
-  {
-    id: "delete-account",
-    title: "Delete Account",
-    description: "Permanently delete your account and data",
-    icon: TrashIcon,
-    type: "action",
-    danger: true,
-  },
-];
+import { ArrowLeftIcon, ShieldCheckIcon } from "@phosphor-icons/react";
+import { privacyItems } from "@/data/data";
 
 export default function PrivacySettings() {
   const router = useRouter();

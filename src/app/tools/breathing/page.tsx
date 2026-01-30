@@ -9,6 +9,7 @@ import {
   ArrowsInIcon,
   LeafIcon,
 } from "@phosphor-icons/react";
+import { breathingSteps } from "@/data/data";
 
 export default function BreathingDetail() {
   const router = useRouter();
@@ -128,12 +129,7 @@ export default function BreathingDetail() {
           </p>
 
           <div className="flex flex-col gap-6">
-            {[
-              { title: "Inhale", desc: "Slowly breathe in for 4 seconds" },
-              { title: "Hold", desc: "Gently hold your breath for 4 seconds" },
-              { title: "Exhale", desc: "Slowly release for 4 seconds" },
-              { title: "Rest", desc: "Pause for 4 seconds before next cycle" },
-            ].map((step, i) => (
+            {breathingSteps.map((step, i) => (
               <div key={i} className="flex gap-4 group">
                 <div
                   className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${isActive && i === ["inhale", "hold", "exhale", "rest"].indexOf(phase) ? "bg-primary text-white" : "bg-gray-100 text-gray-400 group-hover:bg-primary/10"}`}

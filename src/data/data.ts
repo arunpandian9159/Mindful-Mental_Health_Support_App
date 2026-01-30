@@ -12,6 +12,16 @@ import {
   SmileyBlankIcon,
   SmileyIcon,
   SmileyWinkIcon,
+  SunIcon,
+  MoonIcon,
+  CalendarIcon,
+  HeartIcon,
+  NotebookIcon,
+  TrashIcon,
+  DownloadIcon,
+  EyeSlashIcon,
+  LockKeyIcon,
+  UserIcon,
 } from "@phosphor-icons/react";
 
 // ============================================================
@@ -219,6 +229,118 @@ export const settingsItems: SettingsItem[] = [
   },
 ];
 
+export interface NotificationSetting {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  enabled: boolean;
+  time?: string;
+}
+
+export const notificationSettings: NotificationSetting[] = [
+  {
+    id: "morning-checkin",
+    title: "Morning Check-in",
+    description: "Daily reminder to log your mood",
+    icon: SunIcon,
+    enabled: true,
+    time: "09:00",
+  },
+  {
+    id: "evening-reflection",
+    title: "Evening Reflection",
+    description: "Wind down with a journal prompt",
+    icon: MoonIcon,
+    enabled: true,
+    time: "20:00",
+  },
+  {
+    id: "weekly-summary",
+    title: "Weekly Summary",
+    description: "Get insights on your weekly progress",
+    icon: CalendarIcon,
+    enabled: true,
+  },
+  {
+    id: "wellness-tips",
+    title: "Wellness Tips",
+    description: "Receive helpful mental health tips",
+    icon: HeartIcon,
+    enabled: false,
+  },
+  {
+    id: "journal-reminder",
+    title: "Journal Reminder",
+    description: "Remember to write in your journal",
+    icon: NotebookIcon,
+    enabled: true,
+    time: "21:00",
+  },
+];
+
+export interface PrivacyItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  type: "toggle" | "action";
+  danger?: boolean;
+}
+
+export const privacyItems: PrivacyItem[] = [
+  {
+    id: "anonymous-profile",
+    title: "Anonymous Profile",
+    description: "Hide your identity in the community",
+    icon: EyeSlashIcon,
+    type: "toggle",
+  },
+  {
+    id: "data-encryption",
+    title: "Data Encryption",
+    description: "Your data is encrypted at rest",
+    icon: LockKeyIcon,
+    type: "toggle",
+  },
+  {
+    id: "activity-visible",
+    title: "Activity Visible",
+    description: "Allow others to see your activity status",
+    icon: UserIcon,
+    type: "toggle",
+  },
+  {
+    id: "download-data",
+    title: "Download My Data",
+    description: "Export all your personal data",
+    icon: DownloadIcon,
+    type: "action",
+  },
+  {
+    id: "delete-account",
+    title: "Delete Account",
+    description: "Permanently delete your account and data",
+    icon: TrashIcon,
+    type: "action",
+    danger: true,
+  },
+];
+
+export interface TextSizeOption {
+  id: string;
+  label: string;
+  size: string;
+  example: string;
+}
+
+export const textSizeOptions: TextSizeOption[] = [
+  { id: "small", label: "Small", size: "text-sm", example: "14px" },
+  { id: "medium", label: "Medium", size: "text-base", example: "16px" },
+  { id: "large", label: "Large", size: "text-lg", example: "18px" },
+  { id: "extra-large", label: "Extra Large", size: "text-xl", example: "20px" },
+];
+
 // ============================================================
 // TOOLS PAGE DATA
 // ============================================================
@@ -260,6 +382,70 @@ export const wellnessTools: WellnessTool[] = [
     image: "/musclerelaxation.png",
     href: "/tools/muscle-relaxation",
   },
+];
+
+export interface MuscleGroup {
+  id: number;
+  name: string;
+  duration: number;
+  instruction: string;
+}
+
+export const muscleGroups: MuscleGroup[] = [
+  {
+    id: 1,
+    name: "Hands & Arms",
+    duration: 60,
+    instruction:
+      "Clench your fists tightly, hold for 5 seconds, then release slowly.",
+  },
+  {
+    id: 2,
+    name: "Shoulders",
+    duration: 45,
+    instruction:
+      "Raise your shoulders toward your ears, hold, then drop them down.",
+  },
+  {
+    id: 3,
+    name: "Face",
+    duration: 30,
+    instruction:
+      "Scrunch your face tightly, including forehead and jaw, then relax.",
+  },
+  {
+    id: 4,
+    name: "Chest & Back",
+    duration: 60,
+    instruction:
+      "Take a deep breath, hold it while tensing your chest, then exhale slowly.",
+  },
+  {
+    id: 5,
+    name: "Abdomen",
+    duration: 45,
+    instruction:
+      "Tighten your stomach muscles as if bracing for impact, then release.",
+  },
+  {
+    id: 6,
+    name: "Legs & Feet",
+    duration: 60,
+    instruction:
+      "Curl your toes and tense your leg muscles, hold, then relax completely.",
+  },
+];
+
+export interface BreathingStep {
+  title: string;
+  desc: string;
+}
+
+export const breathingSteps: BreathingStep[] = [
+  { title: "Inhale", desc: "Slowly breathe in for 4 seconds" },
+  { title: "Hold", desc: "Gently hold your breath for 4 seconds" },
+  { title: "Exhale", desc: "Slowly release for 4 seconds" },
+  { title: "Rest", desc: "Pause for 4 seconds before next cycle" },
 ];
 
 // ============================================================

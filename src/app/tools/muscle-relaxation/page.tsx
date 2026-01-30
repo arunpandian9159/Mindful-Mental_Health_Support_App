@@ -7,51 +7,7 @@ import {
   PauseIcon,
   CheckCircleIcon,
 } from "@phosphor-icons/react";
-
-const muscleGroups = [
-  {
-    id: 1,
-    name: "Hands & Arms",
-    duration: 60,
-    instruction:
-      "Clench your fists tightly, hold for 5 seconds, then release slowly.",
-  },
-  {
-    id: 2,
-    name: "Shoulders",
-    duration: 45,
-    instruction:
-      "Raise your shoulders toward your ears, hold, then drop them down.",
-  },
-  {
-    id: 3,
-    name: "Face",
-    duration: 30,
-    instruction:
-      "Scrunch your face tightly, including forehead and jaw, then relax.",
-  },
-  {
-    id: 4,
-    name: "Chest & Back",
-    duration: 60,
-    instruction:
-      "Take a deep breath, hold it while tensing your chest, then exhale slowly.",
-  },
-  {
-    id: 5,
-    name: "Abdomen",
-    duration: 45,
-    instruction:
-      "Tighten your stomach muscles as if bracing for impact, then release.",
-  },
-  {
-    id: 6,
-    name: "Legs & Feet",
-    duration: 60,
-    instruction:
-      "Curl your toes and tense your leg muscles, hold, then relax completely.",
-  },
-];
+import { muscleGroups } from "@/data/data";
 
 export default function MuscleRelaxation() {
   const router = useRouter();

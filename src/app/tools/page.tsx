@@ -12,7 +12,7 @@ import {
   ArrowLeft,
 } from "@phosphor-icons/react";
 import Image from "next/image";
-import { toolCategories } from "@/data/data";
+import { toolCategories, wellnessTools } from "@/data/data";
 
 export default function WellnessLibrary() {
   const router = useRouter();
@@ -73,68 +73,50 @@ export default function WellnessLibrary() {
             Recommended for you
           </h3>
 
-          <div
-            onClick={() => router.push("/tools/breathing")}
-            className="group relative flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-primary/30 transition-all"
-          >
-            <div className="shrink-0 relative overflow-hidden rounded-xl">
-              <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGnaZvYW9aR4QCHOZ0Zgz1lMcFz5IznniJmXozsMrM2WP2i-qaOUMju8aR9yvIbdJYHQjxSJZDW8Q97yFAWCyp3MtieA-MvBohsWL2uJAR9cWvEKZQslnWH0m8Zn_mVZZ77Z5ZiBK_0RIBb0MIS_kn2WLLBCA5uiUmjZN4etZeJ_XmAznRPjNXePu7ds5T2oqBLpaUG1EU7s6aDn6Z05fP4IhjrfOBZ-YGfJoVKdKAMQpeJQ8W5oalITNibOr_7IWkEQYaehpvi8AW"
-                alt="Square Breathing"
-                width={80}
-                height={80}
-                className="size-20 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-black/10"></div>
-            </div>
-            <div className="flex flex-col flex-1 justify-center min-w-0">
-              <h4 className="text-slate-900 dark:text-white text-base font-semibold leading-tight mb-1 truncate">
-                Square Breathing
-              </h4>
-              <div className="flex items-center gap-2 text-primary dark:text-primary/80 text-xs font-semibold uppercase tracking-wide">
-                <HeadphonesIcon size={16} weight="bold" />
-                <span>Audio • 5 min</span>
+          {wellnessTools.map((tool) => (
+            <div
+              key={tool.id}
+              onClick={() => router.push(tool.href)}
+              className="group relative flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-primary/30 transition-all"
+            >
+              <div className="shrink-0 relative overflow-hidden rounded-xl">
+                <Image
+                  src={tool.image}
+                  alt={tool.title}
+                  width={80}
+                  height={80}
+                  className="size-20 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/10"></div>
               </div>
-              <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 line-clamp-1">
-                Reduce anxiety with box breathing.
-              </p>
-            </div>
-            <div className="shrink-0 pr-2">
-              <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                <PlayIcon size={20} weight="fill" />
+              <div className="flex flex-col flex-1 justify-center min-w-0">
+                <h4 className="text-slate-900 dark:text-white text-base font-semibold leading-tight mb-1 truncate">
+                  {tool.title}
+                </h4>
+                <div
+                  className={`flex items-center gap-2 ${tool.type === "audio" ? "text-primary dark:text-primary/80" : "text-violet-500 dark:text-violet-400"} text-xs font-semibold uppercase tracking-wide`}
+                >
+                  {tool.type === "audio" ? (
+                    <HeadphonesIcon size={16} weight="bold" />
+                  ) : (
+                    <VideoCameraIcon size={16} weight="bold" />
+                  )}
+                  <span>
+                    {tool.type.charAt(0).toUpperCase() + tool.type.slice(1)} •{" "}
+                    {tool.duration}
+                  </span>
+                </div>
+                <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 line-clamp-1">
+                  {tool.description}
+                </p>
               </div>
-            </div>
-          </div>
-
-          <div className="group relative flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 cursor-pointer hover:border-primary/30 transition-all">
-            <div className="shrink-0 relative overflow-hidden rounded-xl">
-              <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSuF3YmaEuNg0ohb4exDIWDNVRbBAJoWFGfnb3wS3uixJY5JdSCaslOZIAMQoCJa5ZbtSuGwDRqapVPmSHnrmrHHdqLbjmLeSoGacAVv3InGG5tdGKjXhqVMG1Mrqh58ex93RYnimYQsx-M0TENo3dtx5HgkjXBdNBrFqGDnwnhmQvaNddjYmQoUlb17E3Z3jUWCPvhsjOGf6E3ubL-_fP-Exf_w5y42hegDnZZmyEWamKtQ_cur1kbj9HNDTfLBBQa-groQpfBK6j"
-                alt="Muscle Relaxation"
-                width={80}
-                height={80}
-                className="size-20 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-black/10"></div>
-            </div>
-            <div className="flex flex-col flex-1 justify-center min-w-0">
-              <h4 className="text-slate-900 dark:text-white text-base font-semibold leading-tight mb-1 truncate">
-                Muscle Relaxation
-              </h4>
-              <div className="flex items-center gap-2 text-violet-500 dark:text-violet-400 text-xs font-semibold uppercase tracking-wide">
-                <VideoCameraIcon size={16} weight="bold" />
-                <span>Video • 15 min</span>
-              </div>
-              <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 line-clamp-1">
-                Release tension from your body.
-              </p>
-            </div>
-            <div className="shrink-0 pr-2">
-              <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                <PlayIcon size={20} weight="fill" />
+              <div className="shrink-0 pr-2">
+                <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                  <PlayIcon size={20} weight="fill" />
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </main>
       <BottomNav />

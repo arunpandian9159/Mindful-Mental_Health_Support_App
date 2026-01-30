@@ -12,7 +12,13 @@ import {
   PencilLineIcon,
   PlayCircleIcon,
 } from "@phosphor-icons/react";
-import { currentUser, moodOptions } from "@/data/data";
+import {
+  currentUser,
+  moodOptions,
+  dailyGoalsProgress,
+  journalPrompt,
+  suggestedContent,
+} from "@/data/data";
 
 export default function Home() {
   const router = useRouter();
@@ -98,14 +104,17 @@ export default function Home() {
                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                   fill="none"
                   stroke="currentColor"
-                  strokeDasharray="60, 100"
+                  strokeDasharray={`${(dailyGoalsProgress.completed / dailyGoalsProgress.total) * 100}, 100`}
                   strokeLinecap="round"
                   strokeWidth="3"
                 ></path>
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-lg font-bold text-gray-900 dark:text-white">
-                  3<span className="text-gray-400 text-sm font-normal">/5</span>
+                  {dailyGoalsProgress.completed}
+                  <span className="text-gray-400 text-sm font-normal">
+                    /{dailyGoalsProgress.total}
+                  </span>
                 </span>
               </div>
             </div>
@@ -115,7 +124,7 @@ export default function Home() {
           </Link>
 
           <Link
-            href="/journal"
+            href={journalPrompt.href}
             className="bg-[#F0F7FF] dark:bg-primary/10 rounded-xl p-4 flex flex-col justify-between border border-blue-100 dark:border-blue-900/30 group hover:border-primary/50 transition-all"
           >
             <div>
@@ -124,7 +133,7 @@ export default function Home() {
                 <span>Prompt</span>
               </div>
               <p className="text-sm text-gray-800 dark:text-gray-200 font-medium leading-snug">
-                What are you grateful for today?
+                {journalPrompt.text}
               </p>
             </div>
             <button className="mt-4 w-full py-2 bg-white dark:bg-background-dark text-primary text-xs font-semibold rounded-lg shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
@@ -144,7 +153,7 @@ export default function Home() {
             </Link>
           </h3>
           <Link
-            href="/tools/breathing"
+            href={suggestedContent.href}
             className="block group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border border-gray-100 dark:border-gray-800 hover:border-primary/30 transition-all"
           >
             <div className="flex flex-col md:flex-row h-full">
@@ -154,10 +163,10 @@ export default function Home() {
                     Recommended
                   </div>
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white">
-                    5-Minute Breathing
+                    {suggestedContent.title}
                   </h4>
                   <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                    Reset your focus and calm your mind.
+                    {suggestedContent.description}
                   </p>
                 </div>
                 <div className="mt-5 flex items-center gap-3">
@@ -165,14 +174,14 @@ export default function Home() {
                     <PlayCircleIcon size={20} weight="fill" /> Play
                   </span>
                   <span className="text-xs text-gray-400 font-medium">
-                    5 min
+                    {suggestedContent.duration}
                   </span>
                 </div>
               </div>
               <div className="relative h-48 md:h-auto md:w-2/5 order-1 md:order-2 overflow-hidden">
                 <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMnu5DlzaJbe8b4Gx6hkgBNcoYGgp7dGcv86DDzLv41Mn4w33_JKrY4dnYYeHbllcaFVMQ-4qYL7lJhlrr52dnPDo7D7y0D-cxOycNG1M-lz5WNDzu9M0S9IVOr47F9LUcF9aCQQFoWzkSKwZUj_jkAoGlLQqVcgSdhqaxJcK806xRj5zTyjLJcqTdyjTtDF4-qBKQP-oMUms9Cmd1M2x9QtwwKL2B4YWwXZox0o_tEZQzTaqCjPvthx4rcGPLS0p-oCJopPCYm63P"
-                  alt="Breathing exercise"
+                  src={suggestedContent.image}
+                  alt={suggestedContent.title}
                   className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                   fill
                 />

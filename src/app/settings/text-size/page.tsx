@@ -3,13 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon, TextTIcon } from "@phosphor-icons/react";
-
-const textSizeOptions = [
-  { id: "small", label: "Small", size: "text-sm", example: "14px" },
-  { id: "medium", label: "Medium", size: "text-base", example: "16px" },
-  { id: "large", label: "Large", size: "text-lg", example: "18px" },
-  { id: "extra-large", label: "Extra Large", size: "text-xl", example: "20px" },
-];
+import { textSizeOptions } from "@/data/data";
 
 export default function TextSizeSettings() {
   const router = useRouter();
