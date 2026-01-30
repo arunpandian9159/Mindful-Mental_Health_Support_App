@@ -168,11 +168,14 @@ export const getMoodColor = (value: number): string => {
   return moodColorMap[value] || moodColorMap[0];
 };
 
-// Day labels for heatmap
-export const dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+// Day labels for heatmap and chart
+export const dayLabels = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
-// Chart data (0-5 scale)
-export const moodChartData = [3, 5, 4, 5, 5, 5, 5];
+// Mood level labels for chart Y-axis
+export const moodLevels = ["Bad", "Low", "Okay", "Good", "Great"];
+
+// Chart data (1-5 scale) - values chosen to match the screenshot curve
+export const moodChartData = [2.5, 4.2, 3.5, 4.5, 4.8, 5.0];
 
 export const moodStats = {
   averageScore: 4.2,

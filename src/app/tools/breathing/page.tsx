@@ -3,12 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowLeftIcon,
-  ArrowsOutIcon,
-  ArrowsInIcon,
-  LeafIcon,
-} from "@phosphor-icons/react";
+import { ArrowLeftIcon, LeafIcon, WindIcon } from "@phosphor-icons/react";
 import { breathingSteps } from "@/data/data";
 
 export default function BreathingDetail() {
@@ -95,9 +90,9 @@ export default function BreathingDetail() {
           >
             <div className="text-secondary">
               {phase === "inhale" ? (
-                <ArrowsOutIcon size={48} />
+                <WindIcon size={48} />
               ) : phase === "exhale" ? (
-                <ArrowsInIcon size={48} />
+                <WindIcon size={48} />
               ) : (
                 <LeafIcon size={48} weight="fill" />
               )}
@@ -132,7 +127,7 @@ export default function BreathingDetail() {
             {breathingSteps.map((step, i) => (
               <div key={i} className="flex gap-4 group">
                 <div
-                  className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${isActive && i === ["inhale", "hold", "exhale", "rest"].indexOf(phase) ? "bg-primary text-white" : "bg-gray-100 text-gray-400 group-hover:bg-primary/10"}`}
+                  className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${isActive && i === ["inhale", "hold", "exhale", "rest"].indexOf(phase) ? "bg-secondary text-white" : "bg-gray-100 text-gray-400 group-hover:bg-primary/10"}`}
                 >
                   {i + 1}
                 </div>
@@ -148,7 +143,7 @@ export default function BreathingDetail() {
         <div className="absolute bottom-0 left-0 w-full px-6 py-6 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-30">
           <button
             onClick={() => setIsActive(!isActive)}
-            className={`flex w-full items-center justify-center rounded-2xl h-14 font-bold shadow-xl transition-all ${isActive ? "bg-danger text-white" : "bg-secondary text-white"}`}
+            className={`flex w-full items-center justify-center rounded-2xl h-14 font-bold shadow-xl transition-all ${isActive ? "bg-danger text-white" : "bg-primary text-white"}`}
           >
             {isActive ? "Stop Practice" : "Start Practice"}
           </button>

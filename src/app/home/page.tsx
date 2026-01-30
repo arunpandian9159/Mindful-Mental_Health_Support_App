@@ -84,7 +84,7 @@ export default function Home() {
 
         <section className="px-6 py-2 grid grid-cols-2 gap-4">
           <Link
-            href="/goals"
+            href="/goals/new"
             className="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center border border-gray-100 dark:border-gray-800 relative overflow-hidden group hover:border-primary/30 transition-all"
           >
             <div className="relative h-24 w-24 mb-3">

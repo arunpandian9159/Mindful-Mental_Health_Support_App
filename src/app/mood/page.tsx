@@ -9,7 +9,9 @@ import {
   dayLabels,
   moodChartData,
   moodHistory,
+  moodLevels,
 } from "@/data/data";
+import { motion, AnimatePresence } from "framer-motion";
 
 import {
   ArrowLeftIcon,
@@ -109,24 +111,12 @@ export default function MoodHistory() {
 
           {/* Line Chart View */}
           {activeView === "chart" && (
-            <div className="w-full bg-white dark:bg-surface-dark rounded-2xl p-4 shadow-soft border border-gray-100 dark:border-gray-800 relative overflow-hidden h-60 flex items-center justify-center">
-              <div className="text-gray-400 text-xs font-medium uppercase tracking-widest">
-                Mood Chart Visualization
-              </div>
-              {/* Simple CSS-based Sparkline - values clamped to 0-5 scale */}
-              <div className="absolute bottom-10 left-0 right-0 h-24 flex items-end justify-between px-8">
-                {moodChartData.map((h, i) => {
-                  // Clamp values to 0-5 range to match mood scale
-                  const clampedValue = Math.min(Math.max(h, 0), 5);
-                  return (
-                    <div
-                      key={i}
-                      className="w-4 bg-primary/20 rounded-t-sm animate-pulse"
-                      style={{ height: `${clampedValue * 20}%` }}
-                    ></div>
-                  );
-                })}
-              </div>
+            <div className="w-full bg-white dark:bg-surface-dark rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-gray-800 relative overflow-hidden">
+              <MoodChart
+                data={moodChartData}
+                labels={dayLabels}
+                levels={moodLevels}
+              />
             </div>
           )}
 
@@ -248,6 +238,195 @@ export default function MoodHistory() {
       </div>
 
       <BottomNav />
+    </div>
+  );
+}
+
+function MoodChart({
+  data,
+  labels,
+  levels,
+}: {
+  data: number[];
+  labels: string[];
+  levels: string[];
+}) {
+  const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
+  const width = 400;
+  const height = 200;
+  const padding = { top: 20, right: 30, bottom: 40, left: 60 };
+
+  const chartWidth = width - padding.left - padding.right;
+  const chartHeight = height - padding.top - padding.bottom;
+
+  const points = data.map((val, i) => ({
+    x: padding.left + (i / (labels.length - 1)) * chartWidth,
+    y: padding.top + chartHeight - ((val - 1) / 4) * chartHeight, // Assumes 1-5 scale
+  }));
+
+  // Cubic Bezier curve algorithm (Catmull-Rom like)
+  const getPath = (pts: { x: number; y: number }[]) => {
+    if (pts.length < 2) return "";
+    let path = `M ${pts[0].x},${pts[0].y}`;
+
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i === 0 ? i : i - 1];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[i + 2] || p2;
+
+      const cp1x = p1.x + (p2.x - p0.x) / 6;
+      const cp1y = p1.y + (p2.y - p0.y) / 6;
+
+      const cp2x = p2.x - (p3.x - p1.x) / 6;
+      const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+      path += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`;
+    }
+    return path;
+  };
+
+  const linePath = getPath(points);
+  const areaPath = `${linePath} L ${points[points.length - 1].x},${padding.top + chartHeight} L ${points[0].x},${padding.top + chartHeight} Z`;
+
+  return (
+    <div className="relative w-full aspect-2/1">
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className="w-full h-full overflow-visible"
+        onMouseLeave={() => setHoveredPoint(null)}
+      >
+        <defs>
+          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="0%"
+              stopColor="var(--color-primary)"
+              stopOpacity="0.3"
+            />
+            <stop
+              offset="100%"
+              stopColor="var(--color-primary)"
+              stopOpacity="0"
+            />
+          </linearGradient>
+        </defs>
+
+        {/* Grid Lines */}
+        {levels.map((level, i) => {
+          const y =
+            padding.top + chartHeight - (i / (levels.length - 1)) * chartHeight;
+          return (
+            <g key={level}>
+              <text
+                x={padding.left - 10}
+                y={y}
+                textAnchor="end"
+                dominantBaseline="middle"
+                className="fill-gray-400 text-[12px] font-medium"
+              >
+                {level}
+              </text>
+              <line
+                x1={padding.left}
+                y1={y}
+                x2={width - padding.right}
+                y2={y}
+                stroke="currentColor"
+                className="text-gray-100 dark:text-gray-800"
+                strokeWidth="1"
+                strokeDasharray="4 4"
+              />
+            </g>
+          );
+        })}
+
+        {/* X Axis Labels */}
+        {labels.map((label, i) => {
+          const x = padding.left + (i / (labels.length - 1)) * chartWidth;
+          return (
+            <text
+              key={label}
+              x={x}
+              y={height - 10}
+              textAnchor="middle"
+              className="fill-gray-400 text-[12px] font-medium"
+            >
+              {label}
+            </text>
+          );
+        })}
+
+        {/* Area Fill */}
+        <motion.path
+          d={areaPath}
+          fill="url(#chartGradient)"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        />
+
+        {/* Line */}
+        <motion.path
+          d={linePath}
+          fill="none"
+          stroke="var(--color-primary)"
+          strokeWidth="3"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        />
+
+        {/* Points */}
+        {points.map((pt, i) => (
+          <g key={i}>
+            <circle
+              cx={pt.x}
+              cy={pt.y}
+              r="20"
+              fill="transparent"
+              className="cursor-pointer"
+              onMouseEnter={() => setHoveredPoint(i)}
+              onTouchStart={() => setHoveredPoint(i)}
+            />
+            <motion.circle
+              cx={pt.x}
+              cy={pt.y}
+              r="5"
+              fill="white"
+              stroke="var(--color-primary)"
+              strokeWidth="2"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 1 + i * 0.1 }}
+            />
+          </g>
+        ))}
+      </svg>
+
+      {/* Tooltip */}
+      <AnimatePresence>
+        {hoveredPoint !== null && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            className="absolute z-10 bg-white dark:bg-surface-dark shadow-xl border border-gray-100 dark:border-gray-800 px-3 py-2 rounded-lg pointer-events-none"
+            style={{
+              left: `${(points[hoveredPoint].x / width) * 100}%`,
+              top: `${(points[hoveredPoint].y / height) * 100}%`,
+              transform: "translate(-50%, -120%)",
+            }}
+          >
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+              {labels[hoveredPoint]}
+            </p>
+            <p className="text-sm font-bold text-primary">
+              Mood: {data[hoveredPoint].toFixed(1)}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
