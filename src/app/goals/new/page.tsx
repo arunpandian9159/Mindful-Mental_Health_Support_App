@@ -67,23 +67,19 @@ export default function NewGoal() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
-      <div className="w-full max-w-5xl px-6 pt-16 py-2 flex items-center z-10">
-        <button
-          onClick={() => router.back()}
-          className="flex items-center justify-center w-10 h-10 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-        >
-          <ArrowLeftIcon size={24} />
-        </button>
-      </div>
-
-      <div className="flex-1 flex flex-col w-full max-w-5xl px-6 pt-2 pb-6 overflow-y-auto no-scrollbar">
+      <div className="flex-1 flex flex-col w-full max-w-5xl px-6 pt-5 pb-6 overflow-y-auto no-scrollbar">
         <div className="max-w-2xl mx-auto w-full">
-          <h1 className="font-serif tracking-tight text-[32px] md:text-5xl font-bold leading-tight mb-8 text-gray-900 dark:text-white">
-            Set a New
-            <br />
-            Wellness Goal
+          <div className="flex cols">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center justify-center w-10 h-10 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+          >
+            <ArrowLeftIcon size={24} />
+          </button>
+          <h1 className="font-serif tracking-tight text-[24px] md:text-5xl font-bold leading-tight mb-8 text-gray-900 dark:text-white">
+            Set a New Wellness Goal
           </h1>
-
+          </div>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <label

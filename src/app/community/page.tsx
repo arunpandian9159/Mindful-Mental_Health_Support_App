@@ -16,7 +16,7 @@ export default function Community() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-24 bg-background-light dark:bg-background-dark items-center">
-      <header className="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 pt-10 w-full flex flex-col items-center">
+      <header className="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 pt-2 w-full flex flex-col items-center">
         <div className="w-full max-w-5xl">
           <div className="flex items-center justify-between px-4 py-3">
             <h1 className="text-lg font-bold flex-1 text-center">Community</h1>

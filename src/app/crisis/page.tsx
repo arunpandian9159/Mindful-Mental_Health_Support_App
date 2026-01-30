@@ -21,7 +21,7 @@ export default function CrisisSupport() {
       <div className="absolute -top-[20%] -right-[10%] h-125 w-125 rounded-full bg-primary/10 blur-[100px] pointer-events-none"></div>
       <div className="absolute top-[40%] -left-[10%] h-75 w-75 rounded-full bg-coral/10 blur-[80px] pointer-events-none"></div>
 
-      <header className="relative z-10 flex items-center justify-between px-6 pt-12 pb-2 w-full max-w-5xl">
+      <header className="relative z-10 flex items-center justify-between px-6 pt-5 pb-2 w-full max-w-5xl">
         <div className="w-10"></div>
         <h2 className="text-xl font-serif font-bold text-text-primary dark:text-white">
           Immediate Support
