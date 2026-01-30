@@ -571,7 +571,8 @@ export interface JournalEntry {
   date: string;
   title: string;
   excerpt: string;
-  mood: "neutral" | "satisfied" | "sad" | "happy";
+  mood: "neutral" | "satisfied" | "sad" | "happy" | "anxious" | "productive";
+  tags: string[];
 }
 
 export const journalEntries: JournalEntry[] = [
@@ -580,8 +581,9 @@ export const journalEntries: JournalEntry[] = [
     date: "Today, 9:30 AM",
     title: "Morning Reflection",
     excerpt:
-      "Woke up feeling a bit anxious about the presentation today, but the breathing exercise helped...",
-    mood: "neutral",
+      "Woke up feeling a bit anxious about the presentation today, but I took some time to...",
+    mood: "anxious",
+    tags: ["work", "anxiety"],
   },
   {
     id: 2,
@@ -589,7 +591,17 @@ export const journalEntries: JournalEntry[] = [
     title: "Grateful Heart",
     excerpt:
       "Spent time with family and enjoyed a quiet dinner. Feeling much better than this morning.",
-    mood: "satisfied",
+    mood: "happy",
+    tags: ["grateful", "family"],
+  },
+  {
+    id: 3,
+    date: "Yesterday, 2:15 PM",
+    title: "Deep Work Session",
+    excerpt:
+      "Managed to get through all the high-priority tasks today. Focus was surprisingly high.",
+    mood: "productive",
+    tags: ["work", "mental-clarity"],
   },
 ];
 

@@ -8,26 +8,38 @@ import {
   TrashIcon,
   SmileyBlankIcon,
   SmileyIcon,
-  SmileySadIcon,
-  SmileyWinkIcon,
+  SunIcon,
+  BrainIcon,
+  CloudIcon,
+  HeartIcon,
 } from "@phosphor-icons/react";
 import { journalEntries } from "@/data/data";
 
 // Define mood type for type safety
-type Mood = "neutral" | "satisfied" | "sad" | "happy";
+type Mood =
+  | "neutral"
+  | "satisfied"
+  | "sad"
+  | "happy"
+  | "anxious"
+  | "productive";
 
 const moodIcons: Record<Mood, typeof SmileyBlankIcon> = {
   neutral: SmileyBlankIcon,
   satisfied: SmileyIcon,
-  sad: SmileySadIcon,
-  happy: SmileyWinkIcon,
+  sad: HeartIcon,
+  happy: SunIcon,
+  anxious: CloudIcon,
+  productive: BrainIcon,
 };
 
 const moodColors: Record<Mood, string> = {
   neutral: "text-gray-400 bg-gray-50",
   satisfied: "text-green-400 bg-green-50",
   sad: "text-red-400 bg-red-50",
-  happy: "text-green-400 bg-green-50",
+  happy: "text-orange-400 bg-orange-50",
+  anxious: "text-blue-400 bg-blue-50",
+  productive: "text-purple-400 bg-purple-50",
 };
 
 export default function JournalEntryDetail() {
@@ -125,15 +137,14 @@ export default function JournalEntryDetail() {
             Tags
           </h3>
           <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-              Anxiety
-            </span>
-            <span className="px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full">
-              Reflection
-            </span>
-            <span className="px-3 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-sm font-medium rounded-full">
-              Growth
-            </span>
+            {entry.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-4 py-2 bg-gray-50 dark:bg-white/5 text-[#7C8B9E] dark:text-gray-500 text-xs font-bold uppercase tracking-wider rounded-xl border border-gray-100 dark:border-gray-800"
+              >
+                #{tag}
+              </span>
+            ))}
           </div>
         </div>
       </main>
