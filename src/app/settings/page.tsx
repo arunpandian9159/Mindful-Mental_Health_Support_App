@@ -56,7 +56,7 @@ export default function Settings() {
             <ArrowLeftIcon size={24} />
           </button>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white transition-all">
-            Accessibility
+            Accessibility Settings
           </h1>
         </div>
       </div>
