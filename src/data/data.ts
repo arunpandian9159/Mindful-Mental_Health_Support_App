@@ -6,7 +6,6 @@ import {
   BellIcon,
   ShieldIcon,
   DropIcon,
-  FootprintsIcon,
   BrainIcon,
   SmileySadIcon,
   SmileyMehIcon,
@@ -600,7 +599,8 @@ export const journalEntries: JournalEntry[] = [
 
 export interface GoalInspiration {
   title: string;
-  icon: React.ComponentType<{ size?: number }>;
+  subtext: string;
+  icon: Icon;
   color: string;
   bg: string;
 }
@@ -608,21 +608,24 @@ export interface GoalInspiration {
 export const goalInspirations: GoalInspiration[] = [
   {
     title: "Hydrate",
+    subtext: "8 cups daily",
     icon: DropIcon,
     color: "text-blue-500",
     bg: "bg-blue-50",
   },
   {
-    title: "Walk",
-    icon: FootprintsIcon,
-    color: "text-green-500",
-    bg: "bg-green-50",
+    title: "Read",
+    subtext: "15 mins before bed",
+    icon: NotebookIcon,
+    color: "text-purple-500",
+    bg: "bg-purple-50",
   },
   {
     title: "Meditate",
+    subtext: "10 mins morning",
     icon: BrainIcon,
-    color: "text-purple-500",
-    bg: "bg-purple-50",
+    color: "text-orange-500",
+    bg: "bg-orange-50",
   },
 ];
 

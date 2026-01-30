@@ -2,20 +2,24 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-import { ArrowLeftIcon, PencilSimpleIcon } from "@phosphor-icons/react";
+import {
+  ArrowLeftIcon,
+  PencilSimpleIcon,
+  CalendarIcon,
+  CaretDownIcon,
+} from "@phosphor-icons/react";
 import { goalInspirations } from "@/data/data";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function NewGoal() {
   const router = useRouter();
   const [goal, setGoal] = useState("");
+  const [frequency, setFrequency] = useState("Daily");
+  const [isFrequencyOpen, setIsFrequencyOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const inspirations = goalInspirations;
-
   const handleSaveGoal = async () => {
-    // Validate input
     if (!goal.trim()) {
       setError("Please enter a goal");
       return;
@@ -25,33 +29,23 @@ export default function NewGoal() {
     setIsLoading(true);
 
     try {
-      // Attempt to save via API, fallback to localStorage
-      try {
-        const response = await fetch("/api/goals", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title: goal.trim() }),
-        });
+      const payload = {
+        title: goal.trim(),
+        frequency,
+        createdAt: new Date().toISOString(),
+      };
 
-        if (!response.ok) {
-          throw new Error("API request failed");
-        }
-      } catch {
-        // Fallback to localStorage if API is not available
-        const existingGoals = JSON.parse(
-          localStorage.getItem("mindful_goals") || "[]",
-        );
-        const newGoal = {
-          id: Date.now(),
-          title: goal.trim(),
-          createdAt: new Date().toISOString(),
-        };
-        localStorage.setItem(
-          "mindful_goals",
-          JSON.stringify([...existingGoals, newGoal]),
-        );
-      }
+      // Fallback to localStorage
+      const existingGoals = JSON.parse(
+        localStorage.getItem("mindful_goals") || "[]",
+      );
+      localStorage.setItem(
+        "mindful_goals",
+        JSON.stringify([...existingGoals, { ...payload, id: Date.now() }]),
+      );
 
+      // Simulate network delay
+      await new Promise((resolve) => setTimeout(resolve, 800));
       router.push("/home");
     } catch {
       setError("Failed to save goal. Please try again.");
@@ -60,92 +54,142 @@ export default function NewGoal() {
     }
   };
 
-  const handleInspirationClick = (title: string) => {
-    setGoal(title);
-    setError("");
-  };
+  const frequencies = ["Daily", "Weekly", "Bi-weekly", "Monthly"];
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
-      <div className="flex-1 flex flex-col w-full max-w-5xl px-6 pt-5 pb-6 overflow-y-auto no-scrollbar">
-        <div className="max-w-2xl mx-auto w-full">
-          <div className="flex cols">
-          <button
-            onClick={() => router.back()}
-            className="flex items-center justify-center w-10 h-10 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-          >
-            <ArrowLeftIcon size={24} />
-          </button>
-          <h1 className="font-serif tracking-tight text-[24px] md:text-5xl font-bold leading-tight mb-8 text-gray-900 dark:text-white">
-            Set a New Wellness Goal
-          </h1>
-          </div>
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="goalInput"
-                className="text-sm font-semibold ml-1 text-gray-700 dark:text-gray-300"
-              >
-                What is your goal?
-              </label>
-              <div className="relative group">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                  <PencilSimpleIcon size={20} />
-                </span>
-                <input
-                  id="goalInput"
-                  className={`w-full bg-white dark:bg-surface-dark border ${error ? "border-red-500" : "border-gray-200 dark:border-gray-700"} rounded-2xl py-4 pl-12 pr-4 shadow-sm text-base outline-none focus:border-primary transition-colors`}
-                  placeholder="e.g. Walk outside"
-                  type="text"
-                  value={goal}
-                  onChange={(e) => {
-                    setGoal(e.target.value);
-                    if (error) setError("");
-                  }}
-                />
-              </div>
-              {error && (
-                <p className="text-red-500 text-sm ml-1 mt-1">{error}</p>
-              )}
+    <div className="relative flex min-h-screen w-full flex-col bg-[#F8F9FA] dark:bg-background-dark items-center">
+      {/* Scrollable Content Area */}
+      <main className="flex-1 w-full max-w-md px-6 pt-5 pb-40 overflow-y-auto no-scrollbar">
+        {/* Header */}
+        <button
+          onClick={() => router.back()}
+          className="p-2 -ml-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        >
+          <ArrowLeftIcon size={24} weight="bold" />
+        </button>
+
+        <h1 className="font-serif text-[40px] leading-tight font-bold text-gray-900 dark:text-white mb-10">
+          Set a New
+          <br />
+          Wellness Goal
+        </h1>
+
+        <div className="flex flex-col gap-8">
+          {/* Goal Input */}
+          <div className="flex flex-col gap-3">
+            <label className="text-base font-bold text-gray-700 dark:text-gray-300">
+              What is your goal?
+            </label>
+            <div className="relative">
+              <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+                <PencilSimpleIcon size={24} />
+              </span>
+              <input
+                type="text"
+                value={goal}
+                onChange={(e) => {
+                  setGoal(e.target.value);
+                  if (error) setError("");
+                }}
+                placeholder="e.g. Walk outside"
+                className={`w-full bg-white dark:bg-surface-dark rounded-3xl py-5 pl-14 pr-6 text-lg text-gray-900 dark:text-white placeholder:text-gray-300 border-none shadow-sm focus:ring-2 focus:ring-primary/20 transition-all`}
+              />
             </div>
+            {error && <p className="text-red-500 text-sm ml-2">{error}</p>}
           </div>
 
-          <div className="mt-10">
-            <div className="flex items-center justify-between mb-4 px-1">
-              <h2 className="text-base font-bold text-gray-900 dark:text-white">
+          {/* Frequency Select */}
+          <div className="flex flex-col gap-3 relative">
+            <label className="text-base font-bold text-gray-700 dark:text-gray-300">
+              How often?
+            </label>
+            <button
+              onClick={() => setIsFrequencyOpen(!isFrequencyOpen)}
+              className="flex items-center justify-between w-full bg-white dark:bg-surface-dark rounded-3xl py-5 px-6 shadow-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-all text-left"
+            >
+              <div className="flex items-center gap-4">
+                <CalendarIcon size={24} className="text-gray-400" />
+                <span className="text-lg font-medium text-gray-900 dark:text-white">
+                  {frequency}
+                </span>
+              </div>
+              <CaretDownIcon
+                size={20}
+                className={`text-gray-400 transition-transform duration-300 ${isFrequencyOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {isFrequencyOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white dark:bg-surface-dark rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 z-50 overflow-hidden"
+                >
+                  {frequencies.map((freq) => (
+                    <button
+                      key={freq}
+                      onClick={() => {
+                        setFrequency(freq);
+                        setIsFrequencyOpen(false);
+                      }}
+                      className="w-full text-left px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-primary/5 hover:text-primary transition-colors font-medium border-b border-gray-50 dark:border-white/5 last:border-none"
+                    >
+                      {freq}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* SMART Inspirations */}
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white">
                 SMART Inspirations
               </h2>
+              <span className="px-3 py-1 bg-[#E7F3EF] dark:bg-primary/10 text-goal-green dark:text-goal-green text-xs font-bold rounded-lg cursor-pointer hover:bg-goal-green/10 transition-colors">
+                Tips
+              </span>
             </div>
-            <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
-              {inspirations.map((item) => (
+            <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
+              {goalInspirations.map((item) => (
                 <button
                   key={item.title}
-                  onClick={() => handleInspirationClick(item.title)}
-                  className="min-w-37.5 p-4 bg-white dark:bg-surface-dark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-all text-left group"
+                  onClick={() => setGoal(item.title)}
+                  className="min-w-44 p-5 bg-white dark:bg-surface-dark rounded-3xl shadow-sm hover:shadow-md border border-transparent hover:border-primary/10 transition-all text-left group"
                 >
                   <div
-                    className={`w-10 h-10 rounded-full ${item.bg} dark:bg-opacity-10 ${item.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}
+                    className={`w-10 h-10 rounded-full ${item.bg} dark:bg-opacity-20 ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
                   >
-                    <item.icon size={24} />
+                    <item.icon size={24} weight="fill" />
                   </div>
-                  <h3 className="font-semibold text-sm text-gray-900 dark:text-white">
+                  <h3 className="font-bold text-base text-gray-900 dark:text-white mb-0.5">
                     {item.title}
                   </h3>
+                  <p className="text-xs text-gray-400 font-medium">
+                    {item.subtext}
+                  </p>
                 </button>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
-      <div className="w-full max-w-2xl px-6 pb-8 pt-4 flex flex-col gap-3 z-10">
-        <button
-          onClick={handleSaveGoal}
-          disabled={isLoading}
-          className="flex w-full items-center justify-center rounded-full h-14 px-5 bg-goal-green hover:bg-opacity-90 text-white text-[17px] font-bold shadow-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isLoading ? "Saving..." : "Save Goal"}
-        </button>
+      {/* Persistent Bottom Button */}
+      <div className="fixed bottom-0 left-0 right-0 p-6 bg-linear-to-t from-[#F8F9FA] via-[#F8F9FA] to-transparent dark:from-background-dark dark:via-background-dark z-40 flex justify-center">
+        <div className="w-full max-w-md">
+          <button
+            onClick={handleSaveGoal}
+            disabled={isLoading}
+            className="w-full h-16 rounded-full bg-goal-green hover:bg-goal-green/90 text-white text-lg font-bold shadow-xl shadow-goal-green/20 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center"
+          >
+            {isLoading ? "Saving..." : "Save Goal"}
+          </button>
+        </div>
       </div>
     </div>
   );
