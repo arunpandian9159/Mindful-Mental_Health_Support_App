@@ -17,43 +17,49 @@ const moodOptions = [
   {
     id: "anxious",
     icon: CloudIcon,
-    color: "text-blue-500",
+    color: "text-blue-600",
     bg: "bg-blue-50",
+    activeBg: "bg-blue-600",
     label: "Anxious",
   },
   {
     id: "happy",
     icon: SunIcon,
-    color: "text-orange-500",
+    color: "text-orange-600",
     bg: "bg-orange-50",
+    activeBg: "bg-orange-600",
     label: "Happy",
   },
   {
     id: "productive",
     icon: BrainIcon,
-    color: "text-purple-500",
+    color: "text-purple-600",
     bg: "bg-purple-50",
+    activeBg: "bg-purple-600",
     label: "Productive",
   },
   {
     id: "satisfied",
     icon: SmileyIcon,
-    color: "text-green-500",
+    color: "text-green-600",
     bg: "bg-green-50",
+    activeBg: "bg-green-600",
     label: "Satisfied",
   },
   {
     id: "neutral",
     icon: SmileyBlankIcon,
-    color: "text-gray-500",
+    color: "text-gray-600",
     bg: "bg-gray-50",
+    activeBg: "bg-gray-600",
     label: "Neutral",
   },
   {
     id: "sad",
     icon: HeartIcon,
-    color: "text-red-500",
+    color: "text-red-600",
     bg: "bg-red-50",
+    activeBg: "bg-red-600",
     label: "Sad",
   },
 ];
@@ -105,12 +111,18 @@ export default function NewJournalEntry() {
                     onClick={() => setSelectedMood(mood.id)}
                     className={`flex flex-col items-center gap-2 p-4 rounded-3xl transition-all ${
                       isSelected
-                        ? "bg-white dark:bg-surface-dark shadow-xl scale-105 ring-2 ring-primary/10"
-                        : "bg-white/50 dark:bg-white/5 grayscale opacity-60 hover:opacity-100 hover:grayscale-0"
+                        ? `${mood.activeBg} shadow-xl scale-105`
+                        : "bg-white dark:bg-white/5 opacity-60 hover:opacity-100"
                     }`}
                   >
                     <div
-                      className={`size-12 rounded-full ${mood.bg} dark:bg-opacity-20 flex items-center justify-center ${mood.color}`}
+                      className={`size-12 rounded-full transition-colors ${
+                        isSelected
+                          ? "bg-white/20"
+                          : `${mood.bg} dark:bg-opacity-20`
+                      } flex items-center justify-center ${
+                        isSelected ? "text-white" : mood.color
+                      }`}
                     >
                       <mood.icon
                         size={28}
@@ -118,7 +130,9 @@ export default function NewJournalEntry() {
                       />
                     </div>
                     <span
-                      className={`text-[10px] font-bold uppercase tracking-wider ${isSelected ? "text-primary" : "text-gray-400"}`}
+                      className={`text-[10px] font-bold uppercase tracking-wider transition-colors ${
+                        isSelected ? "text-white" : "text-gray-500"
+                      }`}
                     >
                       {mood.label}
                     </span>

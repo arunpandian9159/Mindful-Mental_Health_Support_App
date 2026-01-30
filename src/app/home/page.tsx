@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-32 bg-background-light dark:bg-background-dark">
-      <header className="flex items-center justify-between px-6 py-6 pt-10 sticky top-0 z-20 glass backdrop-blur-md">
+      <header className="flex items-center justify-between px-6 pt-5 sticky top-0 z-20 glass backdrop-blur-md">
         <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
@@ -88,9 +88,9 @@ export default function Home() {
         <section className="px-6 grid grid-cols-2 gap-6">
           <Link
             href="/goals/new"
-            className="glass rounded-3xl shadow-lg p-6 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:scale-[1.02] transition-all"
+            className="glass rounded-3xl shadow-lg p-4 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:scale-[1.02] transition-all"
           >
-            <div className="relative h-24 w-24 mb-4">
+            <div className="relative h-20 w-20 mb-4">
               <svg
                 className="h-full w-full transform -rotate-90"
                 viewBox="0 0 36 36"
@@ -128,12 +128,12 @@ export default function Home() {
 
           <Link
             href={journalPrompt.href}
-            className="bg-primary/5 dark:bg-primary/10 rounded-3xl p-6 flex flex-col justify-between border border-primary/10 group hover:scale-[1.02] transition-all"
+            className="bg-primary/5 dark:bg-primary/10 rounded-3xl p-4 flex flex-col justify-between border border-primary/10 group hover:scale-[1.02] transition-all"
           >
             <div>
               <div className="flex items-center gap-2 mb-3 text-primary font-bold text-xs uppercase tracking-widest">
                 <PencilLineIcon size={16} />
-                <span>Prompt</span>
+                <span>Journal</span>
               </div>
               <p className="text-base font-serif text-text-primary dark:text-gray-100 font-medium leading-relaxed">
                 {journalPrompt.text}

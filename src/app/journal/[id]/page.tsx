@@ -74,7 +74,7 @@ export default function JournalEntryDetail() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
-      <header className="w-full px-4 pt-12 pb-4 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10 sticky top-0">
+      <header className="w-full px-4 pt-6 pb-4 flex items-center justify-between bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10 sticky top-0">
         <button
           onClick={() => router.back()}
           aria-label="Go back"

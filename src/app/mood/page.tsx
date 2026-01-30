@@ -45,7 +45,7 @@ export default function MoodHistory() {
 
   return (
     <div className="relative flex h-full min-h-screen w-full flex-col pb-20 bg-background-light dark:bg-background-dark items-center">
-      <header className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 pt-12 justify-between sticky top-0 z-10 w-full max-w-5xl">
+      <header className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 pt-5 justify-between sticky top-0 z-10 w-full max-w-5xl">
         <button
           onClick={() => router.push("/")}
           className="flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
