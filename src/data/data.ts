@@ -221,27 +221,66 @@ export interface ActivityTag {
   label: string;
   icon: Icon; // Changed icon type to Icon
   color: string;
+  bg: string;
 }
 
 export const activityTags: ActivityTag[] = [
-  { id: "work", label: "Work", icon: BriefcaseIcon, color: "text-amber-500" },
+  {
+    id: "work",
+    label: "Work",
+    icon: BriefcaseIcon,
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+  },
   {
     id: "exercise",
     label: "Exercise",
     icon: BicycleIcon,
-    color: "text-blue-500",
+    color: "text-blue-600",
+    bg: "bg-blue-50",
   },
-  { id: "social", label: "Social", icon: UsersIcon, color: "text-purple-500" },
-  { id: "sleep", label: "Sleep", icon: MoonIcon, color: "text-indigo-500" },
-  { id: "food", label: "Food", icon: ForkKnifeIcon, color: "text-orange-500" },
-  { id: "nature", label: "Nature", icon: LeafIcon, color: "text-emerald-500" },
+  {
+    id: "social",
+    label: "Social",
+    icon: UsersIcon,
+    color: "text-purple-600",
+    bg: "bg-purple-50",
+  },
+  {
+    id: "sleep",
+    label: "Sleep",
+    icon: MoonIcon,
+    color: "text-indigo-600",
+    bg: "bg-indigo-50",
+  },
+  {
+    id: "food",
+    label: "Food",
+    icon: ForkKnifeIcon,
+    color: "text-orange-600",
+    bg: "bg-orange-50",
+  },
+  {
+    id: "nature",
+    label: "Nature",
+    icon: LeafIcon,
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
+  },
   {
     id: "meditation",
     label: "Meditation",
     icon: FlowerLotusIcon,
-    color: "text-teal-500",
+    color: "text-teal-600",
+    bg: "bg-teal-50",
   },
-  { id: "music", label: "Music", icon: MusicNotesIcon, color: "text-pink-500" },
+  {
+    id: "music",
+    label: "Music",
+    icon: MusicNotesIcon,
+    color: "text-pink-600",
+    bg: "bg-pink-50",
+  },
 ];
 
 // ============================================================
