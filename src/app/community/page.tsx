@@ -14,29 +14,31 @@ export default function Community() {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-24 bg-background-light dark:bg-background-dark">
-      <header className="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 pt-10">
-        <div className="flex items-center justify-between px-4 py-3">
-          <h1 className="text-lg font-bold flex-1 text-center">Community</h1>
-        </div>
-        <div className="flex gap-2 px-4 pb-3 overflow-x-auto no-scrollbar w-full">
-          <button className="shrink-0 h-9 px-5 rounded-full bg-primary text-white text-sm font-medium shadow-md">
-            All
-          </button>
-          <button className="shrink-0 h-9 px-5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-primary/5 transition-colors">
-            Recovery
-          </button>
-          <button className="shrink-0 h-9 px-5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-primary/5 transition-colors">
-            Coping
-          </button>
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-24 bg-background-light dark:bg-background-dark items-center">
+      <header className="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 pt-10 w-full flex flex-col items-center">
+        <div className="w-full max-w-5xl">
+          <div className="flex items-center justify-between px-4 py-3">
+            <h1 className="text-lg font-bold flex-1 text-center">Community</h1>
+          </div>
+          <div className="flex gap-2 px-4 pb-3 overflow-x-auto no-scrollbar w-full justify-start md:justify-center">
+            <button className="shrink-0 h-9 px-5 rounded-full bg-primary text-white text-sm font-medium shadow-md">
+              All
+            </button>
+            <button className="shrink-0 h-9 px-5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-primary/5 transition-colors">
+              Recovery
+            </button>
+            <button className="shrink-0 h-9 px-5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium hover:bg-primary/5 transition-colors">
+              Coping
+            </button>
+          </div>
         </div>
       </header>
 
-      <main className="flex flex-col gap-4 p-4 flex-1">
+      <main className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 flex-1 w-full max-w-5xl">
         {posts.map((post) => (
           <article
             key={post.id}
-            className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-soft border border-gray-100 dark:border-gray-700 hover:border-primary/20 transition-all cursor-pointer group"
+            className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-soft border border-gray-100 dark:border-gray-700 hover:border-primary/20 transition-all cursor-pointer group h-fit"
           >
             <div className="flex items-center gap-3 mb-4">
               <div
@@ -72,14 +74,16 @@ export default function Community() {
         ))}
       </main>
 
-      <button
-        type="button"
-        onClick={handleCreatePost}
-        aria-label="Create post"
-        className="fixed bottom-24 right-6 h-14 w-14 rounded-full bg-primary text-white shadow-fab flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-transform"
-      >
-        <PlusIcon size={28} weight="bold" />
-      </button>
+      <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-5xl pointer-events-none px-6">
+        <button
+          type="button"
+          onClick={handleCreatePost}
+          aria-label="Create post"
+          className="float-right h-14 w-14 rounded-full bg-primary text-white shadow-fab flex items-center justify-center z-40 hover:scale-105 active:scale-95 transition-transform pointer-events-auto"
+        >
+          <PlusIcon size={28} weight="bold" />
+        </button>
+      </div>
 
       <BottomNav />
     </div>

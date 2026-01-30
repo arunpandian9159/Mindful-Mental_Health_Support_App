@@ -11,18 +11,17 @@ export default function OnboardingFeatures() {
   const totalSteps = 4;
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
-      <div className="flex-1 flex flex-col w-full relative pt-16 pb-6">
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
+      <div className="flex-1 flex flex-col w-full max-w-5xl relative pt-16 pb-6">
         <div className="w-full px-8 flex justify-center mb-8">
-          <div className="w-full max-w-70 aspect-square relative overflow-hidden rounded-4xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white dark:bg-gray-800 p-3">
+          <div className="w-full max-w-70 md:max-w-xs aspect-square relative overflow-hidden rounded-4xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white dark:bg-gray-800 p-3">
             <div className="w-full h-full rounded-3xl overflow-hidden relative">
-              {/* Using Next.js Image component for automatic format optimization */}
               <Image
                 src="/welcomepage.png"
                 alt=""
                 aria-hidden="true"
                 fill
-                sizes="(max-width: 768px) 100vw, 280px"
+                sizes="(max-width: 768px) 100vw, 320px"
                 priority
                 className="object-cover object-center scale-110"
               />
@@ -30,8 +29,8 @@ export default function OnboardingFeatures() {
             </div>
           </div>
         </div>
-        <div className="w-full px-8 flex flex-col items-center">
-          <h1 className="font-display text-[#101519] dark:text-white text-2xl font-bold text-center mb-8 tracking-tight">
+        <div className="w-full px-8 flex flex-col items-center max-w-md mx-auto">
+          <h1 className="font-display text-[#101519] dark:text-white text-2xl md:text-3xl font-bold text-center mb-8 tracking-tight">
             What Mindful Helps You Do
           </h1>
           <div className="w-full flex flex-col gap-7 pl-2">
@@ -62,7 +61,7 @@ export default function OnboardingFeatures() {
           </div>
         </div>
       </div>
-      <div className="w-full px-6 pb-10 pt-2 flex flex-col items-center gap-6 z-10">
+      <div className="w-full max-w-md px-6 pb-10 pt-2 flex flex-col items-center gap-6 z-10">
         <div
           role="list"
           aria-label="Onboarding progress"
@@ -98,5 +97,5 @@ export default function OnboardingFeatures() {
         </button>
       </div>
     </div>
-  );
+);
 }

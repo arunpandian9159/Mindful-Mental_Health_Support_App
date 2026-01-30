@@ -8,13 +8,13 @@ export default function WelcomePage() {
   const router = useRouter();
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
-      <div className="flex-1 flex flex-col items-center justify-start pt-0 pb-6 w-full relative">
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
+      <div className="flex-1 flex flex-col items-center justify-start pt-0 pb-6 w-full max-w-5xl relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full h-[55vh] relative overflow-hidden rounded-b-[3rem] shadow-[0_10px_40px_-10px_rgba(93,155,213,0.2)]"
+          className="w-full h-[55vh] relative overflow-hidden md:rounded-b-[4rem] rounded-b-[3rem] shadow-[0_10px_40px_-10px_rgba(93,155,213,0.2)]"
         >
           <Image
             src="/welcomepage.png"
@@ -26,12 +26,12 @@ export default function WelcomePage() {
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20 mix-blend-overlay"></div>
         </motion.div>
 
-        <div className="w-full px-8 mt-10 flex flex-col items-center text-center">
+        <div className="w-full px-8 mt-10 md:mt-16 flex flex-col items-center text-center">
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="font-serif text-[#101519] dark:text-white tracking-tight text-[32px] font-bold leading-tight pb-3"
+            className="font-serif text-[#101519] dark:text-white tracking-tight text-[32px] md:text-5xl font-bold leading-tight pb-3"
           >
             You&apos;re not alone.
           </motion.h1>
@@ -39,14 +39,14 @@ export default function WelcomePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-[#566370] dark:text-gray-400 text-base font-normal leading-relaxed max-w-70"
+            className="text-[#566370] dark:text-gray-400 text-base md:text-xl font-normal leading-relaxed max-w-70 md:max-w-md"
           >
             We&apos;re here, one step at a time.
           </motion.p>
         </div>
       </div>
 
-      <div className="w-full px-6 pb-10 pt-4 flex flex-col gap-3 z-10">
+      <div className="w-full max-w-md px-6 pb-10 pt-4 flex flex-col gap-3 z-10">
         <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

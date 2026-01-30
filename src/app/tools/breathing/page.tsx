@@ -55,12 +55,12 @@ export default function BreathingDetail() {
   };
 
   return (
-    <div className="relative flex h-screen w-full flex-col overflow-hidden bg-white dark:bg-background-dark">
+    <div className="relative flex h-screen w-full flex-col overflow-hidden bg-white dark:bg-background-dark items-center">
       <div
         className={`relative h-[45vh] min-h-90 w-full flex flex-col items-center justify-start overflow-hidden transition-colors duration-1000 ${isActive ? "bg-secondary" : "bg-primary"}`}
       >
         <div className="absolute inset-0 bg-linear-to-b from-black/10 to-transparent mix-blend-multiply opacity-50"></div>
-        <div className="w-full flex justify-between items-center px-6 pt-14 pb-2 z-20">
+        <div className="w-full max-w-5xl flex justify-between items-center px-6 pt-14 pb-2 z-20">
           <button
             onClick={() => router.back()}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
@@ -86,15 +86,15 @@ export default function BreathingDetail() {
                 : { scale: 1 }
             }
             transition={{ duration: 4, ease: "easeInOut" }}
-            className="w-28 h-28 rounded-full bg-white/90 flex items-center justify-center shadow-lg"
+            className="w-28 h-28 md:w-40 md:h-40 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-all"
           >
             <div className="text-secondary">
               {phase === "inhale" ? (
-                <WindIcon size={48} />
+                <WindIcon size={64} className="md:size-20" />
               ) : phase === "exhale" ? (
-                <WindIcon size={48} />
+                <WindIcon size={64} className="md:size-20" />
               ) : (
-                <LeafIcon size={48} weight="fill" />
+                <LeafIcon size={64} weight="fill" className="md:size-20" />
               )}
             </div>
           </motion.div>
@@ -105,7 +105,7 @@ export default function BreathingDetail() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="text-white/90 text-lg mt-8 font-medium tracking-wide bg-black/10 px-6 py-2 rounded-full backdrop-blur-sm min-w-30 text-center"
+              className="text-white/90 text-lg md:text-2xl mt-8 md:mt-12 font-medium tracking-wide bg-black/10 px-6 py-2 md:px-10 md:py-4 rounded-full backdrop-blur-sm min-w-30 text-center transition-all"
             >
               {isActive ? getPhaseText() : "Ready?"}
             </motion.p>
@@ -113,12 +113,12 @@ export default function BreathingDetail() {
         </div>
       </div>
 
-      <div className="flex-1 bg-white dark:bg-background-dark rounded-t-[2.5rem] -mt-10 relative z-20 flex flex-col overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
-        <div className="flex-1 overflow-y-auto px-6 pt-10 pb-24 no-scrollbar">
-          <h1 className="font-serif text-[26px] font-bold leading-tight mb-4">
+      <div className="flex-1 bg-white dark:bg-background-dark rounded-t-[2.5rem] -mt-10 relative z-20 flex flex-col overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] w-full max-w-5xl">
+        <div className="flex-1 overflow-y-auto px-6 pt-10 pb-24 no-scrollbar max-w-2xl mx-auto w-full">
+          <h1 className="font-serif text-[26px] md:text-4xl font-bold leading-tight mb-4 transition-all text-center md:text-left">
             Square Breathing
           </h1>
-          <p className="text-gray-500 text-sm mb-8 leading-relaxed">
+          <p className="text-gray-500 text-sm md:text-base mb-8 leading-relaxed text-center md:text-left">
             A powerful technique used by athletes and professionals to calm the
             nervous system and manage stress.
           </p>
@@ -127,23 +127,27 @@ export default function BreathingDetail() {
             {breathingSteps.map((step, i) => (
               <div key={i} className="flex gap-4 group">
                 <div
-                  className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${isActive && i === ["inhale", "hold", "exhale", "rest"].indexOf(phase) ? "bg-secondary text-white" : "bg-gray-100 text-gray-400 group-hover:bg-primary/10"}`}
+                  className={`shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-sm md:text-base transition-colors ${isActive && i === ["inhale", "hold", "exhale", "rest"].indexOf(phase) ? "bg-secondary text-white" : "bg-gray-100 text-gray-400 group-hover:bg-primary/10"}`}
                 >
                   {i + 1}
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">{step.title}</h3>
-                  <p className="text-slate-500 text-sm">{step.desc}</p>
+                  <h3 className="font-semibold mb-1 md:text-lg">
+                    {step.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm md:text-base">
+                    {step.desc}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full px-6 py-6 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-30">
+        <div className="absolute bottom-0 left-0 w-full px-6 py-6 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-30 flex justify-center">
           <button
             onClick={() => setIsActive(!isActive)}
-            className={`flex w-full items-center justify-center rounded-2xl h-14 font-bold shadow-xl transition-all ${isActive ? "bg-danger text-white" : "bg-primary text-white"}`}
+            className={`flex w-full max-w-2xl items-center justify-center rounded-2xl h-14 font-bold shadow-xl transition-all ${isActive ? "bg-danger text-white" : "bg-primary text-white"}`}
           >
             {isActive ? "Stop Practice" : "Start Practice"}
           </button>

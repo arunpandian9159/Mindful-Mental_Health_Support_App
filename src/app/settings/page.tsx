@@ -45,27 +45,29 @@ export default function Settings() {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark max-w-md mx-auto">
-      <div className="px-6 py-4 pt-16 flex items-center gap-4 z-10 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <button
-          onClick={() => router.back()}
-          aria-label="Go back"
-          className="flex items-center justify-center w-8 h-8 rounded-full -ml-2 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-        >
-          <ArrowLeftIcon size={24} />
-        </button>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Accessibility
-        </h1>
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
+      <div className="w-full px-6 py-4 pt-16 flex items-center gap-4 z-10 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md justify-center">
+        <div className="w-full max-w-5xl flex items-center gap-4">
+          <button
+            onClick={() => router.back()}
+            aria-label="Go back"
+            className="flex items-center justify-center w-8 h-8 rounded-full -ml-2 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+          >
+            <ArrowLeftIcon size={24} />
+          </button>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white transition-all">
+            Accessibility
+          </h1>
+        </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-6 pb-10 pt-2 no-scrollbar">
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 font-medium">
+      <div className="flex-1 overflow-y-auto px-6 pb-10 pt-2 no-scrollbar w-full max-w-5xl">
+        <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 mb-6 font-medium transition-all">
           Customize your display and interaction settings to better suit your
           needs.
         </p>
 
-        <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {settingsItems.map((item) => (
             <div
               key={item.key}
@@ -121,12 +123,12 @@ export default function Settings() {
           ))}
         </div>
 
-        <div className="mt-10 p-5 rounded-2xl bg-primary/5 dark:bg-primary/10 border border-primary/10 flex flex-col items-center text-center">
-          <HeartIcon size={32} weight="fill" className="text-primary mb-2" />
-          <h3 className="font-bold text-sm text-primary mb-1">
+        <div className="mt-10 p-8 rounded-3xl bg-primary/5 dark:bg-primary/10 border border-primary/10 flex flex-col items-center text-center max-w-2xl mx-auto w-full transition-all">
+          <HeartIcon size={48} weight="fill" className="text-primary mb-4" />
+          <h3 className="font-bold text-lg text-primary mb-2">
             Empowering Accessibility
           </h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-55">
+          <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
             We aim to make mental health support available to everyone,
             regardless of their visual or physical abilities.
           </p>

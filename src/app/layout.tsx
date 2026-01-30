@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body className={`${raleway.variable} ${lora.variable} antialiased`}>
-        <div className="max-w-md mx-auto min-h-screen bg-background-light dark:bg-background-dark shadow-2xl relative overflow-hidden">
+        <div className="min-h-screen bg-background-light dark:bg-background-dark shadow-2xl relative overflow-hidden">
           {children}
         </div>
       </body>

@@ -24,29 +24,31 @@ export default function Home() {
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden pb-32 bg-background-light dark:bg-background-dark">
       <header className="flex items-center justify-between px-6 py-6 pt-10 sticky top-0 z-20 glass backdrop-blur-md">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
-            <LeafIcon size={18} weight="fill" />
+        <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">
+              <LeafIcon size={18} weight="fill" />
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button className="relative text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
-            <BellIcon size={24} />
-            <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-400 border-2 border-background-light dark:border-background-dark"></span>
-          </button>
-          <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border-2 border-white dark:border-gray-600 shadow-sm">
-            <Image
-              alt="Profile"
-              className="h-full w-full object-cover"
-              src={currentUser.avatar}
-              width={40}
-              height={40}
-            />
+          <div className="flex items-center gap-4">
+            <button className="relative text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+              <BellIcon size={24} />
+              <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-400 border-2 border-background-light dark:border-background-dark"></span>
+            </button>
+            <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border-2 border-white dark:border-gray-600 shadow-sm">
+              <Image
+                alt="Profile"
+                className="h-full w-full object-cover"
+                src={currentUser.avatar}
+                width={40}
+                height={40}
+              />
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col gap-12 pt-8">
+      <main className="flex-1 flex flex-col gap-12 pt-8 max-w-5xl mx-auto w-full">
         <section className="px-6">
           <h1 className="text-4xl font-serif font-bold tracking-tight text-text-primary dark:text-white">
             Good morning,{" "}

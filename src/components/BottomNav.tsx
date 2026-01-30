@@ -22,8 +22,8 @@ export const BottomNav = () => {
   ];
 
   return (
-    <div className="fixed bottom-6 left-6 right-6 z-50 flex justify-center">
-      <nav className="glass rounded-full px-4 py-2 flex items-center gap-2 shadow-2xl max-w-sm w-full justify-between">
+    <div className="fixed bottom-6 left-6 right-6 z-50 flex justify-center pointer-events-none">
+      <nav className="glass rounded-full px-4 py-2 flex items-center gap-2 shadow-2xl max-w-sm w-full justify-between pointer-events-auto">
         {/* Left items */}
         <div className="flex items-center gap-1 flex-1 justify-around">
           {navItems.slice(0, 2).map((item) => {

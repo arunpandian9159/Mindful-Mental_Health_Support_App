@@ -44,21 +44,21 @@ export default function MoodHistory() {
   };
 
   return (
-    <div className="relative flex h-full min-h-screen w-full flex-col pb-20 bg-background-light dark:bg-background-dark">
-      <header className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 pt-12 justify-between sticky top-0 z-10">
+    <div className="relative flex h-full min-h-screen w-full flex-col pb-20 bg-background-light dark:bg-background-dark items-center">
+      <header className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 pt-12 justify-between sticky top-0 z-10 w-full max-w-5xl">
         <button
           onClick={() => router.push("/")}
           className="flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
         >
           <ArrowLeftIcon size={24} />
         </button>
-        <h2 className="text-lg font-bold flex-1 text-center pr-12">
+        <h2 className="text-xl md:text-2xl font-bold flex-1 text-center pr-12">
           Mood Trends
         </h2>
       </header>
 
-      <main className="flex-1 overflow-y-auto no-scrollbar">
-        <div className="flex px-4 py-3">
+      <main className="flex-1 overflow-y-auto no-scrollbar w-full max-w-5xl">
+        <div className="flex px-4 py-3 max-w-md mx-auto">
           <div className="flex h-12 flex-1 items-center justify-center rounded-xl bg-gray-200 dark:bg-gray-800 p-1">
             <button
               onClick={() => setActiveView("chart")}
@@ -96,12 +96,12 @@ export default function MoodHistory() {
         </div>
 
         <div className="flex flex-col gap-4 px-4 py-4">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 items-center md:items-start max-w-2xl mx-auto w-full">
             <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
               Average Mood Score
             </p>
             <div className="flex items-end gap-2">
-              <p className="text-3xl font-bold leading-none">4.2</p>
+              <p className="text-3xl md:text-5xl font-bold leading-none">4.2</p>
               <span className="text-green-500 text-sm font-medium mb-1.5 flex items-center">
                 <TrendUpIcon size={14} className="mr-0.5" />
                 +12%
@@ -111,7 +111,7 @@ export default function MoodHistory() {
 
           {/* Line Chart View */}
           {activeView === "chart" && (
-            <div className="w-full bg-white dark:bg-surface-dark rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-gray-800 relative overflow-hidden">
+            <div className="w-full max-w-3xl mx-auto bg-white dark:bg-surface-dark rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-gray-800 relative overflow-hidden">
               <MoodChart
                 data={moodChartData}
                 labels={dayLabels}
@@ -122,7 +122,7 @@ export default function MoodHistory() {
 
           {/* Heatmap View */}
           {activeView === "heatmap" && (
-            <div className="w-full bg-white dark:bg-surface-dark rounded-2xl p-4 shadow-soft border border-gray-100 dark:border-gray-800">
+            <div className="w-full max-w-3xl mx-auto bg-white dark:bg-surface-dark rounded-2xl p-4 shadow-soft border border-gray-100 dark:border-gray-800">
               <div className="flex flex-col gap-3">
                 {/* Day labels header */}
                 <div className="flex gap-1.5 pl-12">
@@ -197,14 +197,14 @@ export default function MoodHistory() {
           )}
         </div>
 
-        <div className="flex items-center justify-between px-6 py-2 mt-2">
+        <div className="flex items-center justify-between px-6 py-2 mt-2 max-w-2xl mx-auto w-full">
           <h3 className="text-base font-bold">Recent History</h3>
           <button className="text-primary text-sm font-medium hover:underline">
             View All
           </button>
         </div>
 
-        <div className="flex flex-col gap-3 px-4 pb-6">
+        <div className="flex flex-col gap-3 px-4 pb-6 max-w-2xl mx-auto w-full">
           {moodHistory.map((entry) => (
             <div
               key={entry.id}
@@ -228,10 +228,10 @@ export default function MoodHistory() {
       </main>
 
       {/* Center FAB for Logging */}
-      <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40">
+      <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40 w-full max-w-5xl pointer-events-none px-6">
         <button
           onClick={() => router.push("/mood/log")}
-          className="size-16 bg-primary rounded-full flex items-center justify-center shadow-fab text-white hover:scale-105 active:scale-95 transition-transform"
+          className="float-right size-16 bg-primary rounded-full flex items-center justify-center shadow-fab text-white hover:scale-105 active:scale-95 transition-transform pointer-events-auto"
         >
           <PlusIcon size={32} weight="bold" />
         </button>

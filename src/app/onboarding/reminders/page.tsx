@@ -38,12 +38,12 @@ export default function OnboardingReminders() {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
-      <div className="flex-1 flex flex-col items-center justify-center pt-16 pb-6 w-full px-8 text-center relative z-0">
+    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
+      <div className="flex-1 flex flex-col items-center justify-center pt-16 pb-6 w-full max-w-md px-8 text-center relative z-0">
         <div className="w-32 h-32 rounded-[2.5rem] bg-secondary/10 flex items-center justify-center mb-10 shadow-sm">
           <BellRingingIcon size={64} weight="fill" className="text-secondary" />
         </div>
-        <h1 className="font-serif text-[#101519] dark:text-white tracking-tight text-[28px] font-bold leading-tight mb-4">
+        <h1 className="font-serif text-[#101519] dark:text-white tracking-tight text-[28px] md:text-4xl font-bold leading-tight mb-4 transition-all">
           Set Daily Check-ins
         </h1>
         <div className="w-full max-w-xs flex flex-col gap-3 mt-4">
@@ -58,7 +58,7 @@ export default function OnboardingReminders() {
           ))}
         </div>
       </div>
-      <div className="w-full px-6 pb-10 pt-4 flex flex-col gap-6 z-10">
+      <div className="w-full max-w-md px-6 pb-10 pt-4 flex flex-col gap-6 z-10">
         <div className="flex justify-center items-center gap-2">
           <div className="h-1.5 w-8 rounded-full bg-primary transition-all duration-300"></div>
           <div className="h-1.5 w-8 rounded-full bg-primary transition-all duration-300"></div>
