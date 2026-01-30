@@ -53,7 +53,7 @@ export const moodOptions = [
   },
   {
     icon: SmileyMehIcon,
-    color: "text-red-400",
+    color: "text-orange-400",
     bg: "bg-red-50",
     label: "Sad",
   },
@@ -65,7 +65,7 @@ export const moodOptions = [
   },
   {
     icon: SmileyIcon,
-    color: "text-green-400",
+    color: "text-green-300",
     bg: "bg-green-50",
     label: "Good",
   },
@@ -168,14 +168,14 @@ export const heatmapData = [
   [4, 5, 4, 4, 5, 4, 5], // Week 7
 ];
 
-// Mood color mapping for heatmap cells
+// Mood color mapping for heatmap cells (Emerald scale)
 export const moodColorMap: Record<number, string> = {
   0: "bg-gray-100 dark:bg-gray-800",
-  1: "bg-red-200 dark:bg-red-900/40",
-  2: "bg-orange-200 dark:bg-orange-900/40",
-  3: "bg-yellow-200 dark:bg-yellow-900/40",
-  4: "bg-green-200 dark:bg-green-900/40",
-  5: "bg-emerald-300 dark:bg-emerald-800/50",
+  1: "bg-emerald-50 dark:bg-emerald-900/10",
+  2: "bg-emerald-100 dark:bg-emerald-900/20",
+  3: "bg-emerald-300 dark:bg-emerald-700/40",
+  4: "bg-emerald-500 dark:bg-emerald-500/60",
+  5: "bg-emerald-700 dark:bg-emerald-400/80",
 };
 
 export const getMoodColor = (value: number): string => {
@@ -189,35 +189,62 @@ export const dayLabels = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 export const moodLevels = ["Bad", "Low", "Okay", "Good", "Great"];
 
 // Chart data (1-5 scale) - values chosen to match the screenshot curve
-export const moodChartData = [2.5, 4.2, 3.5, 4.5, 4.8, 5.0];
+export const moodChartData = [2.5, 4.2, 3.5, 4.5, 4.8, 5.0, 4.2, 3.5];
 
 export const moodStats = {
   averageScore: 4.2,
   percentChange: "+12%",
+  consistency: "85%",
+  topMood: "Happy",
+  entriesCount: 14,
 };
 
 export interface MoodHistoryEntry {
   id: number;
-  emoji: string;
+  icon: Icon;
   label: string;
   time: string;
+  level: number; // 1-5
+  color: string;
   bgColor: string;
 }
 
 export const moodHistory: MoodHistoryEntry[] = [
   {
     id: 1,
-    emoji: "😊",
+    icon: SmileyWinkIcon,
     label: "Feeling Great",
     time: "Today, 9:00 AM",
+    level: 5,
+    color: "text-green-500",
     bgColor: "bg-green-100 dark:bg-green-900/30",
   },
   {
     id: 2,
-    emoji: "🙂",
-    label: "Feeling Okay",
+    icon: SmileyIcon,
+    label: "Feeling Good",
     time: "Yesterday, 8:45 PM",
-    bgColor: "bg-blue-100 dark:bg-blue-900/30",
+    level: 4,
+    color: "text-blue-500",
+    bgColor: "bg-blue-50 dark:bg-blue-900/20",
+  },
+  {
+    id: 3,
+    icon: SmileyBlankIcon,
+    label: "Feeling Okay",
+    time: "Yesterday, 1:20 PM",
+    level: 3,
+    color: "text-gray-400",
+    bgColor: "bg-gray-100 dark:bg-gray-800",
+  },
+  {
+    id: 4,
+    icon: SmileySadIcon,
+    label: "Feeling Low",
+    time: "Jan 28, 4:30 PM",
+    level: 1,
+    color: "text-red-500",
+    bgColor: "bg-red-100 dark:bg-red-900/30",
   },
 ];
 

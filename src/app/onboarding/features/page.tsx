@@ -12,12 +12,12 @@ export default function OnboardingFeatures() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark items-center">
-      <div className="flex-1 flex flex-col w-full max-w-5xl relative pt-16 pb-6">
+      <div className="flex-1 flex flex-col w-full max-w-5xl relative pt-7 pb-6">
         <div className="w-full px-8 flex justify-center mb-8">
           <div className="w-full max-w-70 md:max-w-xs aspect-square relative overflow-hidden rounded-4xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] bg-white dark:bg-gray-800 p-3">
             <div className="w-full h-full rounded-3xl overflow-hidden relative">
               <Image
-                src="/welcomepage.png"
+                src="/mindful-icon.png"
                 alt=""
                 aria-hidden="true"
                 fill

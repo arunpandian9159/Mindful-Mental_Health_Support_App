@@ -14,7 +14,7 @@ export default function WelcomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full h-[55vh] relative overflow-hidden md:rounded-b-[4rem] rounded-b-[3rem] shadow-[0_10px_40px_-10px_rgba(93,155,213,0.2)]"
+          className="w-full h-[56vh] relative overflow-hidden md:rounded-b-[4rem] rounded-b-[3rem] shadow-[0_10px_40px_-10px_rgba(93,155,213,0.2)]"
         >
           <Image
             src="/welcomepage.png"

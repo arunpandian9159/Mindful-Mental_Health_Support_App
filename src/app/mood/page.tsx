@@ -18,11 +18,15 @@ import {
   TrendUpIcon,
   CaretRightIcon,
   PlusIcon,
+  CalendarBlankIcon,
+  SmileyIcon,
 } from "@phosphor-icons/react";
+import { moodStats } from "@/data/data";
 
 export default function MoodHistory() {
   const router = useRouter();
   const [activeView, setActiveView] = useState<"chart" | "heatmap">("chart");
+  const [timeRange, setTimeRange] = useState<"7" | "30" | "90">("7");
   const [selectedCell, setSelectedCell] = useState<{
     weekIndex: number;
     dayIndex: number;
@@ -59,10 +63,10 @@ export default function MoodHistory() {
 
       <main className="flex-1 overflow-y-auto no-scrollbar w-full max-w-5xl">
         <div className="flex px-4 py-3 max-w-md mx-auto">
-          <div className="flex h-12 flex-1 items-center justify-center rounded-xl bg-gray-200 dark:bg-gray-800 p-1">
+          <div className="flex h-12 flex-1 items-center justify-center rounded-4xl bg-gray-200 dark:bg-gray-800 p-1">
             <button
               onClick={() => setActiveView("chart")}
-              className={`flex cursor-pointer h-full grow items-center justify-center rounded-lg px-2 transition-all ${
+              className={`flex cursor-pointer h-full grow items-center justify-center rounded-4xl px-2 transition-all ${
                 activeView === "chart"
                   ? "bg-white dark:bg-surface-dark shadow-sm"
                   : ""
@@ -78,7 +82,7 @@ export default function MoodHistory() {
             </button>
             <button
               onClick={() => setActiveView("heatmap")}
-              className={`flex cursor-pointer h-full grow items-center justify-center rounded-lg px-2 transition-all ${
+              className={`flex cursor-pointer h-full grow items-center justify-center rounded-4xl px-2 transition-all ${
                 activeView === "heatmap"
                   ? "bg-white dark:bg-surface-dark shadow-sm"
                   : ""
@@ -195,6 +199,67 @@ export default function MoodHistory() {
               </div>
             </div>
           )}
+
+          {/* Time Range Filter (from picture) */}
+          <div className="flex gap-2 justify-center md:justify-start max-w-2xl mx-auto w-full mt-4">
+            {["7", "30", "90"].map((range) => (
+              <button
+                key={range}
+                onClick={() => setTimeRange(range as "7" | "30" | "90")}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  timeRange === range
+                    ? "bg-primary text-white shadow-md"
+                    : "bg-white dark:bg-surface-dark text-gray-500 border border-gray-100 dark:border-gray-800"
+                }`}
+              >
+                {range} days
+              </button>
+            ))}
+          </div>
+
+          {/* New Stats Cards (from picture) */}
+          <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto w-full mt-2">
+            {/* Weekly Average Card */}
+            <div className="bg-white dark:bg-surface-dark p-5 rounded-3xl md:rounded-4xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500">
+                  <CalendarBlankIcon size={20} weight="fill" />
+                </div>
+                <span className="text-gray-400 text-sm font-medium">
+                  Weekly
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl font-bold">
+                    {moodStats.averageScore}
+                  </span>
+                  <span className="text-gray-300 text-sm">/5</span>
+                </div>
+                <span className="text-gray-400 text-[10px] font-medium uppercase tracking-wider">
+                  Consistency {moodStats.consistency}
+                </span>
+              </div>
+            </div>
+
+            {/* Top Mood Card */}
+            <div className="bg-white dark:bg-surface-dark p-5 rounded-3xl md:rounded-4xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="size-10 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-400">
+                  <SmileyIcon size={24} weight="fill" />
+                </div>
+                <span className="text-gray-400 text-sm font-medium">
+                  Top Mood
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold">{moodStats.topMood}</span>
+                <span className="text-gray-400 text-[10px] font-medium uppercase tracking-wider">
+                  {moodStats.entriesCount} entries
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="flex items-center justify-between px-6 py-2 mt-2 max-w-2xl mx-auto w-full">
@@ -212,9 +277,9 @@ export default function MoodHistory() {
             >
               <div className="flex items-center gap-4">
                 <div
-                  className={`size-10 rounded-full ${entry.bgColor} flex items-center justify-center text-2xl`}
+                  className={`size-10 rounded-full ${entry.bgColor} flex items-center justify-center text-xl ${entry.color}`}
                 >
-                  {entry.emoji}
+                  <entry.icon size={24} weight="fill" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold text-sm">{entry.label}</span>
