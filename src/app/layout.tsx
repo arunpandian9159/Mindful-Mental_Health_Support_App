@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { Lora, Raleway } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
 });
 
-const merriweather = Merriweather({
-  variable: "--font-merriweather",
-  weight: ["300", "400", "700"],
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
 });
 
@@ -26,9 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body
-        className={`${inter.variable} ${merriweather.variable} antialiased`}
-      >
+      <body className={`${raleway.variable} ${lora.variable} antialiased`}>
         <div className="max-w-md mx-auto min-h-screen bg-background-light dark:bg-background-dark shadow-2xl relative overflow-hidden">
           {children}
         </div>

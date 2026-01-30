@@ -23,7 +23,9 @@ export default function CrisisSupport() {
 
       <header className="relative z-10 flex items-center justify-between px-6 pt-12 pb-2">
         <div className="w-10"></div>
-        <h2 className="text-lg font-bold">Immediate Support</h2>
+        <h2 className="text-xl font-serif font-bold text-text-primary dark:text-white">
+          Immediate Support
+        </h2>
         <button
           onClick={() => router.back()}
           className="flex size-10 items-center justify-center rounded-full bg-black/5 dark:bg-white/10 text-lg hover:bg-black/10 transition-colors"
@@ -37,8 +39,10 @@ export default function CrisisSupport() {
           <div className="size-20 bg-danger/10 rounded-full flex items-center justify-center mb-6 animate-pulse">
             <SirenIcon size={40} className="text-danger" weight="fill" />
           </div>
-          <h1 className="text-3xl font-bold mb-3">You are not alone.</h1>
-          <p className="text-gray-500 max-w-70">
+          <h1 className="text-4xl font-serif font-bold mb-3 text-text-primary dark:text-white">
+            You are not alone.
+          </h1>
+          <p className="text-gray-500 max-w-sm text-base">
             Help is available right now. Connect with someone who understands.
           </p>
         </div>
@@ -46,13 +50,13 @@ export default function CrisisSupport() {
         <div className="flex flex-col gap-4 mb-8">
           <a
             href={`tel:${crisisHotlines.nationalHotline.number}`}
-            className="flex w-full items-center gap-4 rounded-xl bg-coral p-5 shadow-lg active:scale-95 transition-transform"
+            className="flex w-full items-center gap-5 rounded-3xl bg-coral p-6 shadow-xl active:scale-95 transition-all group"
           >
-            <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-black/10 text-black">
+            <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-black/10 text-black group-hover:scale-110 transition-transform">
               <PhoneCallIcon size={32} weight="fill" />
             </div>
             <div className="flex flex-1 flex-col text-black">
-              <span className="text-lg font-bold">Call National Hotline</span>
+              <span className="text-xl font-bold">Call National Hotline</span>
               <span className="text-sm font-medium opacity-80">
                 {crisisHotlines.nationalHotline.number} -{" "}
                 {crisisHotlines.nationalHotline.description}
@@ -62,13 +66,13 @@ export default function CrisisSupport() {
 
           <a
             href={`sms:${crisisHotlines.textSupport.number}`}
-            className="flex w-full items-center gap-4 rounded-xl bg-primary p-5 shadow-lg active:scale-95 transition-transform"
+            className="flex w-full items-center gap-5 rounded-3xl bg-primary p-6 shadow-xl active:scale-95 transition-all group"
           >
-            <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
+            <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-white/20 text-white group-hover:scale-110 transition-transform">
               <ChatIcon size={32} weight="fill" />
             </div>
             <div className="flex flex-1 flex-col text-white">
-              <span className="text-lg font-bold">Text Support Line</span>
+              <span className="text-xl font-bold">Text Support Line</span>
               <span className="text-sm font-medium opacity-80">
                 Text {crisisHotlines.textSupport.keyword} to{" "}
                 {crisisHotlines.textSupport.number}
@@ -77,12 +81,12 @@ export default function CrisisSupport() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <button className="flex flex-col items-center justify-center gap-3 rounded-xl bg-white dark:bg-surface-dark p-6 text-center shadow-soft border border-gray-100 dark:border-gray-800 hover:border-primary/30 transition-all">
-            <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <ShieldPlusIcon size={32} weight="fill" />
+        <div className="grid grid-cols-2 gap-6">
+          <button className="flex flex-col items-center justify-center gap-4 rounded-3xl glass p-6 text-center shadow-lg hover:scale-[1.02] transition-all">
+            <div className="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <ShieldPlusIcon size={36} weight="fill" />
             </div>
-            <span className="font-bold text-sm">
+            <span className="font-bold text-sm text-text-primary dark:text-white">
               View My
               <br />
               Safety Plan
@@ -91,12 +95,12 @@ export default function CrisisSupport() {
 
           <button
             onClick={() => router.push("/tools/breathing")}
-            className="flex flex-col items-center justify-center gap-3 rounded-xl bg-white dark:bg-surface-dark p-6 text-center shadow-soft border border-gray-100 dark:border-gray-800 hover:border-primary/30 transition-all"
+            className="flex flex-col items-center justify-center gap-4 rounded-3xl glass p-6 text-center shadow-lg hover:scale-[1.02] transition-all"
           >
-            <div className="flex size-12 items-center justify-center rounded-full bg-secondary/10 text-secondary">
-              <LeafIcon size={32} weight="fill" />
+            <div className="flex size-14 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+              <LeafIcon size={36} weight="fill" />
             </div>
-            <span className="font-bold text-sm">
+            <span className="font-bold text-sm text-text-primary dark:text-white">
               Start Grounding
               <br />
               Exercise
