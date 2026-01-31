@@ -39,7 +39,8 @@ export default function WellnessLibrary() {
           toolId.includes("meditation") ||
           toolId.includes("thought") ||
           toolId.includes("metta") ||
-          toolId.includes("visual"))
+          toolId.includes("visual") ||
+          toolId.includes("stop"))
       );
     if (activeTab === "Relaxation")
       return (
@@ -57,7 +58,8 @@ export default function WellnessLibrary() {
           toolId.includes("worry") ||
           toolId.includes("compassion") ||
           toolId.includes("values") ||
-          toolId.includes("journal"))
+          toolId.includes("journal") ||
+          toolId.includes("behavior"))
       );
     if (activeTab === "Physical")
       return (

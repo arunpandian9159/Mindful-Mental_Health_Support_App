@@ -7,7 +7,7 @@ import { communityCategories } from "@/data/data";
 
 export default function CommunityLog() {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState<string>("Recovery");
+  const [selectedCategory, setSelectedCategory] = useState<string>("recovery");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,7 +23,9 @@ export default function CommunityLog() {
       const payload = {
         title: title.trim(),
         content: content.trim(),
-        category: selectedCategory,
+        category:
+          communityCategories.find((c) => c.id === selectedCategory)?.label ||
+          "Recovery",
         timestamp: new Date().toISOString(),
       };
 
@@ -64,7 +66,7 @@ export default function CommunityLog() {
         </button>
       </header>
 
-      <main className="flex-1 w-full px-6 pb-10 flex flex-col gap-8 overflow-y-auto no-scrollbar">
+      <main className="flex-1 w-full px-5 pb-8 flex flex-col gap-6 overflow-y-auto no-scrollbar">
         {submitError && (
           <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
             <p className="text-sm text-red-600 dark:text-red-400 text-center">
@@ -74,8 +76,8 @@ export default function CommunityLog() {
         )}
 
         {/* Title Input */}
-        <div className="flex flex-col gap-3">
-          <label className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+        <div className="flex flex-col gap-2">
+          <label className="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
             Title
           </label>
           <input
@@ -83,56 +85,73 @@ export default function CommunityLog() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="What's on your mind?"
-            className="w-full p-4 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 text-lg font-bold text-gray-900 dark:text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+            className="w-full p-3 rounded-xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 text-base font-semibold text-gray-900 dark:text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
           />
         </div>
 
         {/* Category Selection */}
-        <div className="flex flex-col gap-3">
-          <label className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+        <div className="flex flex-col gap-2">
+          <label className="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
             Topic
           </label>
           <div className="flex flex-wrap gap-2">
-            {communityCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all border-2 ${
-                  selectedCategory === cat
-                    ? "bg-primary border-primary text-white shadow-lg shadow-primary/20 scale-105"
-                    : "bg-white dark:bg-surface-dark border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {communityCategories.map((cat) => {
+              const isSelected = selectedCategory === cat.id;
+              const Icon = cat.icon;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`flex items-center gap-2 pl-2.5 pr-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border-2 ${
+                    isSelected
+                      ? `bg-white dark:bg-white/10 ${cat.color} border-current shadow-md scale-[1.02]`
+                      : "bg-white dark:bg-surface-dark border-transparent text-gray-500 dark:text-gray-400 hover:border-gray-100 dark:hover:border-gray-800"
+                  }`}
+                >
+                  <Icon
+                    size={16}
+                    weight={isSelected ? "fill" : "duotone"}
+                    className={`${cat.color} ${isSelected ? "opacity-100" : "opacity-70"}`}
+                  />
+                  <span
+                    className={`transition-all duration-300 ${
+                      isSelected
+                        ? `${cat.bg} ${cat.color} dark:bg-opacity-20 px-1.5 py-0.5 rounded-lg`
+                        : ""
+                    }`}
+                  >
+                    {cat.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Content Area */}
-        <div className="flex flex-col gap-3">
-          <label className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+        <div className="flex flex-col gap-2">
+          <label className="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
             Content
           </label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Share your thoughts, experiences, or encouragement..."
-            rows={8}
-            className="w-full p-5 rounded-3xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 text-base text-gray-700 dark:text-gray-200 placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all leading-relaxed"
+            rows={6}
+            className="w-full p-4 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 text-sm text-gray-700 dark:text-gray-200 placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all leading-relaxed"
           />
         </div>
 
         {/* Safety Tip */}
-        <div className="p-5 rounded-3xl bg-primary/5 dark:bg-primary/10 border border-primary/10 flex gap-4">
-          <div className="p-2 h-fit rounded-full bg-primary/10 text-primary">
-            <ShieldIcon size={20} weight="fill" />
+        <div className="p-4 rounded-2xl bg-primary/5 dark:bg-primary/10 border border-primary/10 flex gap-3">
+          <div className="p-1.5 h-fit rounded-full bg-primary/10 text-primary">
+            <ShieldIcon size={18} weight="fill" />
           </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-bold text-primary uppercase tracking-widest">
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
               Community Guideline
             </span>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-xs text-gray-600 dark:text-gray-300">
               Your posts are shared anonymously by default to protect your
               sanctuary. Please be kind and supportive.
             </p>
@@ -142,9 +161,9 @@ export default function CommunityLog() {
         <button
           onClick={handleSubmit}
           disabled={!title.trim() || !content.trim() || isSubmitting}
-          className={`w-full py-4 rounded-2xl font-bold text-base transition-all mt-4 ${
+          className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all mt-2 ${
             title.trim() && content.trim()
-              ? "bg-primary text-white hover:bg-primary/90 active:scale-[0.98] shadow-xl shadow-primary/20"
+              ? "bg-primary text-white hover:bg-primary/90 active:scale-[0.98] shadow-lg shadow-primary/20"
               : "bg-gray-100 dark:bg-gray-800 text-gray-400 cursor-not-allowed"
           }`}
         >

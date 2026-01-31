@@ -27,6 +27,8 @@ import {
   FlowerLotusIcon,
   MusicNotesIcon,
   BicycleIcon,
+  ShieldIcon,
+  HandHeartIcon,
 } from "@phosphor-icons/react";
 
 // ============================================================
@@ -98,11 +100,43 @@ export const journalPrompt = {
 // COMMUNITY PAGE DATA
 // ============================================================
 
-export const communityCategories = [
-  "Recovery",
-  "Coping",
-  "Support",
-  "Mindfulness",
+export interface CommunityCategory {
+  id: string;
+  label: string;
+  icon: Icon;
+  color: string;
+  bg: string;
+}
+
+export const communityCategories: CommunityCategory[] = [
+  {
+    id: "recovery",
+    label: "Recovery",
+    icon: HandHeartIcon,
+    color: "text-rose-600",
+    bg: "bg-rose-50",
+  },
+  {
+    id: "coping",
+    label: "Coping",
+    icon: ShieldIcon,
+    color: "text-blue-600",
+    bg: "bg-blue-50",
+  },
+  {
+    id: "support",
+    label: "Support",
+    icon: UsersIcon,
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+  },
+  {
+    id: "mindfulness",
+    label: "Mindfulness",
+    icon: FlowerLotusIcon,
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
+  },
 ];
 
 export interface CommunityPost {
@@ -153,6 +187,18 @@ export const communityPosts: CommunityPost[] = [
     bg: "bg-purple-50",
     likes: 12,
     comments: 4,
+  },
+  {
+    id: "#821",
+    author: "Member #821",
+    time: "3h ago",
+    category: "Recovery",
+    title: "Celebrated 30 days of consistent recovery today.",
+    content:
+      "Taking it one day at a time. The small wins really do add up over time.",
+    bg: "bg-rose-50",
+    likes: 24,
+    comments: 8,
   },
 ];
 
@@ -482,7 +528,6 @@ export const textSizeOptions: TextSizeOption[] = [
 // ============================================================
 
 export const toolCategories = [
-  "All",
   "Mindfulness",
   "Relaxation",
   "Cognitive",
@@ -519,8 +564,8 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/muscle-relaxation",
   },
   {
-    id: "tool_001",
-    title: "5-4-3-2-1 Grounding",
+    id: "grounding-5-4-3-2-1",
+    title: "Grounding-5 4 3 2 1",
     description: "Quickly calm your mind using your senses.",
     type: "audio",
     duration: "5 min",
@@ -528,7 +573,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/grounding-54321",
   },
   {
-    id: "tool_002",
+    id: "body-scan-meditation",
     title: "Body Scan Meditation",
     description: "Release physical tension and stress.",
     type: "audio",
@@ -537,7 +582,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/body-scan",
   },
   {
-    id: "tool_003",
+    id: "thought-challenging",
     title: "Thought Challenging",
     description: "Identify and reframe negative thoughts.",
     type: "audio",
@@ -546,7 +591,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/thought-challenge",
   },
   {
-    id: "tool_004",
+    id: "gratitude-journaling",
     title: "Gratitude Journaling",
     description: "Shift your focus toward the positive.",
     type: "audio",
@@ -555,7 +600,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/gratitude",
   },
   {
-    id: "tool_005",
+    id: "box-breathing-4-4-4-4",
     title: "Box Breathing (4-4-4-4)",
     description: "Advanced rhythm for deep calm.",
     type: "audio",
@@ -564,7 +609,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/box-breathing",
   },
   {
-    id: "tool_006",
+    id: "mindful-walking",
     title: "Mindful Walking",
     description: "Meditation in gentle movement.",
     type: "audio",
@@ -573,7 +618,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/walking",
   },
   {
-    id: "tool_007",
+    id: "worry-time",
     title: "Worry Time",
     description: "Contain your worries to a set time.",
     type: "audio",
@@ -582,7 +627,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/worry-time",
   },
   {
-    id: "tool_008",
+    id: "self-compassion",
     title: "Self-Compassion",
     description: "Be kind to yourself in tough times.",
     type: "audio",
@@ -591,7 +636,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/self-compassion",
   },
   {
-    id: "tool_009",
+    id: "stop-technique",
     title: "STOP Technique",
     description: "Pause before you react to stress.",
     type: "audio",
@@ -600,7 +645,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/stop-technique",
   },
   {
-    id: "tool_010",
+    id: "metta-meditation",
     title: "Metta Meditation",
     description: "Build compassion for self and others.",
     type: "audio",
@@ -609,7 +654,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/metta",
   },
   {
-    id: "tool_011",
+    id: "behavioral-activation",
     title: "Behavioral Activation",
     description: "Plan activities to boost your mood.",
     type: "audio",
@@ -618,7 +663,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/behavior-activation",
   },
   {
-    id: "tool_012",
+    id: "ice-cube-grounding",
     title: "Ice Cube Grounding",
     description: "Intense physical grounding for panic.",
     type: "audio",
@@ -627,7 +672,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/ice-grounding",
   },
   {
-    id: "tool_013",
+    id: "values-clarification",
     title: "Values Clarification",
     description: "Find meaning in what matters most.",
     type: "audio",
@@ -636,7 +681,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/values",
   },
   {
-    id: "tool_014",
+    id: "safe-place-visuals",
     title: "Safe Place Visuals",
     description: "Create a mental refuge of calm.",
     type: "audio",
@@ -645,7 +690,7 @@ export const wellnessTools: WellnessTool[] = [
     href: "/tools/safe-place",
   },
   {
-    id: "tool_015",
+    id: "journaling-prompts",
     title: "Journaling Prompts",
     description: "Prompts to process deep emotions.",
     type: "audio",

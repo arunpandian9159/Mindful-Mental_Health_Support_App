@@ -180,7 +180,7 @@ export default function MoodLog() {
                   tabIndex={0}
                   onClick={() => toggleActivity(activity.id)}
                   onKeyDown={(e) => handleActivityKeyDown(e, activity.id)}
-                  className={`flex items-center gap-2 pl-3 pr-1 py-1 rounded-xl cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 border-2 ${
+                  className={`flex items-center gap-2 pl-2 pr-1 py-1 rounded-xl cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 border-2 ${
                     isSelected
                       ? `bg-white dark:bg-white/10 ${activity.color} border-current shadow-md scale-[1.02]`
                       : `bg-white dark:bg-surface-dark border-transparent hover:border-gray-100 dark:hover:border-gray-800`
@@ -193,7 +193,7 @@ export default function MoodLog() {
                     className={`${activity.color} ${isSelected ? "opacity-100" : "opacity-70"}`}
                   />
                   <span
-                    className={`text-sm font-bold px-2 py-1 rounded-lg transition-all duration-300 ${
+                    className={`text-sm font-bold px-1 py-1 rounded-lg transition-all duration-300 ${
                       isSelected
                         ? `${activity.bg} ${activity.color} dark:bg-opacity-20`
                         : "text-gray-600 dark:text-gray-400"
