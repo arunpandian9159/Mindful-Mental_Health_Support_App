@@ -193,7 +193,7 @@ export default function Home() {
           >
             <div className="flex p-3 gap-4">
               <div className="w-32 h-32 shrink-0 m-auto">
-                <div className="w-full h-full rounded-lg overflow-hidden relative">
+                <div className="w-full h-full rounded-lg shadow-lg shadow-gray-300 dark:shadow-gray-800 overflow-hidden relative">
                   <Image
                     src={suggestedContent.image}
                     alt={suggestedContent.title}

@@ -82,7 +82,7 @@ export const suggestedContent = {
   description:
     "Reset your focus and calm your mind with this guided mindfulness practice.",
   duration: "5 MIN",
-  image: "/breathingexercise.png",
+  image: "/squarebreathing.jpeg",
   href: "/tools/breathing",
 };
 
@@ -551,7 +551,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Reduce anxiety with box breathing.",
     type: "audio",
     duration: "5 min",
-    image: "/squarebreathing.png",
+    image: "/squarebreathing.jpeg",
     href: "/tools/breathing",
   },
   {
@@ -560,7 +560,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Release tension from your body.",
     type: "video",
     duration: "15 min",
-    image: "/musclerelaxation.png",
+    image: "/musclerelaxation.jpeg",
     href: "/tools/muscle-relaxation",
   },
   {
@@ -569,7 +569,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Quickly calm your mind using your senses.",
     type: "audio",
     duration: "5 min",
-    image: "/breathingexercise.png",
+    image: "/Grounding5-4-3-2-1.jpeg",
     href: "/tools/grounding-54321",
   },
   {
@@ -578,7 +578,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Release physical tension and stress.",
     type: "audio",
     duration: "12 min",
-    image: "/musclerelaxation.png",
+    image: "/BodyScanMeditation.jpeg",
     href: "/tools/body-scan",
   },
   {
@@ -587,7 +587,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Identify and reframe negative thoughts.",
     type: "audio",
     duration: "10 min",
-    image: "/breathingexercise.png",
+    image: "/ThoughtChallenging.jpeg",
     href: "/tools/thought-challenge",
   },
   {
@@ -596,7 +596,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Shift your focus toward the positive.",
     type: "audio",
     duration: "5 min",
-    image: "/musclerelaxation.png",
+    image: "/GratitudeJournaling.jpeg",
     href: "/tools/gratitude",
   },
   {
@@ -605,7 +605,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Advanced rhythm for deep calm.",
     type: "audio",
     duration: "4 min",
-    image: "/squarebreathing.png",
+    image: "/BoxBreathing4-4-4-4.jpeg",
     href: "/tools/box-breathing",
   },
   {
@@ -614,7 +614,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Meditation in gentle movement.",
     type: "audio",
     duration: "15 min",
-    image: "/musclerelaxation.png",
+    image: "/MindfulWalking.jpeg",
     href: "/tools/walking",
   },
   {
@@ -623,7 +623,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Contain your worries to a set time.",
     type: "audio",
     duration: "15 min",
-    image: "/breathingexercise.png",
+    image: "/WorryTime.jpeg",
     href: "/tools/worry-time",
   },
   {
@@ -632,7 +632,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Be kind to yourself in tough times.",
     type: "audio",
     duration: "5 min",
-    image: "/musclerelaxation.png",
+    image: "/Self-Compassion.jpeg",
     href: "/tools/self-compassion",
   },
   {
@@ -641,7 +641,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Pause before you react to stress.",
     type: "audio",
     duration: "2 min",
-    image: "/breathingexercise.png",
+    image: "/STOPTechnique.jpeg",
     href: "/tools/stop-technique",
   },
   {
@@ -650,7 +650,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Build compassion for self and others.",
     type: "audio",
     duration: "10 min",
-    image: "/musclerelaxation.png",
+    image: "/MettaMeditation.jpeg",
     href: "/tools/metta",
   },
   {
@@ -659,7 +659,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Plan activities to boost your mood.",
     type: "audio",
     duration: "15 min",
-    image: "/breathingexercise.png",
+    image: "/BehavioralActivation.jpeg",
     href: "/tools/behavior-activation",
   },
   {
@@ -668,7 +668,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Intense physical grounding for panic.",
     type: "audio",
     duration: "3 min",
-    image: "/musclerelaxation.png",
+    image: "/IceCubeGrounding.jpeg",
     href: "/tools/ice-grounding",
   },
   {
@@ -677,7 +677,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Find meaning in what matters most.",
     type: "audio",
     duration: "20 min",
-    image: "/breathingexercise.png",
+    image: "/ValuesClarification.jpeg",
     href: "/tools/values",
   },
   {
@@ -686,7 +686,7 @@ export const wellnessTools: WellnessTool[] = [
     description: "Create a mental refuge of calm.",
     type: "audio",
     duration: "10 min",
-    image: "/musclerelaxation.png",
+    image: "/SafePlaceVisual.jpeg",
     href: "/tools/safe-place",
   },
   {
@@ -695,8 +695,8 @@ export const wellnessTools: WellnessTool[] = [
     description: "Prompts to process deep emotions.",
     type: "audio",
     duration: "15 min",
-    image: "/breathingexercise.png",
-    href: "/tools/journal-prompts",
+    image: "/JournalingPrompt.jpeg",
+    href: "/journal",
   },
 ];
 

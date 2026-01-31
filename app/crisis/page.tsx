@@ -24,7 +24,7 @@ export default function CrisisSupport() {
 
       <SubPageHeader title="Support & Crisis" />
 
-      <main className="relative z-10 flex flex-1 flex-col overflow-y-auto no-scrollbar px-6 pt-4 pb-8 w-full max-w-md">
+      <main className="relative z-10 flex flex-1 flex-col overflow-y-auto no-scrollbar px-6 pt-20 pb-8 w-full max-w-md">
         <div className="mb-8 flex flex-col items-center text-center">
           <h1 className="text-[#101519] dark:text-white text-3xl font-bold leading-tight mb-3">
             We&apos;re holding space for you.
