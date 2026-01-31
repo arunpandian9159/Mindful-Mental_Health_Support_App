@@ -29,6 +29,11 @@ import {
   BicycleIcon,
   ShieldIcon,
   HandHeartIcon,
+  BellIcon,
+  StarIcon,
+  ChartLineUpIcon,
+  ChatCircleIcon,
+  PillIcon,
 } from "@phosphor-icons/react";
 
 // ============================================================
@@ -1329,5 +1334,125 @@ export const recoveryStories: RecoveryStory[] = [
       "It's okay to adjust your timeline",
       "Mental health is as important as your GPA",
     ],
+  },
+];
+// ============================================================
+// NOTIFICATIONS DATA
+// ============================================================
+
+export interface Notification {
+  id: string;
+  title: string;
+  description: string;
+  time: string;
+  type: "system" | "goal" | "community" | "mood" | "medication";
+  isUnread: boolean;
+  icon: Icon;
+  color: string;
+  bgColor: string;
+}
+
+export const notifications: Notification[] = [
+    {
+    id: "1",
+    title: "Medication Low",
+    description:
+      "You have 7 days of medication left. Time to request a refill.",
+    time: "3h ago",
+    type: "medication",
+    isUnread: true,
+    icon: PillIcon,
+    color: "text-orange-500",
+    bgColor: "bg-orange-50 dark:bg-orange-900/20",
+  },
+  {
+    id: "2",
+    title: "Critical Supply",
+    description:
+      "Only 3 days of medication remaining! Request refill immediately.",
+    time: "1d ago",
+    type: "medication",
+    isUnread: true,
+    icon: PillIcon,
+    color: "text-red-500",
+    bgColor: "bg-red-50 dark:bg-red-900/20",
+  },
+  {
+    id: "3",
+    title: "Mood Check-in",
+    description: "Time for your morning reflection. How are you feeling today?",
+    time: "5m ago",
+    type: "mood",
+    isUnread: true,
+    icon: SunIcon,
+    color: "text-amber-500",
+    bgColor: "bg-amber-50 dark:bg-amber-900/20",
+  },
+  {
+    id: "4",
+    title: "Goal Reached!",
+    description: "You've completed your daily hydration goal. Great job!",
+    time: "2h ago",
+    type: "goal",
+    isUnread: true,
+    icon: StarIcon,
+    color: "text-purple-500",
+    bgColor: "bg-purple-50 dark:bg-purple-900/20",
+  },
+  {
+    id: "5",
+    title: "Community Love",
+    description: "Someone liked your post in the Recovery circle.",
+    time: "5h ago",
+    type: "community",
+    isUnread: false,
+    icon: HeartIcon,
+    color: "text-rose-500",
+    bgColor: "bg-rose-50 dark:bg-rose-900/20",
+  },
+  {
+    id: "6",
+    title: "New Comment",
+    description: "Member #492 commented on your coping strategy.",
+    time: "Yesterday",
+    type: "community",
+    isUnread: false,
+    icon: ChatCircleIcon,
+    color: "text-blue-500",
+    bgColor: "bg-blue-50 dark:bg-blue-900/20",
+  },
+  {
+    id: "7",
+    title: "Weekly Insight",
+    description:
+      "Your mood has been improving steadily this week. View summary.",
+    time: "2 days ago",
+    type: "mood",
+    isUnread: false,
+    icon: ChartLineUpIcon,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
+  },
+  {
+    id: "8",
+    title: "System Update",
+    description: "Mindful version 2.0 is here with new wellness tools!",
+    time: "1 week ago",
+    type: "system",
+    isUnread: false,
+    icon: BellIcon,
+    color: "text-gray-500",
+    bgColor: "bg-gray-50 dark:bg-gray-800",
+  },
+  {
+    id: "9",
+    title: "Refill Ready",
+    description: "Your refill is ready for pickup at CVS Pharmacy.",
+    time: "2d ago",
+    type: "medication",
+    isUnread: false,
+    icon: PillIcon,
+    color: "text-green-500",
+    bgColor: "bg-green-50 dark:bg-green-900/20",
   },
 ];

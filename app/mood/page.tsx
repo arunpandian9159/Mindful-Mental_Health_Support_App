@@ -57,7 +57,7 @@ export default function MoodHistory() {
 
       <main className="flex-1 overflow-y-auto no-scrollbar w-full max-w-5xl">
         <div className="flex px-4 py-3 max-w-md mx-auto">
-          <div className="flex h-12 flex-1 items-center justify-center rounded-4xl bg-gray-200 dark:bg-gray-800 p-1">
+          <div className="flex h-12 flex-1 mt-20 items-center justify-center rounded-4xl bg-gray-200 dark:bg-gray-800 p-1">
             <button
               onClick={() => setActiveView("chart")}
               className={`flex cursor-pointer h-full grow items-center justify-center rounded-4xl px-2 transition-all ${

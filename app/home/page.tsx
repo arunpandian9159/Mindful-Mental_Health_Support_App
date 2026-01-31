@@ -40,7 +40,9 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <button className="relative text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
               <BellIcon size={24} />
-              <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-400 border-2 border-background-light dark:border-background-dark"></span>
+              <span 
+              onClick={() => router.push("/notifications")} 
+              className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-400 border-2 border-background-light dark:border-background-dark"></span>
             </button>
             <Link
               href="/profile"
