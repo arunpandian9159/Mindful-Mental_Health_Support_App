@@ -12,6 +12,7 @@ import {
 } from "@phosphor-icons/react";
 import { articles, recoveryStories } from "@/data/data";
 import { BottomNav } from "@/components/BottomNav";
+import { SubPageHeader } from "@/components/SubPageHeader";
 
 export default function EducationalHub() {
   const router = useRouter();
@@ -34,18 +35,10 @@ export default function EducationalHub() {
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark pb-32">
-      <div className="max-w-md mx-auto px-6 pt-12">
-        <header className="mb-8">
-          <h1 className="text-3xl font-serif font-bold text-text-primary dark:text-white mb-2">
-            Resources
-          </h1>
-          <p className="text-gray-500 dark:text-gray-400">
-            Learn and find inspiration for your journey
-          </p>
-        </header>
-
+      <SubPageHeader title="Resources" />
+      <div className="max-w-md mx-auto px-6 pt-20">
         {/* Search Bar */}
-        <div className="relative mb-8">
+        <div className="relative mb-4">
           <MagnifyingGlassIcon
             size={20}
             className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -55,15 +48,15 @@ export default function EducationalHub() {
             placeholder="Search articles or stories..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-soft"
+            className="w-full pl-12 pr-4 py-4 rounded-4xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-soft"
           />
         </div>
 
         {/* Tabs */}
-        <div className="flex bg-gray-100 dark:bg-gray-800/50 p-1.5 rounded-2xl mb-8">
+        <div className="flex bg-gray-100 dark:bg-gray-800/50 p-1.5 rounded-4xl mb-8">
           <button
             onClick={() => setActiveTab("articles")}
-            className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 ${
+            className={`flex-1 py-3 rounded-4xl text-sm font-bold transition-all flex items-center justify-center gap-2 ${
               activeTab === "articles"
                 ? "bg-white dark:bg-surface-dark text-primary shadow-sm"
                 : "text-gray-500 dark:text-gray-400"
@@ -77,7 +70,7 @@ export default function EducationalHub() {
           </button>
           <button
             onClick={() => setActiveTab("stories")}
-            className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 ${
+            className={`flex-1 py-3 rounded-4xl text-sm font-bold transition-all flex items-center justify-center gap-2 ${
               activeTab === "stories"
                 ? "bg-white dark:bg-surface-dark text-primary shadow-sm"
                 : "text-gray-500 dark:text-gray-400"
@@ -116,10 +109,10 @@ export default function EducationalHub() {
                       {article.readingTime} MIN READ
                     </div>
                   </div>
-                  <h3 className="font-bold text-lg text-text-primary dark:text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                  <h3 className="font-bold text-[16px] text-text-primary dark:text-white mb-2 leading-tight group-hover:text-primary transition-colors">
                     {article.title}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-3">
+                  <p className="text-[14px] text-gray-500 dark:text-gray-400 line-clamp-2 mb-3">
                     {article.summary}
                   </p>
                   <div className="flex items-center justify-between">
@@ -144,7 +137,7 @@ export default function EducationalHub() {
                       {story.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] font-bold text-gray-500 bg-gray-100 dark:bg-gray-800/50 px-2 py-1 rounded-md"
+                          className="text-[10px] font-bold text-primary bg-primary/5 dark:bg-primary/5 px-2 py-1 rounded-md"
                         >
                           {tag}
                         </span>
@@ -155,10 +148,10 @@ export default function EducationalHub() {
                       {story.readingTime} MIN READ
                     </div>
                   </div>
-                  <h3 className="font-bold text-lg text-text-primary dark:text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                  <h3 className="font-bold text-[16px] text-text-primary dark:text-white mb-2 leading-tight group-hover:text-primary transition-colors">
                     {story.title}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-3 italic">
+                  <p className="text-[14px] text-gray-500 dark:text-gray-400 line-clamp-2 mb-3 italic">
                     &quot;{story.excerpt}&quot;
                   </p>
                   <div className="flex items-center justify-between">

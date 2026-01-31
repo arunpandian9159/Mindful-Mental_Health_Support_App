@@ -60,22 +60,22 @@ export default function NewGoal() {
     <div className="relative flex min-h-screen w-full flex-col bg-[#F8F9FA] dark:bg-background-dark items-center pt-16">
       <SubPageHeader title="New Goal" />
       {/* Scrollable Content Area */}
-      <main className="flex-1 w-full max-w-md px-6 pt-10 pb-40 overflow-y-auto no-scrollbar">
-        <h1 className="font-serif text-[40px] leading-tight font-bold text-gray-900 dark:text-white mb-10">
+      <main className="flex-1 w-full max-w-md px-5 pt-6 pb-40 overflow-y-auto no-scrollbar">
+        <h1 className="font-serif text-3xl leading-tight font-bold text-gray-900 dark:text-white mb-8">
           Set a New
           <br />
           Wellness Goal
         </h1>
 
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6">
           {/* Goal Input */}
-          <div className="flex flex-col gap-3">
-            <label className="text-base font-bold text-gray-700 dark:text-gray-300">
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">
               What is your goal?
             </label>
             <div className="relative">
-              <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
-                <PencilSimpleIcon size={24} />
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                <PencilSimpleIcon size={20} />
               </span>
               <input
                 type="text"
@@ -85,29 +85,29 @@ export default function NewGoal() {
                   if (error) setError("");
                 }}
                 placeholder="e.g. Walk outside"
-                className={`w-full bg-white dark:bg-surface-dark rounded-3xl py-5 pl-14 pr-6 text-lg text-gray-900 dark:text-white placeholder:text-gray-300 border-none shadow-sm focus:ring-2 focus:ring-primary/20 transition-all`}
+                className={`w-full bg-white dark:bg-surface-dark rounded-2xl py-4 pl-12 pr-5 text-base text-gray-900 dark:text-white placeholder:text-gray-300 border-none shadow-sm focus:ring-2 focus:ring-primary/20 transition-all`}
               />
             </div>
-            {error && <p className="text-red-500 text-sm ml-2">{error}</p>}
+            {error && <p className="text-red-500 text-xs ml-2">{error}</p>}
           </div>
 
           {/* Frequency Select */}
-          <div className="flex flex-col gap-3 relative">
-            <label className="text-base font-bold text-gray-700 dark:text-gray-300">
+          <div className="flex flex-col gap-2 relative">
+            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">
               How often?
             </label>
             <button
               onClick={() => setIsFrequencyOpen(!isFrequencyOpen)}
-              className="flex items-center justify-between w-full bg-white dark:bg-surface-dark rounded-3xl py-5 px-6 shadow-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-all text-left"
+              className="flex items-center justify-between w-full bg-white dark:bg-surface-dark rounded-2xl py-4 px-5 shadow-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-all text-left"
             >
-              <div className="flex items-center gap-4">
-                <CalendarIcon size={24} className="text-gray-400" />
-                <span className="text-lg font-medium text-gray-900 dark:text-white">
+              <div className="flex items-center gap-3">
+                <CalendarIcon size={20} className="text-gray-400" />
+                <span className="text-base font-medium text-gray-900 dark:text-white">
                   {frequency}
                 </span>
               </div>
               <CaretDownIcon
-                size={20}
+                size={18}
                 className={`text-gray-400 transition-transform duration-300 ${isFrequencyOpen ? "rotate-180" : ""}`}
               />
             </button>
@@ -118,7 +118,7 @@ export default function NewGoal() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white dark:bg-surface-dark rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 z-50 overflow-hidden"
+                  className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 z-50 overflow-hidden"
                 >
                   {frequencies.map((freq) => (
                     <button
@@ -127,7 +127,7 @@ export default function NewGoal() {
                         setFrequency(freq);
                         setIsFrequencyOpen(false);
                       }}
-                      className="w-full text-left px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-primary/5 hover:text-primary transition-colors font-medium border-b border-gray-50 dark:border-white/5 last:border-none"
+                      className="w-full text-left px-5 py-3.5 text-gray-700 dark:text-gray-300 hover:bg-primary/5 hover:text-primary transition-colors text-sm font-medium border-b border-gray-50 dark:border-white/5 last:border-none"
                     >
                       {freq}
                     </button>
@@ -138,31 +138,31 @@ export default function NewGoal() {
           </div>
 
           {/* SMART Inspirations */}
-          <div className="mt-4">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-4 px-1">
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">
                 SMART Inspirations
               </h2>
-              <span className="px-3 py-1 bg-[#E7F3EF] dark:bg-primary/10 text-goal-green dark:text-goal-green text-xs font-bold rounded-lg cursor-pointer hover:bg-goal-green/10 transition-colors">
+              <span className="px-2 py-0.5 bg-[#E7F3EF] dark:bg-primary/10 text-goal-green dark:text-goal-green text-[10px] font-bold rounded-md cursor-pointer hover:bg-goal-green/10 transition-colors">
                 Tips
               </span>
             </div>
-            <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-6 px-6">
+            <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar -mx-5 px-5">
               {goalInspirations.map((item) => (
                 <button
                   key={item.title}
                   onClick={() => setGoal(item.title)}
-                  className="min-w-44 p-5 bg-white dark:bg-surface-dark rounded-3xl shadow-sm hover:shadow-md border border-transparent hover:border-primary/10 transition-all text-left group"
+                  className="min-w-36 p-4 bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-md border border-transparent hover:border-primary/10 transition-all text-left group"
                 >
                   <div
-                    className={`w-10 h-10 rounded-full ${item.bg} dark:bg-opacity-20 ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                    className={`w-9 h-9 rounded-full ${item.bg} dark:bg-opacity-20 ${item.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}
                   >
-                    <item.icon size={24} weight="fill" />
+                    <item.icon size={20} weight="fill" />
                   </div>
-                  <h3 className="font-bold text-base text-gray-900 dark:text-white mb-0.5">
+                  <h3 className="font-bold text-sm text-gray-900 dark:text-white mb-0.5">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-gray-400 font-medium">
+                  <p className="text-[10px] text-gray-400 font-medium">
                     {item.subtext}
                   </p>
                 </button>
@@ -173,12 +173,12 @@ export default function NewGoal() {
       </main>
 
       {/* Persistent Bottom Button */}
-      <div className="fixed bottom-0 left-0 right-0 p-6 bg-linear-to-t from-[#F8F9FA] via-[#F8F9FA] to-transparent dark:from-background-dark dark:via-background-dark z-40 flex justify-center">
+      <div className="fixed bottom-0 left-0 right-0 p-5 bg-linear-to-t from-[#F8F9FA] via-[#F8F9FA] to-transparent dark:from-background-dark dark:via-background-dark z-40 flex justify-center">
         <div className="w-full max-w-md">
           <button
             onClick={handleSaveGoal}
             disabled={isLoading}
-            className="w-full h-16 rounded-full bg-goal-green hover:bg-goal-green/90 text-white text-lg font-bold shadow-xl shadow-goal-green/20 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center"
+            className="w-full h-14 rounded-full bg-goal-green hover:bg-goal-green/90 text-white text-base font-bold shadow-xl shadow-goal-green/20 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center"
           >
             {isLoading ? "Saving..." : "Save Goal"}
           </button>

@@ -8,12 +8,14 @@ interface SubPageHeaderProps {
   title: string;
   rightIcon?: ReactNode;
   rightAction?: () => void;
+  backPath?: string;
 }
 
 export const SubPageHeader = ({
   title,
   rightIcon,
   rightAction,
+  backPath = "/home",
 }: SubPageHeaderProps) => {
   const router = useRouter();
 
@@ -21,7 +23,7 @@ export const SubPageHeader = ({
     <header className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md z-30 border-b border-gray-100 dark:border-gray-800">
       <div className="max-w-md mx-auto px-6 h-16 flex items-center justify-between">
         <button
-          onClick={() => router.push("/home")}
+          onClick={() => router.push(backPath)}
           className="size-10 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 transition-all active:scale-95"
         >
           <CaretLeftIcon size={20} weight="bold" />

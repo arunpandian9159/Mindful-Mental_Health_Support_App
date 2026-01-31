@@ -92,9 +92,9 @@ export default function Journal() {
         rightIcon={<PlusIcon size={20} weight="bold" />}
         rightAction={() => router.push("/journal/new")}
       />
-      <header className="w-full px-6 py-6 flex flex-col gap-4 bg-white/40 dark:bg-background-dark/40 backdrop-blur-md z-10 sticky top-16 items-center border-b border-gray-100 dark:border-gray-800">
+      <header className="w-full px-6 py-6 flex flex-col gap-4 bg-white/40 dark:bg-background-dark/40 backdrop-blur-md sticky items-center border-b border-gray-100 dark:border-gray-800">
         <div className="w-full max-w-2xl">
-          <div className="relative w-full mt-6 max-w-2xl mx-auto">
+          <div className="relative w-full max-w-2xl mx-auto">
             <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
               <MagnifyingGlassIcon size={20} />
             </span>

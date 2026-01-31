@@ -10,6 +10,8 @@ import {
   CalendarIcon,
   ChartLineUpIcon,
   TrendUpIcon,
+  CirclesFourIcon,
+  TargetIcon,
 } from "@phosphor-icons/react";
 import { userGoals, currentUser } from "@/data/data";
 import { BottomNav } from "@/components/BottomNav";
@@ -125,19 +127,31 @@ export default function GoalsDashboard() {
         {/* Goals List */}
         <section className="space-y-4">
           <div className="flex items-center gap-4 mb-2 overflow-x-auto no-scrollbar pb-2">
-            {(["all", "active", "completed"] as const).map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold capitalize transition-all whitespace-nowrap ${
-                  activeFilter === filter
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-white dark:bg-surface-dark text-gray-500 border border-gray-100 dark:border-gray-800"
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
+            {(["all", "active", "completed"] as const).map((filter) => {
+              const Icon =
+                filter === "all"
+                  ? CirclesFourIcon
+                  : filter === "active"
+                    ? TargetIcon
+                    : CheckCircleIcon;
+              return (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold capitalize transition-all whitespace-nowrap flex items-center gap-2 ${
+                    activeFilter === filter
+                      ? "bg-primary text-white shadow-md"
+                      : "bg-white dark:bg-surface-dark text-gray-500 border border-gray-100 dark:border-gray-800"
+                  }`}
+                >
+                  <Icon
+                    size={14}
+                    weight={activeFilter === filter ? "bold" : "regular"}
+                  />
+                  {filter}
+                </button>
+              );
+            })}
           </div>
 
           <div className="space-y-4">
